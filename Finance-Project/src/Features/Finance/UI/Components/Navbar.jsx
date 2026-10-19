@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-import EkPaisa from "/dist/assets/images/EkPaisa.png";
+import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.png";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
