@@ -524,6 +524,190 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* BANK LOGOS SECTION - UPDATED UI */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+        variants={fadeUp}
+        className="relative overflow-hidden bg-gradient-to-b from-white via-[#F5F8F2] to-white px-5 py-20 sm:px-8 lg:px-16"
+      >
+        <div className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-[#DCEFE2]/60 blur-3xl" />
+        <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#F5C542]/15 blur-3xl" />
+
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#DCEFE2] bg-white px-4 py-2 text-sm font-semibold text-[#087A3D] shadow-sm">
+              <ShieldCheck size={16} />
+              Banking Partners
+            </span>
+            <h2 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-[#102016] sm:text-4xl">
+              Banks you <span className="text-[#087A3D]">recognise</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl leading-7 text-[#5F6F63]">
+              Explore well-known banks while researching financial options that
+              may suit your needs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-5">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/sbi.svg" alt="State Bank of India logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">State Bank of India</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.07 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/hdfc.svg" alt="HDFC Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">HDFC Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.14 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/icici.svg" alt="ICICI Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">ICICI Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.21 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/axis.svg" alt="Axis Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Axis Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.28 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/kotak.svg" alt="Kotak Mahindra Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Kotak Mahindra Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.35 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/pnb.svg" alt="Punjab National Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Punjab National Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.42 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/bob.svg" alt="Bank of Baroda logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Bank of Baroda</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.49 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/canara.svg" alt="Canara Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Canara Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.56 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/idfc.svg" alt="IDFC FIRST Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">IDFC FIRST Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: 0.63 }}
+              whileHover={{ y: -8, scale: 1.025 }}
+              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+            >
+              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/indus.svg" alt="IndusInd Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
+              </div>
+              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">IndusInd Bank</p>
+              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+            </motion.div>
+          </div>
+
+          <p className="mt-8 text-center text-xs leading-5 text-[#7A8A7D]">
+            Bank logos are trademarks of their respective owners. Logo images are loaded from an external repository.
+          </p>
+        </div>
+      </motion.section>
+
       {/* TRUST SECTION */}
       <motion.section
         initial="hidden"
