@@ -1,3 +1,8 @@
+
+// ============================================================
+// EKPAISA HOME PAGE
+// ============================================================
+
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -11,14 +16,24 @@ import {
   CheckCircle2,
   Wallet,
   CreditCard,
-  Gauge,
   Users,
   LockKeyhole,
   Sparkles,
   Rocket,
 } from "lucide-react";
 import { useMain } from "../../Hooks/useMain";
+import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.webp";
+import pnb from "/src/assets/pnb.webp";
+import newkotak from "/src/assets/newkotak.webp";
+import newaxis from "/src/assets/newaxis.webp";
+import  induslnd from "/src/assets/induslnd .webp";
 
+import idfc from "/src/assets/idfc.webp";
+import hdfc from "/src/assets/hdfc.webp";
+import icic from "/src/assets/icic.jpg";
+import canara from "/src/assets/canara.webp";
+import bob from "/src/assets/bob.webp";
+import sbi from "/src/assets/sbi.webp";
 const fadeUp = {
   hidden: { opacity: 0, y: 35 },
   visible: {
@@ -30,8 +45,55 @@ const fadeUp = {
 
 const HomePage = () => {
   const { navigate } = useMain();
+
+  const bankLogos = [
+    {
+      name: "State Bank of India",
+      src: sbi
+    },
+    {
+      name: "HDFC Bank",
+      src:hdfc,
+    },
+    {
+      name: "ICICI Bank",
+      src:icic,
+    },
+    {
+      name: "Axis Bank",
+      src:newaxis,
+    },
+    {
+      name: "Kotak Mahindra Bank",
+      src:newkotak,
+    },
+    {
+      name: "Punjab National Bank",
+      src:pnb,
+    },
+    {
+      name: "Bank of Baroda",
+      src:bob,
+    },
+    {
+      name: "Canara Bank",
+      src:canara,
+    },
+    {
+      name: "IDFC FIRST Bank",
+      src:idfc,
+    },
+    {
+      name: "IndusInd Bank",
+      src:induslnd
+    },
+  ];
+
   return (
-    <main className="overflow-hidden bg-white font-sans text-[#102016]">
+    <main
+      style={{ fontFamily: "'Inter', Arial, sans-serif" }}
+      className="overflow-hidden bg-white font-sans text-[#102016]"
+    >
       {/* HERO SECTION */}
       <section className="relative bg-gradient-to-br from-[#F4F8F2] via-white to-[#E7F0E5] px-5 pb-20 pt-12 sm:px-8 lg:px-16 lg:pt-20">
         <motion.div
@@ -71,8 +133,8 @@ const HomePage = () => {
             </h1>
 
             <p className="mt-6 max-w-lg text-base leading-7 text-[#5F6F63] sm:text-lg">
-              Explore money-related options, learn the basics, and organise your
-              next step with a clearer view.
+              Explore money-related options, learn the basics, and organise
+              your next step with a clearer view.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
@@ -81,8 +143,9 @@ const HomePage = () => {
                 whileTap={{ scale: 0.96 }}
               >
                 <button
+                  type="button"
                   onClick={() => navigate("/apply")}
-                  className="group inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#087A3D]/10 transition-colors hover:bg-[#075C30]"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3.5 font-semibold text-white shadow-lg transition-colors hover:bg-[#075C30]"
                 >
                   Apply Now
                   <ArrowRight
@@ -124,14 +187,14 @@ const HomePage = () => {
             </motion.div>
           </motion.div>
 
-          {/* HERO IMAGE AND FLOATING CARDS */}
+          {/* HERO IMAGE */}
           <motion.div
             initial={{ opacity: 0, x: 50, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
             className="relative mx-auto w-full max-w-xl"
           >
-            <div className="relative rounded-[2rem] bg-gradient-to-br from-[#DCEFE2] to-[#F5C542] p-3 shadow-2xl shadow-[#087A3D]/10/60 sm:p-5">
+            <div className="relative rounded-[2rem] bg-gradient-to-br from-[#DCEFE2] to-[#F5C542] p-3 shadow-2xl sm:p-5">
               <motion.img
                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85"
                 alt="Financial analytics dashboard"
@@ -148,7 +211,7 @@ const HomePage = () => {
               <div className="pointer-events-none absolute inset-3 rounded-[1.5rem] bg-gradient-to-t from-[#102016]/30 via-transparent to-transparent sm:inset-5" />
             </div>
 
-            {/* PRODUCTS FLOATING CARD */}
+            {/* FLOATING PRODUCTS CARD */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: [0, 8, 0] }}
@@ -167,38 +230,28 @@ const HomePage = () => {
                 Explore Your Next Step
               </p>
 
-              <p
-                onClick={() => navigate("/loans")}
-                className="flex items-center justify-between rounded-lg p-2 text-sm transition-colors hover:bg-[#F4F8F2]"
-              >
-                <span className="flex items-center gap-2">
-                  <Wallet size={17} className="text-[#087A3D]" />
-                  Personal Loans
-                </span>
-                <ArrowRight size={15} />
-              </p>
-
-              <p
-                onClick={() => navigate("/credit-cards")}
-                className="flex items-center justify-between rounded-lg p-2 text-sm transition-colors hover:bg-[#F4F8F2]"
-              >
-                <span className="flex items-center gap-2">
-                  <CreditCard size={17} className="text-[#087A3D]" />
-                  Credit Cards
-                </span>
-                <ArrowRight size={15} />
-              </p>
-
-              <p
-                onClick={() => navigate("/blogs")}
-                className="flex items-center justify-between rounded-lg p-2 text-sm transition-colors hover:bg-[#F4F8F2]"
-              >
-                <span className="flex items-center gap-2">
-                  <FileText size={17} className="text-[#087A3D]" />
-                  Money Guides
-                </span>
-                <ArrowRight size={15} />
-              </p>
+              {[
+                { label: "Personal Loans", icon: Wallet, path: "/loans" },
+                {
+                  label: "Credit Cards",
+                  icon: CreditCard,
+                  path: "/credit-cards",
+                },
+                { label: "Money Guides", icon: FileText, path: "/blogs" },
+              ].map(({ label, icon: Icon, path }) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => navigate(path)}
+                  className="flex w-full items-center justify-between rounded-lg p-2 text-left text-sm transition-colors hover:bg-[#F4F8F2]"
+                >
+                  <span className="flex items-center gap-2">
+                    <Icon size={17} className="text-[#087A3D]" />
+                    {label}
+                  </span>
+                  <ArrowRight size={15} />
+                </button>
+              ))}
             </motion.div>
           </motion.div>
         </div>
@@ -213,61 +266,52 @@ const HomePage = () => {
         className="px-5 py-16 sm:px-8 lg:px-16"
       >
         <div className="mx-auto grid max-w-7xl gap-5 rounded-3xl bg-[#F5F8F2] p-6 sm:p-8 md:grid-cols-2 lg:grid-cols-4">
-          <motion.div
-            whileHover={{ y: -7 }}
-            className="rounded-2xl p-4 transition-all hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10"
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
-              <Search size={24} />
-            </div>
-            <h3 className="text-lg font-bold">Explore Your Options</h3>
-            <p className="mt-2 text-sm leading-6 text-[#5F6F63]">
-              Review product details and decide which questions matter to you.
-            </p>
-          </motion.div>
+          {[
+            {
+              icon: Search,
+              title: "Explore Your Options",
+              description:
+                "Review product details and decide which questions matter to you.",
+            },
+            {
+              icon: ShieldCheck,
+              title: "Learn About Credit",
+              description:
+                "Get familiar with credit terms before making a financial decision.",
+            },
+            {
+              icon: FileText,
+              title: "Plain-Language Guides",
+              description:
+                "Read straightforward explanations designed for everyday decisions.",
+            },
+            {
+              icon: Heart,
+              title: "Your Plans, Your Pace",
+              description:
+                "Use helpful starting points to think through your own priorities.",
+            },
+          ].map(({ icon: Icon, title, description }) => (
+            <motion.div
+              key={title}
+              whileHover={{ y: -7 }}
+              className="rounded-2xl p-4 transition-all hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10"
+            >
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
+                <Icon size={24} />
+              </div>
 
-          <motion.div
-            whileHover={{ y: -7 }}
-            className="rounded-2xl p-4 transition-all hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10"
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
-              <ShieldCheck size={24} />
-            </div>
-            <h3 className="text-lg font-bold">Learn About Credit</h3>
-            <p className="mt-2 text-sm leading-6 text-[#5F6F63]">
-              Get familiar with credit terms before making a financial decision.
-            </p>
-          </motion.div>
+              <h3 className="text-lg font-bold">{title}</h3>
 
-          <motion.div
-            whileHover={{ y: -7 }}
-            className="rounded-2xl p-4 transition-all hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10"
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
-              <FileText size={24} />
-            </div>
-            <h3 className="text-lg font-bold">Plain-Language Guides</h3>
-            <p className="mt-2 text-sm leading-6 text-[#5F6F63]">
-              Read straightforward explanations designed for everyday decisions.
-            </p>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -7 }}
-            className="rounded-2xl p-4 transition-all hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10"
-          >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
-              <Heart size={24} />
-            </div>
-            <h3 className="text-lg font-bold">Your Plans, Your Pace</h3>
-            <p className="mt-2 text-sm leading-6 text-[#5F6F63]">
-              Use helpful starting points to think through your own priorities.
-            </p>
-          </motion.div>
+              <p className="mt-2 text-sm leading-6 text-[#5F6F63]">
+                {description}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </motion.section>
 
-      {/* WORKS SECTION */}
+      {/* HOW IT WORKS SECTION */}
       <motion.section
         id="how-it-works"
         initial="hidden"
@@ -292,7 +336,8 @@ const HomePage = () => {
               to look into next.
             </p>
 
-            <p
+            <button
+              type="button"
               onClick={() => navigate("/apply")}
               className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3 font-semibold text-white transition-all hover:-translate-y-1 hover:bg-[#075C30]"
             >
@@ -301,67 +346,54 @@ const HomePage = () => {
                 size={18}
                 className="transition-transform group-hover:translate-x-1"
               />
-            </p>
+            </button>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition-shadow hover:shadow-xl hover:shadow-[#087A3D]/10"
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#087A3D] font-bold text-white">
-                1
-              </span>
-              <div className="my-5 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF4EC] text-[#087A3D]">
-                  <FileText size={30} />
-                </div>
-              </div>
-              <h3 className="text-center text-lg font-bold">Name Your Goal</h3>
-              <p className="mt-3 text-center text-sm leading-6 text-[#5F6F63]">
-                Pick the topic you want to understand first.
-              </p>
-            </motion.div>
+            {[
+              {
+                number: "1",
+                icon: FileText,
+                title: "Name Your Goal",
+                description: "Pick the topic you want to understand first.",
+              },
+              {
+                number: "2",
+                icon: SlidersHorizontal,
+                title: "Review the Details",
+                description:
+                  "Look at the details and note anything you need to verify.",
+              },
+              {
+                number: "3",
+                icon: CheckCircle2,
+                title: "Choose Your Next Step",
+                description:
+                  "Move forward when the information fits your needs.",
+              },
+            ].map(({ number, icon: Icon, title, description }) => (
+              <motion.div
+                key={number}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition-shadow hover:shadow-xl hover:shadow-[#087A3D]/10"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#087A3D] font-bold text-white">
+                  {number}
+                </span>
 
-            <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition-shadow hover:shadow-xl hover:shadow-[#087A3D]/10"
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#087A3D] font-bold text-white">
-                2
-              </span>
-              <div className="my-5 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF4EC] text-[#087A3D]">
-                  <SlidersHorizontal size={30} />
+                <div className="my-5 flex justify-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF4EC] text-[#087A3D]">
+                    <Icon size={30} />
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-center text-lg font-bold">
-                Review the Details
-              </h3>
-              <p className="mt-3 text-center text-sm leading-6 text-[#5F6F63]">
-                Look at the details and note anything you need to verify.
-              </p>
-            </motion.div>
 
-            <motion.div
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition-shadow hover:shadow-xl hover:shadow-[#087A3D]/10 sm:col-span-2 xl:col-span-1"
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#087A3D] font-bold text-white">
-                3
-              </span>
-              <div className="my-5 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF4EC] text-[#087A3D]">
-                  <CheckCircle2 size={30} />
-                </div>
-              </div>
-              <h3 className="text-center text-lg font-bold">
-                Choose Your Next Step
-              </h3>
-              <p className="mt-3 text-center text-sm leading-6 text-[#5F6F63]">
-                Move forward when the information fits your needs.
-              </p>
-            </motion.div>
+                <h3 className="text-center text-lg font-bold">{title}</h3>
+
+                <p className="mt-3 text-center text-sm leading-6 text-[#5F6F63]">
+                  {description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>
@@ -380,16 +412,19 @@ const HomePage = () => {
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
                 Topics to Explore
               </p>
+
               <h2 className="mt-3 max-w-xl text-3xl font-bold leading-tight sm:text-4xl">
                 Start with the topic on your mind
               </h2>
+
               <p className="mt-4 max-w-xl leading-7 text-[#5F6F63]">
                 Browse introductory information about borrowing and card
                 features before comparing providers.
               </p>
             </div>
-            {/* yeh sa dekhana ha  */}
-            <p
+
+            <button
+              type="button"
               onClick={() => navigate("/apply")}
               className="group inline-flex w-fit items-center gap-2 font-semibold text-[#087A3D] transition-colors hover:text-[#075C30]"
             >
@@ -398,7 +433,7 @@ const HomePage = () => {
                 size={18}
                 className="transition-transform group-hover:translate-x-1"
               />
-            </p>
+            </button>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -412,9 +447,12 @@ const HomePage = () => {
                 <img
                   src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85"
                   alt="Home representing financial goals"
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-[#102016]/30 to-transparent" />
+
                 <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-2 text-sm font-semibold text-[#087A3D]">
                   Personal Loans
                 </span>
@@ -424,12 +462,16 @@ const HomePage = () => {
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                   <Wallet size={23} />
                 </div>
+
                 <h3 className="text-xl font-bold">Personal Loans</h3>
+
                 <p className="mt-3 leading-7 text-[#5F6F63]">
                   Learn the basics of personal borrowing and the details worth
                   reviewing.
                 </p>
-                <p
+
+                <button
+                  type="button"
                   onClick={() => navigate("/loans")}
                   className="group/link mt-5 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
                 >
@@ -438,7 +480,7 @@ const HomePage = () => {
                     size={18}
                     className="transition-transform group-hover/link:translate-x-1"
                   />
-                </p>
+                </button>
               </div>
             </motion.article>
 
@@ -452,9 +494,12 @@ const HomePage = () => {
                 <img
                   src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85"
                   alt="Card payment at checkout"
+                  loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-[#102016]/30 to-transparent" />
+
                 <span className="absolute bottom-4 left-4 rounded-full bg-white/95 px-3 py-2 text-sm font-semibold text-[#087A3D]">
                   Credit Cards
                 </span>
@@ -464,12 +509,16 @@ const HomePage = () => {
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                   <CreditCard size={23} />
                 </div>
+
                 <h3 className="text-xl font-bold">Credit Cards</h3>
+
                 <p className="mt-3 leading-7 text-[#5F6F63]">
                   Get familiar with common card features, charges, and reward
                   conditions.
                 </p>
-                <p
+
+                <button
+                  type="button"
                   onClick={() => navigate("/credit-cards")}
                   className="group/link mt-5 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
                 >
@@ -478,11 +527,11 @@ const HomePage = () => {
                     size={18}
                     className="transition-transform group-hover/link:translate-x-1"
                   />
-                </p>
+                </button>
               </div>
             </motion.article>
 
-            {/* ORIGINAL FINANCIAL GUIDES */}
+            {/* MONEY GUIDES */}
             <motion.article
               whileHover={{ y: -9 }}
               transition={{ duration: 0.25 }}
@@ -491,9 +540,11 @@ const HomePage = () => {
               <div className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-[#071B10] via-[#087A3D] to-[#D6A91F]">
                 <div className="absolute -right-6 -top-8 h-36 w-36 rounded-full border-[18px] border-white/15" />
                 <div className="absolute -bottom-12 -left-5 h-36 w-36 rounded-full border-[18px] border-[#F5C542]/20" />
+
                 <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/30 bg-white/10 text-[#F5C542] shadow-lg backdrop-blur">
                   <FileText size={38} />
                 </div>
+
                 <span className="absolute bottom-4 left-4 rounded-full border border-white/20 bg-[#071B10]/70 px-3 py-1.5 text-xs font-semibold text-white">
                   EkPaisa Guides
                 </span>
@@ -503,13 +554,17 @@ const HomePage = () => {
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                   <FileText size={23} />
                 </div>
+
                 <h3 className="text-xl font-bold">Money Made Easier</h3>
+
                 <p className="mt-3 leading-7 text-[#5F6F63]">
                   Read original, easy-to-follow guides about budgeting,
                   borrowing, and everyday money decisions.
                 </p>
-                <p
-                  to="/blogs"
+
+                <button
+                  type="button"
+                  onClick={() => navigate("/blogs")}
                   className="group/link mt-5 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
                 >
                   Read Our Guides
@@ -517,14 +572,14 @@ const HomePage = () => {
                     size={18}
                     className="transition-transform group-hover/link:translate-x-1"
                   />
-                </p>
+                </button>
               </div>
             </motion.article>
           </div>
         </div>
       </motion.section>
 
-      {/* BANK LOGOS SECTION - UPDATED UI */}
+      {/* BANK LOGOS SECTION */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -541,9 +596,11 @@ const HomePage = () => {
               <ShieldCheck size={16} />
               Banking Partners
             </span>
+
             <h2 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-[#102016] sm:text-4xl">
               Banks you <span className="text-[#087A3D]">recognise</span>
             </h2>
+
             <p className="mx-auto mt-4 max-w-xl leading-7 text-[#5F6F63]">
               Explore well-known banks while researching financial options that
               may suit your needs.
@@ -551,159 +608,37 @@ const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-5 lg:grid-cols-5">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/sbi.svg" alt="State Bank of India logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">State Bank of India</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
+            {bankLogos.map((bank, index) => (
+              <motion.div
+                key={bank.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.07 }}
+                whileHover={{ y: -8, scale: 1.025 }}
+                className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+              >
+                <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
+                  <img
+                    src={bank.src}
+                    alt={`${bank.name} logo`}
+                    loading="lazy"
+                    className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24"
+                  />
+                </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.07 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/hdfc.svg" alt="HDFC Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">HDFC Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
+                <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">
+                  {bank.name}
+                </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.14 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/icici.svg" alt="ICICI Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">ICICI Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.21 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/axis.svg" alt="Axis Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Axis Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.28 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/kotak.svg" alt="Kotak Mahindra Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Kotak Mahindra Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.35 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/pnb.svg" alt="Punjab National Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Punjab National Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.42 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/bob.svg" alt="Bank of Baroda logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Bank of Baroda</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.49 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/canara.svg" alt="Canara Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">Canara Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.56 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/idfc.svg" alt="IDFC FIRST Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">IDFC FIRST Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: 0.63 }}
-              whileHover={{ y: -8, scale: 1.025 }}
-              className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
-            >
-              <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
-                <img src="https://raw.githubusercontent.com/auraveni/global-bank-logos/main/assets/bank/indian-bank/indus.svg" alt="IndusInd Bank logo" loading="lazy" className="h-20 w-full max-w-[190px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-24" />
-              </div>
-              <p className="mt-5 text-center text-sm font-bold leading-5 text-[#34483A] sm:text-base">IndusInd Bank</p>
-              <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
-            </motion.div>
+                <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-14 group-hover:bg-[#087A3D]" />
+              </motion.div>
+            ))}
           </div>
 
           <p className="mt-8 text-center text-xs leading-5 text-[#7A8A7D]">
-            Bank logos are trademarks of their respective owners. Logo images are loaded from an external repository.
+            Bank logos are trademarks of their respective owners. Logo images
+            are loaded from an external repository.
           </p>
         </div>
       </motion.section>
@@ -725,51 +660,44 @@ const HomePage = () => {
               Your money journey,
               <span className="block text-[#087A3D]">at your pace.</span>
             </h2>
+
             <p className="mt-3 text-sm leading-6 text-[#5F6F63]">
               A thoughtful starting point for your own research.
             </p>
           </div>
 
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="relative flex items-center gap-4"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm">
-              <Users size={25} />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">Your Goals</p>
-              <p className="mt-1 text-sm text-[#5F6F63]">
-                Explore at your pace
-              </p>
-            </div>
-          </motion.div>
+          {[
+            {
+              icon: Users,
+              title: "Your Goals",
+              description: "Explore at your pace",
+            },
+            {
+              icon: ShieldCheck,
+              title: "Transparency",
+              description: "Read the details",
+            },
+            {
+              icon: LockKeyhole,
+              title: "Privacy First",
+              description: "Privacy matters",
+            },
+          ].map(({ icon: Icon, title, description }) => (
+            <motion.div
+              key={title}
+              whileHover={{ y: -5 }}
+              className="relative flex items-center gap-4"
+            >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm">
+                <Icon size={25} />
+              </div>
 
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="relative flex items-center gap-4"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm">
-              <ShieldCheck size={25} />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">Transparency</p>
-              <p className="mt-1 text-sm text-[#5F6F63]">Read the details</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ y: -5 }}
-            className="relative flex items-center gap-4"
-          >
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm">
-              <LockKeyhole size={25} />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">Privacy First</p>
-              <p className="mt-1 text-sm text-[#5F6F63]">Privacy matters</p>
-            </div>
-          </motion.div>
+              <div>
+                <p className="text-2xl font-bold">{title}</p>
+                <p className="mt-1 text-sm text-[#5F6F63]">{description}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </motion.section>
 
@@ -811,7 +739,8 @@ const HomePage = () => {
           </div>
 
           <motion.div whileHover={{ scale: 1.05, y: -3 }}>
-            <p
+            <button
+              type="button"
               onClick={() => navigate("/apply")}
               className="group relative inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-4 font-bold text-[#087A3D] transition-colors hover:bg-[#EAF4EC]"
             >
@@ -820,113 +749,133 @@ const HomePage = () => {
                 size={19}
                 className="transition-transform group-hover:translate-x-1"
               />
-            </p>
+            </button>
           </motion.div>
         </div>
       </motion.section>
 
       {/* FOOTER */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="bg-gradient-to-br from-[#071B10] to-[#102016] px-5 pb-8 pt-14 text-white sm:px-8 lg:px-16"
-      >
-        <div className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_0.8fr_0.8fr_1fr]">
-          {/* BRAND */}
-          <div>
-            <p to="/" className="inline-flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[#F5C542] to-[#D6A91F] text-[#102016]">
-                <Sparkles size={21} />
-              </span>
-              <span className="text-2xl font-bold tracking-tight">
-                EkPaisa<span className="text-[#F5C542]">.</span>
-              </span>
-            </p>
 
-            <p className="mt-5 max-w-xs text-sm leading-6 text-[#D5E4D8]">
-              EkPaisa brings together approachable financial topics to help you
-              begin your own research.
-            </p>
-          </div>
 
-          {/* EXPLORE */}
-          <div>
-            <h3 className="font-bold">Explore</h3>
-            <div className="mt-5 flex flex-col items-start gap-3 text-sm text-[#D5E4D8]">
-              <p
-                onClick={() => navigate("/loans")}
-                className="transition-colors hover:text-white"
-              >
-                Personal Loans
-              </p>
-              <p
-                to="/credit-cards"
-                className="transition-colors hover:text-white"
-              >
-                Credit Cards
-              </p>
-              <p
-                onClick={() => navigate("/blogs")}
-                className="transition-colors hover:text-white"
-              >
-                Money Guides
-              </p>
-            </div>
-          </div>
+{/* FOOTER SECTION */}
+<footer className="relative overflow-hidden border-t-2 border-[#075C30] bg-gradient-to-r from-[#D6A91F] to-[#FFD95A] text-[#123D27]">
 
-          {/* GET STARTED */}
-          <div>
-            <h3 className="font-bold">Get Started</h3>
-            <div className="mt-5 flex flex-col items-start gap-3 text-sm text-[#D5E4D8]">
-              <p to="/apply" className="transition-colors hover:text-white">
-                Apply Now
-              </p>
-              <a
-                href="#how-it-works"
-                className="transition-colors hover:text-white"
-              >
-                Your Starting Point
-              </a>
-              <a className="transition-colors hover:text-white">Contact Us</a>
-            </div>
-          </div>
+  {/* Decorative background */}
+  <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
+  <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#075C30]/10 blur-3xl" />
 
-          {/* LEGAL */}
-          <div>
-            <h3 className="font-bold">Legal</h3>
-            <div className="mt-5 flex flex-col items-start gap-3 text-sm text-[#D5E4D8]">
-              <a href="#privacy" className="transition-colors hover:text-white">
-                Privacy Policy
-              </a>
-              <a href="#terms" className="transition-colors hover:text-white">
-                Terms & Conditions
-              </a>
-              <a href="#cookies" className="transition-colors hover:text-white">
-                Cookie Policy
-              </a>
-            </div>
-          </div>
+  <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10">
 
-          {/* TAGLINE */}
-          <div className="border-t border-white/10 pt-6 sm:col-span-2 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-2">
-            <p className="text-xl font-semibold leading-relaxed text-[#F5C542]">
-              More clarity.
-              <br />
-              More confident steps.
-              <Heart size={16} className="ml-1 inline-block fill-[#F5C542]" />
-            </p>
-            <p className="mt-4 text-sm leading-6 text-[#D5E4D8]">
-              Start learning about financial choices at your own pace.
-            </p>
-          </div>
+    {/* Main footer grid */}
+    <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+
+      {/* Brand section */}
+      <div className="lg:col-span-2">
+        <a href="/" className="inline-flex items-center gap-3">
+          <img
+            src={EkPaisa}
+            alt="EkPaisa logo"
+            className="h-14 w-auto object-contain"
+          />
+        </a>
+
+        <p className="mt-5 max-w-sm text-sm font-bold leading-7 text-[#234B34]">
+          Making financial decisions simpler. Explore loan options,
+          understand your choices, and take your next financial step
+          with greater confidence.
+        </p>
+
+        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/30 px-4 py-2 text-sm font-bold">
+          <ShieldCheck size={18} />
+          Your financial journey, made simpler
         </div>
+      </div>
 
-        <div className="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6 text-center text-xs text-[#AFC4B4]">
-          © {new Date().getFullYear()} EkPaisa. Original EkPaisa content.
+      {/* Explore links */}
+      <div>
+        <h3 className="text-base font-extrabold text-[#073D24]">
+          Explore
+        </h3>
+
+        <div className="mt-5 flex flex-col items-start gap-3">
+          <a href="/" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
+            Home
+          </a>
+
+          <a href="/loan" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
+            Personal Loans
+          </a>
+
+          <a href="/apply" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
+            Apply for a Loan
+          </a>
+
+          <a href="/credit-cards" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
+            Credit Cards
+          </a>
         </div>
-      </motion.footer>
+      </div>
+
+      {/* Get Started */}
+      <div>
+        <h3 className="text-base font-extrabold text-[#073D24]">
+          Get Started
+        </h3>
+
+        <p className="mt-5 text-sm font-bold leading-6 text-[#234B34]">
+          Take the first step towards finding a financial option
+          that suits your needs.
+        </p>
+
+        <a
+          href="/loan"
+          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#075C30] px-5 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#064824] hover:shadow-lg"
+        >
+          Explore Loans
+          <ArrowRight size={17} />
+        </a>
+      </div>
+
+      {/* Important Links */}
+      <div>
+        <h3 className="text-base font-extrabold text-[#073D24]">
+          Important Links
+        </h3>
+
+        <div className="mt-5 flex flex-col items-start gap-3">
+          <a href="/privacy-policy" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
+            Privacy Policy
+          </a>
+
+          <a href="/terms" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
+            Terms & Conditions
+          </a>
+
+          <a href="/contact" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Footer divider */}
+    <div className="my-9 h-px bg-[#075C30]/25" />
+
+    {/* Bottom footer */}
+    <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+      <p className="text-sm font-bold text-[#234B34]">
+        © {new Date().getFullYear()} EkPaisa. All rights reserved.
+      </p>
+
+      <p className="flex items-center gap-2 text-sm font-bold text-[#234B34]">
+        <LockKeyhole size={15} />
+        Make informed financial decisions
+      </p>
+    </div>
+
+  </div>
+</footer>
+  
     </main>
   );
 };

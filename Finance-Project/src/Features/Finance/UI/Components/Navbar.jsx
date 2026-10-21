@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.png";
+import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.webp";
 
 
 const Navbar = () => {

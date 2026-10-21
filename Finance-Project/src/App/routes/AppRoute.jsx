@@ -14,6 +14,8 @@ const LoanPage = lazy(
 const ApplyPage = lazy(
   () => import("../../Features/Finance/UI/Pages/ApplyPage")
 );
+const BlogPage = lazy(() => import("../../Features/Finance/UI/Pages/BlogPage"));
+
 
 // Loading UI
 const PageLoader = () => (
@@ -52,6 +54,29 @@ const AppRoute = () => {
             </Suspense>
           ),
         },
+
+    {
+          path: "blogs",
+          element: (
+            <Suspense fallback={<PageLoader />}>
+              <BlogPage />
+            </Suspense>
+          ),
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       ],
     },
   ]);
