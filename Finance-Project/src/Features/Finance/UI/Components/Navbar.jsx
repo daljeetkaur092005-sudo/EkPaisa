@@ -1,12 +1,38 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.webp";
 
-
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hideNavbar, setHideNavbar] = useState(false);
+
   const navigate = useNavigate();
+
+  // Detect when the homepage footer enters the screen
+useEffect(() => {
+  const checkFooter = () => {
+    const footer = document.querySelector("#home-footer");
+
+    if (!footer) return;
+
+    const rect = footer.getBoundingClientRect();
+
+    const footerVisible =
+      rect.top < window.innerHeight && rect.bottom > 0;
+
+    setHideNavbar(footerVisible);
+  };
+
+  checkFooter();
+
+  window.addEventListener("scroll", checkFooter);
+
+  return () => {
+    window.removeEventListener("scroll", checkFooter);
+  };
+}, []);
 
   const linkClass = ({ isActive }) =>
     `text-sm font-medium transition-colors duration-300 ${
@@ -23,7 +49,11 @@ const Navbar = () => {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-[#087A3D]/40 bg-[#071B10]/95 shadow-[0_4px_24px_rgba(0,0,0,0.3)] backdrop-blur-xl">
+    <nav
+      className={`sticky top-0 z-50 w-full border-b border-[#087A3D]/40 bg-[#071B10]/95 shadow-[0_4px_24px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-transform duration-300 ${
+  hideNavbar ? "-translate-y-full" : "translate-y-0"
+}`}
+    >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <NavLink
@@ -81,11 +111,20 @@ const Navbar = () => {
       {isOpen && (
         <div className="border-t border-[#087A3D]/30 bg-[#071B10] px-4 py-5 md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-2">
-            <NavLink to="/" end onClick={closeMenu} className={mobileLinkClass}>
+            <NavLink
+              to="/"
+              end
+              onClick={closeMenu}
+              className={mobileLinkClass}
+            >
               Home
             </NavLink>
 
-            <NavLink to="/loan" onClick={closeMenu} className={mobileLinkClass}>
+            <NavLink
+              to="/loan"
+              onClick={closeMenu}
+              className={mobileLinkClass}
+            >
               Loans
             </NavLink>
 

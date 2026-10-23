@@ -136,6 +136,13 @@ const loanTypes = [
 // ==========================================
 const LoanPage = () => {
   const { navigate } = useMain();
+  useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "instant",
+  });
+}, []);
 
   // Calculator ki default values
   const [loanAmount, setLoanAmount] = useState(500000);

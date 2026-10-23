@@ -30,10 +30,12 @@ import  induslnd from "/src/assets/induslnd .webp";
 
 import idfc from "/src/assets/idfc.webp";
 import hdfc from "/src/assets/hdfc.webp";
-import icic from "/src/assets/icic.jpg";
+import icic from "/src/assets/icic.webp";
 import canara from "/src/assets/canara.webp";
 import bob from "/src/assets/bob.webp";
 import sbi from "/src/assets/sbi.webp";
+import personalloan from "/src/assets/personalloan.webp";
+import creditcard from "/src/assets/creditcard.webp";
 const fadeUp = {
   hidden: { opacity: 0, y: 35 },
   visible: {
@@ -445,7 +447,7 @@ const HomePage = () => {
             >
               <div className="relative h-52 overflow-hidden bg-[#DCEFE2]">
                 <img
-                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=85"
+                  src={personalloan}
                   alt="Home representing financial goals"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -492,7 +494,7 @@ const HomePage = () => {
             >
               <div className="relative h-52 overflow-hidden bg-[#DCEFE2]">
                 <img
-                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=85"
+                  src={creditcard}
                   alt="Card payment at checkout"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -758,7 +760,8 @@ const HomePage = () => {
 
 
 {/* FOOTER SECTION */}
-<footer className="relative overflow-hidden border-t-2 border-[#075C30] bg-gradient-to-r from-[#D6A91F] to-[#FFD95A] text-[#123D27]">
+<footer id="home-footer"
+className="relative overflow-hidden border-t-2 border-[#075C30] bg-gradient-to-r from-[#e9ddba] to-[#FFD95A] text-[#123D27]">
 
   {/* Decorative background */}
   <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/20 blur-3xl" />

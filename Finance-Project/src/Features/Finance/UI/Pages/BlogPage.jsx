@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -123,6 +123,13 @@ const fadeUp = {
 
 const BlogPage = () => {
   const { navigate } = useMain();
+    useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }, []);
   const [activeCategory, setActiveCategory] = useState("All Articles");
   const [searchTerm, setSearchTerm] = useState("");
 
