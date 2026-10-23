@@ -1,4 +1,3 @@
-
 import { IndianRupee, ShieldCheck, ChevronDown } from "lucide-react";
 import { useMain } from "../../Hooks/useMain";
 
@@ -6,83 +5,75 @@ const ApplyPage = () => {
   const { register, handleSubmit, errors, onSubmit } = useMain();
 
   const inputClass =
-    "mt-1 w-full rounded-lg border border-[#D5E7D9] bg-[#FAFCFA] px-3 py-2 text-sm text-[#123D26] outline-none transition-all duration-200 placeholder:text-[#91A196] hover:border-[#9CC9A8] focus:border-[#087A3D] focus:bg-white focus:ring-2 focus:ring-[#087A3D]/10";
+    "mt-1 w-full rounded-lg border border-[#D5E7D9] bg-[#FAFCFA] px-4 py-3 text-sm text-[#123D26] outline-none transition-all duration-200 placeholder:text-[#91A196] hover:border-[#9CC9A8] focus:border-[#087A3D] focus:bg-white focus:ring-2 focus:ring-[#087A3D]/10";
 
   const labelClass = "text-xs font-semibold text-[#244632] sm:text-sm";
-
   const errorClass = "mt-1 text-xs font-medium text-red-600";
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#E8F5EC] via-white to-[#F9F3D9] px-3 py-3 sm:px-5 sm:py-5">
       <div className="mx-auto grid max-w-4xl overflow-hidden rounded-2xl border border-[#E2EDE4] bg-white shadow-xl shadow-green-950/10 md:grid-cols-2">
 
-        {/* Left Side - Compact Green Content */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#087A3D] via-[#076735] to-[#043D22] p-4 text-white sm:p-6">
-          {/* Decorative Circles */}
-          <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 rounded-full border border-white/10" />
-          <div className="pointer-events-none absolute -right-5 -top-5 h-24 w-24 rounded-full border border-white/10" />
-          <div className="pointer-events-none absolute -bottom-12 -left-10 h-36 w-36 rounded-full bg-white/[0.04]" />
+        {/* Compact Green Section */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#087A3D] via-[#076735] to-[#043D22] p-4 text-white sm:p-5">
+          {/* Minimal Decorations */}
+          <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full border border-white/10" />
+          <div className="pointer-events-none absolute -bottom-8 -left-6 h-20 w-20 rounded-full bg-white/[0.04]" />
 
           <div className="relative z-10">
             {/* Logo */}
-            <div className="flex items-center gap-2.5">
-              <div className="rounded-lg border border-[#F5C542]/30 bg-white/10 p-2">
-                <IndianRupee size={20} className="text-[#F5C542]" />
+            <div className="flex items-center gap-2">
+              <div className="rounded-lg border border-[#F5C542]/30 bg-white/10 p-1.5">
+                <IndianRupee size={17} className="text-[#F5C542]" />
               </div>
 
-              <h1 className="text-xl font-bold tracking-tight">
+              <h1 className="text-lg font-bold tracking-tight">
                 EkPaisa<span className="text-[#F5C542]">.</span>
               </h1>
             </div>
 
-            {/* Main Content */}
-            <div className="mt-5">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#F5C542]/30 bg-[#F5C542]/10 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-[#FFE28A]">
+            {/* Short Main Content */}
+            <div className="mt-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#F5C542]/30 bg-[#F5C542]/10 px-2 py-1 text-[9px] font-semibold tracking-wide text-[#FFE28A]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[#F5C542]" />
-                YOUR FINANCIAL JOURNEY
+                LOAN ENQUIRY
               </span>
 
-              <h2 className="mt-3 max-w-sm text-2xl font-bold leading-tight sm:text-3xl">
-                Find a loan that fits your needs.
+              <h2 className="mt-2 text-xl font-bold leading-tight sm:text-2xl">
+                Your goals, our guidance.
               </h2>
 
-              <p className="mt-2 max-w-sm text-xs leading-5 text-green-100 sm:text-sm">
-                Share a few details about yourself and the kind of loan you are
-                exploring. Start your enquiry with EkPaisa.
+              <p className="mt-1.5 max-w-xs text-xs leading-5 text-green-100">
+                Share your details to explore loan options with EkPaisa.
               </p>
             </div>
 
-            {/* Information Card */}
-            <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.07] p-3 backdrop-blur-sm">
-              <div className="flex items-start gap-2.5">
-                <div className="shrink-0 rounded-lg bg-[#F5C542]/15 p-2">
-                  <ShieldCheck size={19} className="text-[#F5C542]" />
-                </div>
+            {/* Compact Trust Information */}
+            <div className="mt-3 flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.07] p-2.5">
+              <div className="shrink-0 rounded-lg bg-[#F5C542]/15 p-1.5">
+                <ShieldCheck size={17} className="text-[#F5C542]" />
+              </div>
 
-                <div>
-                  <h3 className="text-sm font-semibold text-white">
-                    Your details matter
-                  </h3>
+              <div>
+                <h3 className="text-xs font-semibold text-white">
+                  Your details matter
+                </h3>
 
-                  <p className="mt-1 text-xs leading-5 text-green-100">
-                    Review your information before submitting your enquiry.
-                  </p>
-                </div>
+                <p className="mt-0.5 text-[11px] leading-4 text-green-100">
+                  Check your information before submitting.
+                </p>
               </div>
             </div>
 
-            {/* Bottom Text */}
-            <div className="mt-4 border-t border-white/15 pt-3">
-              <p className="text-xs leading-5 text-green-100">
-                Make informed financial decisions, one step at a time.
-              </p>
-            </div>
+            {/* Short Footer Text */}
+            <p className="mt-3 border-t border-white/15 pt-2 text-[11px] leading-4 text-green-100">
+              Make every financial decision count.
+            </p>
           </div>
         </section>
 
-        {/* Right Side - Compact Form */}
+        {/* Form Section */}
         <section className="p-4 sm:p-6 lg:p-7">
-          {/* Form Heading */}
           <div className="mb-4">
             <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#087A3D] sm:text-xs">
               Loan enquiry
@@ -98,7 +89,6 @@ const ApplyPage = () => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-
             {/* Full Name */}
             <div>
               <label className={labelClass}>Full Name</label>
@@ -113,9 +103,7 @@ const ApplyPage = () => {
               />
 
               {errors.fullName && (
-                <p className={errorClass}>
-                  {errors.fullName.message}
-                </p>
+                <p className={errorClass}>{errors.fullName.message}</p>
               )}
             </div>
 
@@ -140,9 +128,7 @@ const ApplyPage = () => {
               />
 
               {errors.mobile && (
-                <p className={errorClass}>
-                  {errors.mobile.message}
-                </p>
+                <p className={errorClass}>{errors.mobile.message}</p>
               )}
             </div>
 
@@ -156,12 +142,11 @@ const ApplyPage = () => {
                   {...register("loanType", {
                     required: "Please select a loan type",
                   })}
-                  className="w-full cursor-pointer appearance-none rounded-lg border border-[#B8D8C0] bg-gradient-to-r from-[#F0F8F1] to-[#F9FCF8] px-3 py-2.5 pr-11 text-sm font-medium text-[#244632] outline-none transition-all duration-200 hover:border-[#087A3D] focus:border-[#087A3D] focus:bg-white focus:ring-2 focus:ring-[#087A3D]/10"
+                  className="w-full cursor-pointer appearance-none rounded-lg border border-[#B8D8C0] bg-gradient-to-r from-[#F0F8F1] to-[#F9FCF8] px-4 py-3 pr-12 text-sm font-medium text-[#244632] outline-none transition-all duration-200 hover:border-[#087A3D] focus:border-[#087A3D] focus:bg-white focus:ring-2 focus:ring-[#087A3D]/10"
                 >
                   <option value="" disabled>
                     Choose the type of loan
                   </option>
-
                   <option value="personal">Personal Loan</option>
                   <option value="business">Business Loan</option>
                   <option value="home">Home Loan</option>
@@ -179,9 +164,7 @@ const ApplyPage = () => {
               </p>
 
               {errors.loanType && (
-                <p className={errorClass}>
-                  {errors.loanType.message}
-                </p>
+                <p className={errorClass}>{errors.loanType.message}</p>
               )}
             </div>
 
@@ -204,9 +187,7 @@ const ApplyPage = () => {
               />
 
               {errors.income && (
-                <p className={errorClass}>
-                  {errors.income.message}
-                </p>
+                <p className={errorClass}>{errors.income.message}</p>
               )}
             </div>
 
@@ -229,16 +210,14 @@ const ApplyPage = () => {
               />
 
               {errors.loanAmount && (
-                <p className={errorClass}>
-                  {errors.loanAmount.message}
-                </p>
+                <p className={errorClass}>{errors.loanAmount.message}</p>
               )}
             </div>
 
             {/* Submit Button */}
             <button
               type="submit"
-              className="group flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#087A3D] to-[#064D29] px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-green-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:from-[#0A8D48] hover:to-[#087A3D] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#087A3D]/20 active:translate-y-0"
+              className="group flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-[#087A3D] to-[#064D29] px-4 py-3 text-sm font-bold text-white shadow-md shadow-green-900/15 transition-all duration-300 hover:-translate-y-0.5 hover:from-[#0A8D48] hover:to-[#087A3D] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#087A3D]/20 active:translate-y-0"
             >
               Submit Application
 

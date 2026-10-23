@@ -24,7 +24,6 @@ import { useMain } from "../../Hooks/useMain";
 
 // ==========================================
 // 1. HELPER FUNCTION
-// Amount ko Indian currency format mein dikhana
 // ==========================================
 const formatINR = (value) =>
   new Intl.NumberFormat("en-IN", {
@@ -58,7 +57,8 @@ const faqItems = [
       "Depending on the lender and your profile, you may be asked for identity and address proof, income proof, recent bank statements and employment or business details. Confirm the current list directly with the lender before applying.",
   },
   {
-    question: "Is the lowest advertised interest rate always the best option?",
+    question:
+      "Is the lowest advertised interest rate always the best option?",
     answer:
       "Not necessarily. Compare the annual rate, APR if provided, processing fees, other charges, total repayment, late-payment rules and prepayment conditions. A lower advertised rate may not mean the lowest overall borrowing cost for every applicant.",
   },
@@ -132,75 +132,49 @@ const loanTypes = [
 ];
 
 // ==========================================
-// 5. MAIN LOAN PAGE COMPONENT
+// 5. REUSABLE SECTION LABEL
+// ==========================================
+const SectionLabel = ({ children }) => (
+  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#087A3D] sm:text-sm">
+    {children}
+  </p>
+);
+
+// ==========================================
+// 6. MAIN COMPONENT
 // ==========================================
 const LoanPage = () => {
   const { navigate } = useMain();
-  useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "instant",
-  });
-}, []);
 
-  // Calculator ki default values
   const [loanAmount, setLoanAmount] = useState(500000);
   const [interestRate, setInterestRate] = useState(10.5);
   const [tenure, setTenure] = useState(5);
-
-  // FAQ mein open answer ki index
   const [openFaq, setOpenFaq] = useState(0);
 
   // ==========================================
-  // 6. EMI CALCULATION
+  // SCROLL TO TOP
   // ==========================================
-
-  // Years ko months mein convert karo
-  const months = tenure * 12;
-
-  // Annual interest rate ko monthly rate mein convert karo
-  // Example: 12% / 1200 = 0.01 monthly rate
-  const monthlyRate = interestRate / 1200;
-
-  // EMI calculate karne ke liye variable
-  let emi = 0;
-
-  if (monthlyRate === 0) {
-    // Interest zero ho toh simple division
-    emi = loanAmount / months;
-  } else {
-    // EMI formula ka common calculation
-    const rate = Math.pow(1 + monthlyRate, months);
-
-    // Monthly instalment calculate karo
-    emi = (loanAmount * monthlyRate * rate) / (rate - 1);
-  }
-
-  // Total repayment aur interest
-  const totalPayment = emi * months;
-  const totalInterest = totalPayment - loanAmount;
-
-  // Saari calculation ek object mein
-  const emiDetails = {
-    emi,
-    totalPayment,
-    totalInterest,
-  };
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, []);
 
   // ==========================================
-  // 7. SEO: TITLE, DESCRIPTION AND FAQ SCHEMA
+  // SEO METADATA + FAQ SCHEMA
   // ==========================================
   useEffect(() => {
     const previousTitle = document.title;
+    const pageTitle = "Personal Loan Guide & EMI Calculator | EkPaisa";
 
-    document.title = "Personal Loan Guide & EMI Calculator | EkPaisa";
+    document.title = pageTitle;
 
     let description = document.querySelector(
       'meta[name="description"]'
     );
 
-    // Check karo meta description pehle se hai ya nahi
     const createdDescription = !description;
 
     if (!description) {
@@ -212,10 +186,8 @@ const LoanPage = () => {
     const previousDescription = description.content;
 
     description.content =
-      "Explore personal loans with EkPaisa. Learn how personal loans work, compare costs and eligibility factors, and estimate monthly EMI with our simple loan calculator.";
+      "Explore personal loans with EkPaisa. Learn about loan costs, eligibility factors and repayment terms, and estimate your monthly EMI with our loan calculator.";
 
-    // FAQ structured data search engines ko page ke FAQs
-    // ka structured format provide karta hai.
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -232,11 +204,10 @@ const LoanPage = () => {
     const script = document.createElement("script");
     script.type = "application/ld+json";
     script.dataset.ekpaisaFaq = "true";
-    script.text = JSON.stringify(structuredData);
+    script.textContent = JSON.stringify(structuredData);
 
     document.head.appendChild(script);
 
-    // Component leave hone par purani SEO values restore karo
     return () => {
       document.title = previousTitle;
 
@@ -251,7 +222,32 @@ const LoanPage = () => {
   }, []);
 
   // ==========================================
-  // 8. CALCULATOR TAK SCROLL KARNA
+  // EMI CALCULATION
+  // ==========================================
+  const months = tenure * 12;
+  const monthlyRate = interestRate / 1200;
+
+  const emi =
+    loanAmount <= 0 || months <= 0
+      ? 0
+      : monthlyRate === 0
+        ? loanAmount / months
+        : (loanAmount *
+            monthlyRate *
+            Math.pow(1 + monthlyRate, months)) /
+          (Math.pow(1 + monthlyRate, months) - 1);
+
+  const totalPayment = emi * months;
+  const totalInterest = Math.max(0, totalPayment - loanAmount);
+
+  const emiDetails = {
+    emi,
+    totalPayment,
+    totalInterest,
+  };
+
+  // ==========================================
+  // SCROLL TO CALCULATOR
   // ==========================================
   const scrollToCalculator = () => {
     document.getElementById("emi-calculator")?.scrollIntoView({
@@ -261,27 +257,49 @@ const LoanPage = () => {
   };
 
   // ==========================================
-  // 9. PAGE UI
+  // LOAN AMOUNT HANDLERS
+  // ==========================================
+  const handleLoanAmountChange = (event) => {
+    const rawValue = event.target.value;
+
+    if (rawValue === "") {
+      setLoanAmount(0);
+      return;
+    }
+
+    const value = Number(rawValue);
+
+    if (!Number.isFinite(value)) return;
+
+    setLoanAmount(Math.min(5000000, Math.max(0, value)));
+  };
+
+  const handleLoanAmountBlur = () => {
+    setLoanAmount((amount) =>
+      Math.min(5000000, Math.max(50000, amount || 50000))
+    );
+  };
+
+  // ==========================================
+  // 7. PAGE UI
   // ==========================================
   return (
-    <main className="overflow-hidden bg-white font-sans text-[#102016]">
-
+    <main className="overflow-hidden bg-white font-sans text-[#102016] selection:bg-[#DCEFE2] selection:text-[#075C30]">
       {/* ======================================
           HERO SECTION
       ====================================== */}
-      <section className="relative isolate bg-gradient-to-br from-[#F4F8F2] via-white to-[#E7F0E5] px-5 pb-12 pt-10 sm:px-8 sm:pb-16 lg:px-16 lg:pt-16">
-        <div className="pointer-events-none absolute -right-16 top-8 -z-10 h-72 w-72 rounded-full bg-[#DCEFE2]/70 blur-3xl" />
+      <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#F4F8F2] via-white to-[#E7F0E5] px-5 pb-12 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:px-16 lg:pb-20 lg:pt-20">
+        <div className="pointer-events-none absolute -right-20 top-0 -z-10 h-72 w-72 rounded-full bg-[#DCEFE2]/70 blur-3xl sm:h-96 sm:w-96" />
         <div className="pointer-events-none absolute bottom-0 left-1/4 -z-10 h-48 w-48 rounded-full bg-[#F5C542]/20 blur-3xl" />
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
-
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           {/* Hero content */}
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.55 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#DCEFE2] bg-white/90 px-4 py-2 text-sm font-semibold text-[#087A3D] shadow-sm">
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#DCEFE2] bg-white/90 px-4 py-2 text-xs font-semibold text-[#087A3D] shadow-sm sm:text-sm">
               <ShieldCheck size={17} />
               Borrow with a clearer plan
             </div>
@@ -293,17 +311,17 @@ const LoanPage = () => {
               </span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-8 text-[#5F6F63] sm:text-lg">
+            <p className="mt-5 max-w-xl text-base leading-7 text-[#5F6F63] sm:text-lg sm:leading-8">
               Understand how a personal loan works, what can affect its cost,
               and how monthly repayments may fit your budget. Use the EkPaisa
               EMI calculator to explore your numbers before you decide.
             </p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <button
                 type="button"
                 onClick={scrollToCalculator}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#087A3D]/20 transition hover:-translate-y-0.5 hover:bg-[#075C30] focus:outline-none focus:ring-4 focus:ring-[#087A3D]/20"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#087A3D] px-5 py-3 font-semibold text-white shadow-lg shadow-[#087A3D]/20 transition duration-300 hover:-translate-y-0.5 hover:bg-[#075C30] focus:outline-none focus:ring-4 focus:ring-[#087A3D]/20 sm:px-6"
               >
                 Calculate your EMI
                 <ArrowRight size={18} />
@@ -311,7 +329,7 @@ const LoanPage = () => {
 
               <a
                 href="#personal-loan-basics"
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#CFE3D3] bg-white px-6 py-3.5 font-semibold text-[#087A3D] transition hover:border-[#087A3D] focus:outline-none focus:ring-4 focus:ring-[#087A3D]/10"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#CFE3D3] bg-white px-5 py-3 font-semibold text-[#087A3D] transition duration-300 hover:border-[#087A3D] hover:bg-[#F7FBF7] focus:outline-none focus:ring-4 focus:ring-[#087A3D]/10 sm:px-6"
               >
                 Understand personal loans
                 <ArrowDownRight size={18} />
@@ -339,26 +357,26 @@ const LoanPage = () => {
 
           {/* Hero EMI preview */}
           <motion.div
-            initial={{ opacity: 0, y: 22 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.08 }}
+            transition={{ duration: 0.55, delay: 0.08 }}
             className="relative mx-auto w-full max-w-xl"
           >
             <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-[#DCEFE2] via-white to-[#F5C542]/40 blur-sm" />
 
-            <div className="relative overflow-hidden rounded-[1.75rem] border border-[#DCEFE2] bg-white p-5 shadow-2xl shadow-[#16452A]/10 sm:p-7">
+            <div className="relative overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white p-5 shadow-2xl shadow-[#16452A]/10 sm:rounded-[1.75rem] sm:p-7">
               <div className="flex items-start justify-between gap-4">
-                <div>
+                <div className="min-w-0">
                   <p className="text-sm font-semibold text-[#5F6F63]">
                     Example monthly EMI
                   </p>
 
-                  <p className="mt-2 text-3xl font-bold tracking-tight text-[#087A3D] sm:text-4xl">
+                  <p className="mt-2 break-words text-3xl font-bold tracking-tight text-[#087A3D] sm:text-4xl">
                     {formatINR(emiDetails.emi)}
                   </p>
 
-                  <p className="mt-1 text-sm text-[#718075]">
-                    Your estimate updates as you adjust the calculator
+                  <p className="mt-2 text-sm leading-6 text-[#718075]">
+                    Your estimate updates as you adjust the calculator.
                   </p>
                 </div>
 
@@ -368,29 +386,25 @@ const LoanPage = () => {
               </div>
 
               <div className="mt-5 space-y-3">
-                <div className="flex items-center justify-between gap-4 rounded-xl bg-[#F6F9F5] p-3.5">
-                  <span className="text-sm text-[#5F6F63]">
-                    Loan amount
-                  </span>
-                  <span className="font-bold">
+                <div className="flex items-center justify-between gap-3 rounded-xl bg-[#F6F9F5] p-3.5">
+                  <span className="text-sm text-[#5F6F63]">Loan amount</span>
+                  <span className="text-right text-sm font-bold sm:text-base">
                     {formatINR(loanAmount)}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between gap-4 rounded-xl bg-[#F6F9F5] p-3.5">
-                  <span className="text-sm text-[#5F6F63]">
-                    Interest rate
-                  </span>
-                  <span className="font-bold">
+                <div className="flex items-center justify-between gap-3 rounded-xl bg-[#F6F9F5] p-3.5">
+                  <span className="text-sm text-[#5F6F63]">Interest rate</span>
+                  <span className="text-right text-sm font-bold sm:text-base">
                     {interestRate.toFixed(1)}% p.a.
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between gap-4 rounded-xl bg-[#F6F9F5] p-3.5">
+                <div className="flex items-center justify-between gap-3 rounded-xl bg-[#F6F9F5] p-3.5">
                   <span className="text-sm text-[#5F6F63]">
                     Repayment period
                   </span>
-                  <span className="font-bold">
+                  <span className="text-right text-sm font-bold sm:text-base">
                     {tenure} {tenure === 1 ? "year" : "years"}
                   </span>
                 </div>
@@ -399,15 +413,15 @@ const LoanPage = () => {
               <button
                 type="button"
                 onClick={scrollToCalculator}
-                className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-[#087A3D] px-5 py-3 font-semibold text-white transition hover:bg-[#075C30]"
+                className="mt-5 flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-[#087A3D] px-5 py-3 font-semibold text-white transition duration-300 hover:bg-[#075C30] focus:outline-none focus:ring-4 focus:ring-[#087A3D]/20"
               >
                 Personalise this estimate
                 <ArrowRight size={18} />
               </button>
 
               <p className="mt-3 text-xs leading-5 text-[#718075]">
-                Illustrative only. The rate and repayment terms available to
-                you may differ. Fees are not included in this estimate.
+                Illustrative only. Your available rate and repayment terms may
+                differ. Fees are not included in this estimate.
               </p>
             </div>
           </motion.div>
@@ -419,19 +433,17 @@ const LoanPage = () => {
       ====================================== */}
       <section
         id="personal-loan-basics"
-        className="scroll-mt-24 px-5 py-14 sm:px-8 lg:px-16 lg:py-16"
+        className="scroll-mt-24 px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16"
       >
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
-              Personal loan basics
-            </p>
+            <SectionLabel>Personal loan basics</SectionLabel>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
               What is a personal loan?
             </h2>
 
-            <p className="mt-5 leading-8 text-[#5F6F63]">
+            <p className="mt-5 leading-7 text-[#5F6F63] sm:leading-8">
               A personal loan is a sum of money borrowed from a lender and
               repaid over an agreed period, usually through monthly
               instalments. Some personal loans are unsecured, which means
@@ -439,7 +451,7 @@ const LoanPage = () => {
               reviews the applicant's financial profile.
             </p>
 
-            <p className="mt-4 leading-8 text-[#5F6F63]">
+            <p className="mt-4 leading-7 text-[#5F6F63] sm:leading-8">
               People may explore personal loans for a range of eligible
               expenses. Before applying, check the loan's permitted use,
               interest rate, fees, repayment schedule and what happens if a
@@ -448,7 +460,7 @@ const LoanPage = () => {
 
             <a
               href="#loan-costs"
-              className="mt-6 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
+              className="mt-6 inline-flex items-center gap-2 font-semibold text-[#087A3D] transition hover:gap-3 hover:text-[#075C30]"
             >
               Learn what costs to compare
               <ArrowRight size={18} />
@@ -456,9 +468,9 @@ const LoanPage = () => {
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-3xl bg-[#087A3D] p-6 text-white sm:col-span-2 sm:p-8">
+            <div className="rounded-3xl bg-gradient-to-br from-[#087A3D] to-[#075C30] p-6 text-white shadow-lg shadow-[#087A3D]/10 sm:col-span-2 sm:p-8">
               <div className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/15">
                   <Lightbulb size={25} />
                 </div>
 
@@ -467,14 +479,14 @@ const LoanPage = () => {
                 </h3>
               </div>
 
-              <p className="mt-4 max-w-2xl leading-7 text-white/80">
+              <p className="mt-4 max-w-2xl leading-7 text-white/85">
                 When you have a defined expense, understand the repayment
                 commitment and have checked that the monthly instalment fits
                 your budget without putting essential expenses at risk.
               </p>
             </div>
 
-            <div className="rounded-2xl border border-[#DCEFE2] bg-[#F8FBF7] p-6">
+            <div className="rounded-2xl border border-[#DCEFE2] bg-[#F8FBF7] p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#087A3D]/5 sm:p-6">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm">
                 <FileCheck2 size={22} />
               </div>
@@ -487,7 +499,7 @@ const LoanPage = () => {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-[#F0E2AD] bg-[#FFFBEB] p-6">
+            <div className="rounded-2xl border border-[#F0E2AD] bg-[#FFFBEB] p-5 transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#8C6B00]/5 sm:p-6">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-[#8C6B00] shadow-sm">
                 <LockKeyhole size={22} />
               </div>
@@ -506,12 +518,10 @@ const LoanPage = () => {
       {/* ======================================
           PERSONAL LOAN FEATURES
       ====================================== */}
-      <section className="bg-[#F4F8F2] px-5 py-14 sm:px-8 lg:px-16 lg:py-16">
+      <section className="bg-[#F4F8F2] px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
-              Know the details
-            </p>
+            <SectionLabel>Know the details</SectionLabel>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
               Personal loan features to understand
@@ -531,11 +541,11 @@ const LoanPage = () => {
               return (
                 <motion.article
                   key={feature.title}
-                  initial={{ opacity: 0, y: 18 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.4, delay: index * 0.07 }}
-                  className="rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg hover:shadow-[#087A3D]/10 sm:p-7"
+                  className="rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:p-7"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                     <Icon size={24} />
@@ -557,11 +567,10 @@ const LoanPage = () => {
 
       {/* ======================================
           EMI CALCULATOR
-          Reduced padding and spacing for less height
       ====================================== */}
       <section
         id="emi-calculator"
-        className="scroll-mt-24 px-5 py-12 sm:px-8 lg:px-16 lg:py-14"
+        className="scroll-mt-24 px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16"
       >
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
@@ -569,9 +578,9 @@ const LoanPage = () => {
               <Calculator size={25} />
             </div>
 
-            <p className="mt-4 text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
-              Plan your monthly budget
-            </p>
+            <div className="mt-4">
+              <SectionLabel>Plan your monthly budget</SectionLabel>
+            </div>
 
             <h2 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
               Personal loan EMI calculator
@@ -583,20 +592,17 @@ const LoanPage = () => {
             </p>
           </div>
 
-          {/* Calculator card: compact layout */}
-          <div className="mt-7 grid overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white shadow-xl shadow-[#16452A]/5 lg:grid-cols-[1.1fr_0.9fr]">
-
-            {/* Left panel: calculator inputs */}
-            <div className="space-y-5 p-5 sm:p-7 lg:p-8">
-
-              {/* Loan amount slider and number input */}
+          <div className="mt-8 grid overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white shadow-xl shadow-[#16452A]/5 lg:grid-cols-[1.1fr_0.9fr]">
+            {/* Calculator inputs */}
+            <div className="space-y-6 p-5 sm:p-7 lg:p-8">
+              {/* Loan amount */}
               <div>
-                <div className="mb-3 flex items-center justify-between gap-4">
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                   <label htmlFor="loanAmount" className="font-semibold">
                     Loan amount
                   </label>
 
-                  <span className="rounded-lg bg-[#EAF4EC] px-3 py-2 font-bold text-[#087A3D]">
+                  <span className="rounded-lg bg-[#EAF4EC] px-3 py-2 text-sm font-bold text-[#087A3D] sm:text-base">
                     {formatINR(loanAmount)}
                   </span>
                 </div>
@@ -607,10 +613,9 @@ const LoanPage = () => {
                   min="50000"
                   max="5000000"
                   step="25000"
-                  value={loanAmount}
-                  onChange={(event) =>
-                    setLoanAmount(Number(event.target.value))
-                  }
+                  value={Math.min(5000000, Math.max(50000, loanAmount))}
+                  onChange={handleLoanAmountChange}
+                  aria-label="Adjust loan amount"
                   className="h-2 w-full cursor-pointer accent-[#087A3D]"
                 />
 
@@ -625,38 +630,27 @@ const LoanPage = () => {
                   min="50000"
                   max="5000000"
                   step="25000"
-                  value={loanAmount}
-                  onChange={(event) => {
-                    const value = Number(event.target.value);
-
-                    // Empty input ko temporary zero rehne do
-                    if (event.target.value === "") {
-                      setLoanAmount(0);
-                      return;
-                    }
-
-                    setLoanAmount(
-                      Math.min(5000000, Math.max(50000, value))
-                    );
-                  }}
-                  onBlur={() => {
-                    // Input se bahar aane par valid amount set karo
-                    setLoanAmount((amount) =>
-                      Math.min(5000000, Math.max(50000, amount || 50000))
-                    );
-                  }}
-                  className="mt-3 w-full rounded-xl border border-[#DCE6DB] px-4 py-2.5 outline-none transition focus:border-[#087A3D] focus:ring-4 focus:ring-[#087A3D]/10"
+                  value={loanAmount === 0 ? "" : loanAmount}
+                  onChange={handleLoanAmountChange}
+                  onBlur={handleLoanAmountBlur}
+                  className="mt-4 min-h-12 w-full rounded-xl border border-[#DCE6DB] bg-white px-4 py-3 outline-none transition focus:border-[#087A3D] focus:ring-4 focus:ring-[#087A3D]/10"
                 />
+
+                {loanAmount > 0 && loanAmount < 50000 && (
+                  <p className="mt-2 text-xs text-[#8C6B00]">
+                    Minimum loan amount is ₹50,000.
+                  </p>
+                )}
               </div>
 
-              {/* Annual interest rate slider */}
+              {/* Interest rate */}
               <div>
-                <div className="mb-3 flex items-center justify-between gap-4">
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                   <label htmlFor="interestRate" className="font-semibold">
                     Annual interest rate
                   </label>
 
-                  <span className="rounded-lg bg-[#EAF4EC] px-3 py-2 font-bold text-[#087A3D]">
+                  <span className="rounded-lg bg-[#EAF4EC] px-3 py-2 text-sm font-bold text-[#087A3D] sm:text-base">
                     {interestRate.toFixed(1)}%
                   </span>
                 </div>
@@ -680,14 +674,14 @@ const LoanPage = () => {
                 </div>
               </div>
 
-              {/* Repayment tenure slider */}
+              {/* Tenure */}
               <div>
-                <div className="mb-3 flex items-center justify-between gap-4">
+                <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                   <label htmlFor="tenure" className="font-semibold">
                     Repayment tenure
                   </label>
 
-                  <span className="rounded-lg bg-[#EAF4EC] px-3 py-2 font-bold text-[#087A3D]">
+                  <span className="rounded-lg bg-[#EAF4EC] px-3 py-2 text-sm font-bold text-[#087A3D] sm:text-base">
                     {tenure} {tenure === 1 ? "year" : "years"}
                   </span>
                 </div>
@@ -699,9 +693,7 @@ const LoanPage = () => {
                   max="30"
                   step="1"
                   value={tenure}
-                  onChange={(event) =>
-                    setTenure(Number(event.target.value))
-                  }
+                  onChange={(event) => setTenure(Number(event.target.value))}
                   className="h-2 w-full cursor-pointer accent-[#087A3D]"
                 />
 
@@ -712,7 +704,7 @@ const LoanPage = () => {
               </div>
             </div>
 
-            {/* Right panel: EMI results */}
+            {/* EMI results */}
             <div className="relative overflow-hidden bg-gradient-to-br from-[#071B10] via-[#087A3D] to-[#0D5A32] p-5 text-white sm:p-7 lg:p-8">
               <div className="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full border-[24px] border-white/10" />
               <div className="pointer-events-none absolute -bottom-16 -left-12 h-52 w-52 rounded-full border-[28px] border-[#F5C542]/15" />
@@ -722,61 +714,50 @@ const LoanPage = () => {
                   Estimated monthly EMI
                 </p>
 
-                <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+                <p className="mt-2 break-words text-3xl font-bold tracking-tight sm:text-4xl">
                   {formatINR(emiDetails.emi)}
                 </p>
 
-                <p className="mt-2 text-sm text-white/70">
+                <p className="mt-2 text-sm text-white/75">
                   {tenure} {tenure === 1 ? "year" : "years"} at{" "}
                   {interestRate.toFixed(1)}% per annum
                 </p>
 
-                {/* Repayment breakdown */}
-                <div className="mt-5 space-y-3 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm">
-                  <div className="flex items-center justify-between gap-4 text-sm">
-                    <span className="text-white/75">
-                      Principal amount
-                    </span>
-
-                    <span className="font-semibold">
+                <div className="mt-6 space-y-4 rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-sm sm:p-5">
+                  <div className="flex items-start justify-between gap-3 text-sm">
+                    <span className="text-white/75">Principal amount</span>
+                    <span className="text-right font-semibold">
                       {formatINR(loanAmount)}
                     </span>
                   </div>
 
-                  <div className="flex items-center justify-between gap-4 text-sm">
-                    <span className="text-white/75">
-                      Estimated interest
-                    </span>
-
-                    <span className="font-semibold">
+                  <div className="flex items-start justify-between gap-3 text-sm">
+                    <span className="text-white/75">Estimated interest</span>
+                    <span className="text-right font-semibold">
                       {formatINR(emiDetails.totalInterest)}
                     </span>
                   </div>
 
                   <div className="h-px bg-white/20" />
 
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="font-semibold">
-                      Total repayment
-                    </span>
-
-                    <span className="text-lg font-bold">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="font-semibold">Total repayment</span>
+                    <span className="text-right text-lg font-bold">
                       {formatINR(emiDetails.totalPayment)}
                     </span>
                   </div>
                 </div>
 
-                {/* Budget tip */}
-                <div className="mt-4 rounded-xl bg-[#F5C542] p-3.5 text-sm leading-6 text-[#172317]">
-                  <strong>Budget tip:</strong> a longer tenure can reduce the
+                <div className="mt-4 rounded-xl bg-[#F5C542] p-4 text-sm leading-6 text-[#172317]">
+                  <strong>Budget tip:</strong> A longer tenure can reduce the
                   monthly instalment while increasing the total interest paid.
                   Compare both figures before deciding.
                 </div>
 
-                <p className="mt-3 text-xs leading-5 text-white/70">
+                <p className="mt-4 text-xs leading-5 text-white/75">
                   Estimate only. Processing fees, taxes, insurance and other
-                  charges are excluded. The actual schedule may differ from
-                  this calculation.
+                  charges are excluded. The actual repayment schedule may
+                  differ from this calculation.
                 </p>
               </div>
             </div>
@@ -789,26 +770,27 @@ const LoanPage = () => {
       ====================================== */}
       <section
         id="loan-costs"
-        className="scroll-mt-24 bg-[#F8FAF7] px-5 py-14 sm:px-8 lg:px-16 lg:py-16"
+        className="scroll-mt-24 bg-[#F8FAF7] px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16"
       >
-        <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+        <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
-              Before you apply
-            </p>
+            <SectionLabel>Before you apply</SectionLabel>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
               Compare more than the EMI
             </h2>
 
-            <p className="mt-5 leading-8 text-[#5F6F63]">
+            <p className="mt-5 leading-7 text-[#5F6F63] sm:leading-8">
               The monthly instalment is only one part of a loan decision. Read
               the offer carefully and compare the total amount payable,
               additional charges and repayment rules.
             </p>
 
-            <div className="mt-6 flex gap-3 rounded-2xl border border-[#F0E2AD] bg-[#FFFBEB] p-5">
-              <CircleHelp size={22} className="mt-0.5 shrink-0 text-[#8C6B00]" />
+            <div className="mt-6 flex gap-3 rounded-2xl border border-[#F0E2AD] bg-[#FFFBEB] p-4 sm:p-5">
+              <CircleHelp
+                size={22}
+                className="mt-0.5 shrink-0 text-[#8C6B00]"
+              />
 
               <p className="text-sm leading-6 text-[#685B35]">
                 If a fee, penalty or clause is unclear, ask the lender to
@@ -835,10 +817,14 @@ const LoanPage = () => {
                 title: "Late payment and prepayment rules",
                 text: "Understand late-payment consequences, part-payment options, foreclosure conditions and related charges.",
               },
-            ].map((item) => (
-              <div
+            ].map((item, index) => (
+              <motion.div
                 key={item.title}
-                className="flex gap-4 rounded-2xl border border-[#DCEFE2] bg-white p-5 sm:p-6"
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                className="flex gap-4 rounded-2xl border border-[#DCEFE2] bg-white p-4 transition duration-300 hover:border-[#B7D7BE] hover:shadow-md sm:p-5"
               >
                 <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EAF4EC] text-[#087A3D]">
                   <Check size={18} />
@@ -851,7 +837,7 @@ const LoanPage = () => {
                     {item.text}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -860,12 +846,10 @@ const LoanPage = () => {
       {/* ======================================
           DIFFERENT LOAN TYPES
       ====================================== */}
-      <section className="px-5 py-14 sm:px-8 lg:px-16 lg:py-16">
+      <section className="px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
-              Explore loan categories
-            </p>
+            <SectionLabel>Explore loan categories</SectionLabel>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
               Different loans serve different needs
@@ -877,21 +861,21 @@ const LoanPage = () => {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {loanTypes.map((loan, index) => {
               const Icon = loan.icon;
 
               return (
                 <motion.article
                   key={loan.title}
-                  initial={{ opacity: 0, y: 18 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.4, delay: index * 0.06 }}
-                  className="group rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-[#087A3D]/10"
+                  transition={{ duration: 0.35, delay: index * 0.06 }}
+                  className="group flex h-full flex-col rounded-2xl border border-[#DCEFE2] bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#B7D7BE] hover:shadow-xl hover:shadow-[#087A3D]/10 sm:p-6"
                 >
                   <div className="flex items-center justify-between gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D] transition group-hover:bg-[#087A3D] group-hover:text-white">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D] transition duration-300 group-hover:bg-[#087A3D] group-hover:text-white">
                       <Icon size={23} />
                     </div>
 
@@ -900,15 +884,13 @@ const LoanPage = () => {
                     </span>
                   </div>
 
-                  <h3 className="mt-5 text-xl font-bold">
-                    {loan.title}
-                  </h3>
+                  <h3 className="mt-5 text-xl font-bold">{loan.title}</h3>
 
-                  <p className="mt-3 min-h-[112px] text-sm leading-6 text-[#5F6F63]">
+                  <p className="mt-3 flex-1 text-sm leading-6 text-[#5F6F63]">
                     {loan.description}
                   </p>
 
-                  <div className="mt-4 border-t border-[#E8F0E8] pt-4">
+                  <div className="mt-5 border-t border-[#E8F0E8] pt-4">
                     <p className="text-xs font-bold uppercase tracking-wide text-[#087A3D]">
                       Common purpose
                     </p>
@@ -927,12 +909,10 @@ const LoanPage = () => {
       {/* ======================================
           ELIGIBILITY AND DOCUMENTS
       ====================================== */}
-      <section className="bg-[#F4F8F2] px-5 py-14 sm:px-8 lg:px-16 lg:py-16">
+      <section className="bg-[#F4F8F2] px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
-              Prepare with confidence
-            </p>
+            <SectionLabel>Prepare with confidence</SectionLabel>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
               Eligibility and documents
@@ -944,24 +924,27 @@ const LoanPage = () => {
             </p>
           </div>
 
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-3xl border border-[#DCEFE2] bg-white p-6 sm:p-8">
+          <div className="mt-8 grid gap-5 lg:grid-cols-2">
+            <div className="rounded-3xl border border-[#DCEFE2] bg-white p-5 shadow-sm sm:p-7">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                 <BadgeCheck size={25} />
               </div>
 
-              <h3 className="mt-5 text-2xl font-bold">
+              <h3 className="mt-5 text-xl font-bold sm:text-2xl">
                 Personal loan eligibility factors
               </h3>
 
-              <ul className="mt-5 space-y-3">
+              <ul className="mt-5 space-y-4">
                 {[
                   "Age and residency criteria set by the lender",
                   "Income and employment or business stability",
                   "Existing EMIs and overall repayment capacity",
                   "Credit history and lender-specific checks",
                 ].map((item) => (
-                  <li key={item} className="flex gap-3 text-[#405247]">
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 text-sm leading-6 text-[#405247] sm:text-base"
+                  >
                     <CheckCircle2
                       size={19}
                       className="mt-0.5 shrink-0 text-[#087A3D]"
@@ -972,23 +955,26 @@ const LoanPage = () => {
               </ul>
             </div>
 
-            <div className="rounded-3xl border border-[#DCEFE2] bg-white p-6 sm:p-8">
+            <div className="rounded-3xl border border-[#DCEFE2] bg-white p-5 shadow-sm sm:p-7">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#FFF5D6] text-[#8C6B00]">
                 <FileCheck2 size={25} />
               </div>
 
-              <h3 className="mt-5 text-2xl font-bold">
+              <h3 className="mt-5 text-xl font-bold sm:text-2xl">
                 Documents you may be asked for
               </h3>
 
-              <ul className="mt-5 space-y-3">
+              <ul className="mt-5 space-y-4">
                 {[
                   "Identity and address proof",
                   "Income proof or salary slips, where applicable",
                   "Recent bank statements",
                   "Employment or business details, if requested",
                 ].map((item) => (
-                  <li key={item} className="flex gap-3 text-[#405247]">
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 text-sm leading-6 text-[#405247] sm:text-base"
+                  >
                     <CheckCircle2
                       size={19}
                       className="mt-0.5 shrink-0 text-[#087A3D]"
@@ -1007,13 +993,11 @@ const LoanPage = () => {
       ====================================== */}
       <section
         id="loan-faqs"
-        className="scroll-mt-24 px-5 py-14 sm:px-8 lg:px-16 lg:py-16"
+        className="scroll-mt-24 px-5 py-12 sm:px-8 sm:py-14 lg:px-16 lg:py-16"
       >
         <div className="mx-auto max-w-3xl">
           <div className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#087A3D]">
-              Personal loan FAQs
-            </p>
+            <SectionLabel>Personal loan FAQs</SectionLabel>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
               Questions worth asking
@@ -1026,36 +1010,60 @@ const LoanPage = () => {
           </div>
 
           <div className="mt-8 space-y-3">
-            {faqItems.map((faq, index) => (
-              <div
-                key={faq.question}
-                className="overflow-hidden rounded-2xl border border-[#DCEFE2] bg-white transition hover:border-[#B7D7BE]"
-              >
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenFaq(openFaq === index ? -1 : index)
-                  }
-                  aria-expanded={openFaq === index}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left font-semibold sm:px-6"
+            {faqItems.map((faq, index) => {
+              const isOpen = openFaq === index;
+
+              return (
+                <div
+                  key={faq.question}
+                  className={`overflow-hidden rounded-2xl border bg-white transition duration-300 ${
+                    isOpen
+                      ? "border-[#A9D1B3] shadow-md shadow-[#087A3D]/5"
+                      : "border-[#DCEFE2] hover:border-[#B7D7BE]"
+                  }`}
                 >
-                  <span>{faq.question}</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenFaq(isOpen ? -1 : index)
+                    }
+                    aria-expanded={isOpen}
+                    className="flex min-h-14 w-full items-center justify-between gap-4 px-4 py-4 text-left font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#087A3D] sm:px-6 sm:py-5"
+                  >
+                    <span className="text-sm leading-6 sm:text-base">
+                      {faq.question}
+                    </span>
 
-                  <ChevronDown
-                    size={20}
-                    className={`shrink-0 text-[#087A3D] transition-transform ${
-                      openFaq === index ? "rotate-180" : ""
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition ${
+                        isOpen
+                          ? "bg-[#087A3D] text-white"
+                          : "bg-[#EAF4EC] text-[#087A3D]"
+                      }`}
+                    >
+                      <ChevronDown
+                        size={18}
+                        className={`transition-transform duration-300 ${
+                          isOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </span>
+                  </button>
+
+                  <div
+                    className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${
+                      isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
                     }`}
-                  />
-                </button>
-
-                {openFaq === index && (
-                  <div className="px-5 pb-5 leading-7 text-[#5F6F63] sm:px-6">
-                    {faq.answer}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="px-4 pb-5 text-sm leading-7 text-[#5F6F63] sm:px-6">
+                        {faq.answer}
+                      </p>
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1063,21 +1071,22 @@ const LoanPage = () => {
       {/* ======================================
           FINAL CALL TO ACTION
       ====================================== */}
-      <section className="px-5 pb-14 sm:px-8 lg:px-16 lg:pb-16">
-        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-r from-[#071B10] via-[#087A3D] to-[#0D5A32] px-6 py-9 text-white sm:px-10 sm:py-11 lg:px-14">
+      <section className="px-5 pb-12 sm:px-8 sm:pb-14 lg:px-16 lg:pb-16">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-gradient-to-br from-[#071B10] via-[#087A3D] to-[#0D5A32] px-5 py-8 text-white shadow-xl shadow-[#087A3D]/10 sm:px-8 sm:py-10 lg:px-14 lg:py-12">
           <div className="pointer-events-none absolute -right-10 -top-20 h-64 w-64 rounded-full border-[30px] border-white/10" />
+          <div className="pointer-events-none absolute -bottom-24 left-1/3 h-52 w-52 rounded-full bg-[#F5C542]/10 blur-3xl" />
 
-          <div className="relative flex flex-col items-start justify-between gap-7 md:flex-row md:items-center">
+          <div className="relative flex flex-col items-start justify-between gap-6 md:flex-row md:items-center md:gap-8">
             <div className="max-w-2xl">
-              <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#F5D76E]">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#F5D76E] sm:text-sm">
                 Take the next step thoughtfully
               </p>
 
-              <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
+              <h2 className="mt-3 text-2xl font-bold leading-tight tracking-tight sm:text-3xl lg:text-4xl">
                 Start with the numbers. Decide with clarity.
               </h2>
 
-              <p className="mt-4 leading-7 text-white/75">
+              <p className="mt-4 text-sm leading-7 text-white/80 sm:text-base">
                 Estimate a possible repayment, compare the complete cost and
                 read the lender's terms before submitting an application.
               </p>
@@ -1086,7 +1095,7 @@ const LoanPage = () => {
             <button
               type="button"
               onClick={() => navigate("/apply")}
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#F5C542] px-6 py-3.5 font-bold text-[#172317] transition hover:bg-[#FFDB68] focus:outline-none focus:ring-4 focus:ring-white/25"
+              className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#F5C542] px-6 py-3.5 font-bold text-[#172317] shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFDB68] focus:outline-none focus:ring-4 focus:ring-white/25 sm:w-auto"
             >
               Go to application
               <ArrowRight size={18} />
@@ -1094,12 +1103,12 @@ const LoanPage = () => {
           </div>
         </div>
 
-        <p className="mx-auto mt-5 max-w-5xl text-center text-xs leading-6 text-[#31ad52]">
-          EkPaisa provides educational information and illustrative calculations,
-          not a loan approval or a promise of specific rates. Product
-          availability, eligibility, fees and terms are determined by the
-          relevant lender. Review official loan documents and consider your
-          ability to repay before borrowing.
+        <p className="mx-auto mt-5 max-w-5xl text-center text-xs leading-6 text-[#607568]">
+          EkPaisa provides educational information and illustrative
+          calculations, not a loan approval or a promise of specific rates.
+          Product availability, eligibility, fees and terms are determined by
+          the relevant lender. Review official loan documents and consider
+          your ability to repay before borrowing.
         </p>
       </section>
     </main>

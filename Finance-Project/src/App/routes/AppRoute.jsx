@@ -20,7 +20,7 @@ const BlogPage = lazy(() => import("../../Features/Finance/UI/Pages/BlogPage"));
 // Loading UI
 const PageLoader = () => (
   <div className="flex min-h-[60vh] items-center justify-center">
-    <div className="h-10 w-10 animate-spin rounded-full border-4 border-purple-200 border-t-purple-700" />
+    <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#087A3D]/25 border-t-[#087A3D]" />
   </div>
 );
 

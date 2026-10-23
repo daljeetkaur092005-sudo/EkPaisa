@@ -21,13 +21,14 @@ import {
   Sparkles,
   Rocket,
 } from "lucide-react";
+
 import { useMain } from "../../Hooks/useMain";
+
 import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.webp";
 import pnb from "/src/assets/pnb.webp";
 import newkotak from "/src/assets/newkotak.webp";
 import newaxis from "/src/assets/newaxis.webp";
-import  induslnd from "/src/assets/induslnd .webp";
-
+import induslnd from "/src/assets/induslnd .webp";
 import idfc from "/src/assets/idfc.webp";
 import hdfc from "/src/assets/hdfc.webp";
 import icic from "/src/assets/icic.webp";
@@ -36,67 +37,146 @@ import bob from "/src/assets/bob.webp";
 import sbi from "/src/assets/sbi.webp";
 import personalloan from "/src/assets/personalloan.webp";
 import creditcard from "/src/assets/creditcard.webp";
+import computer from "/src/assets/computer.webp";
+
+// ============================================================
+// ANIMATION VARIANTS
+// ============================================================
+
 const fadeUp = {
   hidden: { opacity: 0, y: 35 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: "easeOut" },
+    transition: {
+      duration: 0.65,
+      ease: "easeOut",
+    },
   },
 };
+
+const buttonMotion = {
+  whileHover: { y: -3 },
+  whileTap: { scale: 0.97 },
+  transition: { duration: 0.25, ease: "easeOut" },
+};
+
+// ============================================================
+// HOME PAGE
+// ============================================================
 
 const HomePage = () => {
   const { navigate } = useMain();
 
   const bankLogos = [
+    { name: "State Bank of India", src: sbi },
+    { name: "HDFC Bank", src: hdfc },
+    { name: "ICICI Bank", src: icic },
+    { name: "Axis Bank", src: newaxis },
+    { name: "Kotak Mahindra Bank", src: newkotak },
+    { name: "Punjab National Bank", src: pnb },
+    { name: "Bank of Baroda", src: bob },
+    { name: "Canara Bank", src: canara },
+    { name: "IDFC FIRST Bank", src: idfc },
+    { name: "IndusInd Bank", src: induslnd },
+  ];
+
+  const exploreItems = [
+    { label: "Personal Loans", icon: Wallet, path: "/loans" },
+    { label: "Credit Cards", icon: CreditCard, path: "/credit-cards" },
+    { label: "Money Guides", icon: FileText, path: "/blogs" },
+  ];
+
+  const features = [
     {
-      name: "State Bank of India",
-      src: sbi
+      icon: Search,
+      title: "Explore Your Options",
+      description:
+        "Review product details and decide which questions matter to you.",
     },
     {
-      name: "HDFC Bank",
-      src:hdfc,
+      icon: ShieldCheck,
+      title: "Learn About Credit",
+      description:
+        "Get familiar with credit terms before making a financial decision.",
     },
     {
-      name: "ICICI Bank",
-      src:icic,
+      icon: FileText,
+      title: "Plain-Language Guides",
+      description:
+        "Read straightforward explanations designed for everyday decisions.",
     },
     {
-      name: "Axis Bank",
-      src:newaxis,
+      icon: Heart,
+      title: "Your Plans, Your Pace",
+      description:
+        "Use helpful starting points to think through your own priorities.",
+    },
+  ];
+
+  const steps = [
+    {
+      number: "1",
+      icon: FileText,
+      title: "Name Your Goal",
+      description: "Pick the topic you want to understand first.",
     },
     {
-      name: "Kotak Mahindra Bank",
-      src:newkotak,
+      number: "2",
+      icon: SlidersHorizontal,
+      title: "Review the Details",
+      description:
+        "Look at the details and note anything you need to verify.",
     },
     {
-      name: "Punjab National Bank",
-      src:pnb,
+      number: "3",
+      icon: CheckCircle2,
+      title: "Choose Your Next Step",
+      description:
+        "Move forward when the information fits your needs.",
+    },
+  ];
+
+  const trustItems = [
+    {
+      icon: Users,
+      title: "Your Goals",
+      description: "Explore at your pace",
     },
     {
-      name: "Bank of Baroda",
-      src:bob,
+      icon: ShieldCheck,
+      title: "Transparency",
+      description: "Read the details",
     },
     {
-      name: "Canara Bank",
-      src:canara,
-    },
-    {
-      name: "IDFC FIRST Bank",
-      src:idfc,
-    },
-    {
-      name: "IndusInd Bank",
-      src:induslnd
+      icon: LockKeyhole,
+      title: "Privacy First",
+      description: "Privacy matters",
     },
   ];
 
   return (
     <main
       style={{ fontFamily: "'Inter', Arial, sans-serif" }}
-      className="overflow-hidden bg-white font-sans text-[#102016]"
+      className="
+        overflow-hidden bg-white font-sans text-[#102016]
+        [&_button]:transition-all
+        [&_button]:duration-300
+        [&_button]:ease-out
+        [&_button:active]:scale-[0.98]
+        [&_button:focus-visible]:outline-none
+        [&_button:focus-visible]:ring-2
+        [&_button:focus-visible]:ring-[#D6A91F]
+        [&_button:focus-visible]:ring-offset-2
+        [&_a]:transition-all
+        [&_a]:duration-300
+        [&_a]:ease-out
+      "
     >
+      {/* ================================================== */}
       {/* HERO SECTION */}
+      {/* ================================================== */}
+
       <section className="relative bg-gradient-to-br from-[#F4F8F2] via-white to-[#E7F0E5] px-5 pb-20 pt-12 sm:px-8 lg:px-16 lg:pt-20">
         <motion.div
           initial={{ opacity: 0 }}
@@ -109,6 +189,7 @@ const HomePage = () => {
 
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
           {/* HERO CONTENT */}
+
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -140,27 +221,23 @@ const HomePage = () => {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <motion.div
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.96 }}
+              <motion.button
+                type="button"
+                onClick={() => navigate("/apply")}
+                {...buttonMotion}
+                className="group inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#087A3D]/20 hover:bg-[#075C30] hover:shadow-xl hover:shadow-[#087A3D]/25"
               >
-                <button
-                  type="button"
-                  onClick={() => navigate("/apply")}
-                  className="group inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3.5 font-semibold text-white shadow-lg transition-colors hover:bg-[#075C30]"
-                >
-                  Apply Now
-                  <ArrowRight
-                    size={18}
-                    className="transition-transform group-hover:translate-x-1"
-                  />
-                </button>
-              </motion.div>
+                Apply Now
+                <ArrowRight
+                  size={18}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </motion.button>
 
               <motion.a
                 href="#how-it-works"
-                whileHover={{ y: -3 }}
-                className="inline-flex items-center justify-center rounded-xl border border-[#D6A91F] bg-white/80 px-6 py-3.5 font-semibold text-[#087A3D] transition-colors hover:bg-[#F4F8F2]"
+                {...buttonMotion}
+                className="inline-flex items-center justify-center rounded-xl border border-[#D6A91F] bg-white/80 px-6 py-3.5 font-semibold text-[#087A3D] hover:border-[#087A3D] hover:bg-[#F4F8F2] hover:shadow-md"
               >
                 Learn More
               </motion.a>
@@ -190,6 +267,7 @@ const HomePage = () => {
           </motion.div>
 
           {/* HERO IMAGE */}
+
           <motion.div
             initial={{ opacity: 0, x: 50, scale: 0.95 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -198,7 +276,7 @@ const HomePage = () => {
           >
             <div className="relative rounded-[2rem] bg-gradient-to-br from-[#DCEFE2] to-[#F5C542] p-3 shadow-2xl sm:p-5">
               <motion.img
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85"
+                src={computer}
                 alt="Financial analytics dashboard"
                 animate={{ y: [0, -8, 0] }}
                 transition={{
@@ -214,6 +292,7 @@ const HomePage = () => {
             </div>
 
             {/* FLOATING PRODUCTS CARD */}
+
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: [0, 8, 0] }}
@@ -232,26 +311,22 @@ const HomePage = () => {
                 Explore Your Next Step
               </p>
 
-              {[
-                { label: "Personal Loans", icon: Wallet, path: "/loans" },
-                {
-                  label: "Credit Cards",
-                  icon: CreditCard,
-                  path: "/credit-cards",
-                },
-                { label: "Money Guides", icon: FileText, path: "/blogs" },
-              ].map(({ label, icon: Icon, path }) => (
+              {exploreItems.map(({ label, icon: Icon, path }) => (
                 <button
                   key={label}
                   type="button"
                   onClick={() => navigate(path)}
-                  className="flex w-full items-center justify-between rounded-lg p-2 text-left text-sm transition-colors hover:bg-[#F4F8F2]"
+                  className="flex w-full items-center justify-between rounded-lg p-2 text-left text-sm hover:bg-[#F4F8F2]"
                 >
                   <span className="flex items-center gap-2">
                     <Icon size={17} className="text-[#087A3D]" />
                     {label}
                   </span>
-                  <ArrowRight size={15} />
+
+                  <ArrowRight
+                    size={15}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
                 </button>
               ))}
             </motion.div>
@@ -259,7 +334,10 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* ================================================== */}
       {/* FEATURES SECTION */}
+      {/* ================================================== */}
+
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -268,35 +346,11 @@ const HomePage = () => {
         className="px-5 py-16 sm:px-8 lg:px-16"
       >
         <div className="mx-auto grid max-w-7xl gap-5 rounded-3xl bg-[#F5F8F2] p-6 sm:p-8 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              icon: Search,
-              title: "Explore Your Options",
-              description:
-                "Review product details and decide which questions matter to you.",
-            },
-            {
-              icon: ShieldCheck,
-              title: "Learn About Credit",
-              description:
-                "Get familiar with credit terms before making a financial decision.",
-            },
-            {
-              icon: FileText,
-              title: "Plain-Language Guides",
-              description:
-                "Read straightforward explanations designed for everyday decisions.",
-            },
-            {
-              icon: Heart,
-              title: "Your Plans, Your Pace",
-              description:
-                "Use helpful starting points to think through your own priorities.",
-            },
-          ].map(({ icon: Icon, title, description }) => (
+          {features.map(({ icon: Icon, title, description }) => (
             <motion.div
               key={title}
               whileHover={{ y: -7 }}
+              transition={{ duration: 0.25 }}
               className="rounded-2xl p-4 transition-all hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10"
             >
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
@@ -313,7 +367,10 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* HOW IT WORKS SECTION */}
+      {/* ================================================== */}
+
       <motion.section
         id="how-it-works"
         initial="hidden"
@@ -334,49 +391,30 @@ const HomePage = () => {
             </h2>
 
             <p className="mt-4 max-w-sm leading-7 text-[#5F6F63]">
-              Begin with a goal, explore relevant information, then decide what
-              to look into next.
+              Begin with a goal, explore relevant information, then decide
+              what to look into next.
             </p>
 
-            <button
+            <motion.button
               type="button"
               onClick={() => navigate("/apply")}
-              className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3 font-semibold text-white transition-all hover:-translate-y-1 hover:bg-[#075C30]"
+              {...buttonMotion}
+              className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#075C30] hover:shadow-lg"
             >
               Apply Now
               <ArrowRight
                 size={18}
-                className="transition-transform group-hover:translate-x-1"
+                className="transition-transform duration-300 group-hover:translate-x-1"
               />
-            </button>
+            </motion.button>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {[
-              {
-                number: "1",
-                icon: FileText,
-                title: "Name Your Goal",
-                description: "Pick the topic you want to understand first.",
-              },
-              {
-                number: "2",
-                icon: SlidersHorizontal,
-                title: "Review the Details",
-                description:
-                  "Look at the details and note anything you need to verify.",
-              },
-              {
-                number: "3",
-                icon: CheckCircle2,
-                title: "Choose Your Next Step",
-                description:
-                  "Move forward when the information fits your needs.",
-              },
-            ].map(({ number, icon: Icon, title, description }) => (
+            {steps.map(({ number, icon: Icon, title, description }) => (
               <motion.div
                 key={number}
                 whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ duration: 0.25 }}
                 className="rounded-2xl border border-[#DCEFE2] bg-white p-6 shadow-sm transition-shadow hover:shadow-xl hover:shadow-[#087A3D]/10"
               >
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#087A3D] font-bold text-white">
@@ -400,7 +438,10 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* POPULAR PRODUCTS */}
+      {/* ================================================== */}
+
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -425,21 +466,23 @@ const HomePage = () => {
               </p>
             </div>
 
-            <button
+            <motion.button
               type="button"
-              onClick={() => navigate("/apply")}
-              className="group inline-flex w-fit items-center gap-2 font-semibold text-[#087A3D] transition-colors hover:text-[#075C30]"
+              onClick={() => navigate("/blogs")}
+              {...buttonMotion}
+              className="group inline-flex w-fit items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
             >
               Browse Topics
               <ArrowRight
                 size={18}
-                className="transition-transform group-hover:translate-x-1"
+                className="transition-transform duration-300 group-hover:translate-x-1"
               />
-            </button>
+            </motion.button>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {/* PERSONAL LOANS */}
+
             <motion.article
               whileHover={{ y: -9 }}
               transition={{ duration: 0.25 }}
@@ -448,7 +491,7 @@ const HomePage = () => {
               <div className="relative h-52 overflow-hidden bg-[#DCEFE2]">
                 <img
                   src={personalloan}
-                  alt="Home representing financial goals"
+                  alt="Personal loan information"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -472,21 +515,23 @@ const HomePage = () => {
                   reviewing.
                 </p>
 
-                <button
+                <motion.button
                   type="button"
-                  onClick={() => navigate("/loans")}
+                  onClick={() => navigate("/loan")}
+                  {...buttonMotion}
                   className="group/link mt-5 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
                 >
                   Learn About Loans
                   <ArrowRight
                     size={18}
-                    className="transition-transform group-hover/link:translate-x-1"
+                    className="transition-transform duration-300 group-hover/link:translate-x-1"
                   />
-                </button>
+                </motion.button>
               </div>
             </motion.article>
 
             {/* CREDIT CARDS */}
+
             <motion.article
               whileHover={{ y: -9 }}
               transition={{ duration: 0.25 }}
@@ -495,7 +540,7 @@ const HomePage = () => {
               <div className="relative h-52 overflow-hidden bg-[#DCEFE2]">
                 <img
                   src={creditcard}
-                  alt="Card payment at checkout"
+                  alt="Credit card information"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -519,21 +564,23 @@ const HomePage = () => {
                   conditions.
                 </p>
 
-                <button
+                <motion.button
                   type="button"
-                  onClick={() => navigate("/credit-cards")}
+                  onClick={() => navigate("/")}
+                  {...buttonMotion}
                   className="group/link mt-5 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
                 >
                   Learn About Cards
                   <ArrowRight
                     size={18}
-                    className="transition-transform group-hover/link:translate-x-1"
+                    className="transition-transform duration-300 group-hover/link:translate-x-1"
                   />
-                </button>
+                </motion.button>
               </div>
             </motion.article>
 
             {/* MONEY GUIDES */}
+
             <motion.article
               whileHover={{ y: -9 }}
               transition={{ duration: 0.25 }}
@@ -541,6 +588,7 @@ const HomePage = () => {
             >
               <div className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-[#071B10] via-[#087A3D] to-[#D6A91F]">
                 <div className="absolute -right-6 -top-8 h-36 w-36 rounded-full border-[18px] border-white/15" />
+
                 <div className="absolute -bottom-12 -left-5 h-36 w-36 rounded-full border-[18px] border-[#F5C542]/20" />
 
                 <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/30 bg-white/10 text-[#F5C542] shadow-lg backdrop-blur">
@@ -564,24 +612,28 @@ const HomePage = () => {
                   borrowing, and everyday money decisions.
                 </p>
 
-                <button
+                <motion.button
                   type="button"
                   onClick={() => navigate("/blogs")}
+                  {...buttonMotion}
                   className="group/link mt-5 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
                 >
                   Read Our Guides
                   <ArrowRight
                     size={18}
-                    className="transition-transform group-hover/link:translate-x-1"
+                    className="transition-transform duration-300 group-hover/link:translate-x-1"
                   />
-                </button>
+                </motion.button>
               </div>
             </motion.article>
           </div>
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* BANK LOGOS SECTION */}
+      {/* ================================================== */}
+
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -590,6 +642,7 @@ const HomePage = () => {
         className="relative overflow-hidden bg-gradient-to-b from-white via-[#F5F8F2] to-white px-5 py-20 sm:px-8 lg:px-16"
       >
         <div className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-[#DCEFE2]/60 blur-3xl" />
+
         <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#F5C542]/15 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl">
@@ -604,8 +657,8 @@ const HomePage = () => {
             </h2>
 
             <p className="mx-auto mt-4 max-w-xl leading-7 text-[#5F6F63]">
-              Explore well-known banks while researching financial options that
-              may suit your needs.
+              Explore well-known banks while researching financial options
+              that may suit your needs.
             </p>
           </div>
 
@@ -645,7 +698,10 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* TRUST SECTION */}
+      {/* ================================================== */}
+
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -655,6 +711,7 @@ const HomePage = () => {
       >
         <div className="relative mx-auto grid max-w-7xl gap-8 overflow-hidden rounded-3xl border border-[#DCEFE2] bg-gradient-to-r from-[#EAF4EC] via-[#E7F0E5] to-[#F5F8F2] p-7 sm:p-10 md:grid-cols-2 lg:grid-cols-4 lg:items-center">
           <div className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-[#F5C542]/40" />
+
           <div className="pointer-events-none absolute -bottom-12 right-10 h-32 w-32 rounded-full bg-[#F5C542]/40" />
 
           <div className="relative md:col-span-2 lg:col-span-1">
@@ -668,34 +725,19 @@ const HomePage = () => {
             </p>
           </div>
 
-          {[
-            {
-              icon: Users,
-              title: "Your Goals",
-              description: "Explore at your pace",
-            },
-            {
-              icon: ShieldCheck,
-              title: "Transparency",
-              description: "Read the details",
-            },
-            {
-              icon: LockKeyhole,
-              title: "Privacy First",
-              description: "Privacy matters",
-            },
-          ].map(({ icon: Icon, title, description }) => (
+          {trustItems.map(({ icon: Icon, title, description }) => (
             <motion.div
               key={title}
               whileHover={{ y: -5 }}
+              transition={{ duration: 0.25 }}
               className="relative flex items-center gap-4"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm transition-all duration-300 hover:shadow-md">
                 <Icon size={25} />
               </div>
 
               <div>
-                <p className="text-2xl font-bold">{title}</p>
+                <p className="text-xl font-bold sm:text-2xl">{title}</p>
                 <p className="mt-1 text-sm text-[#5F6F63]">{description}</p>
               </div>
             </motion.div>
@@ -703,7 +745,10 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* FINAL CTA */}
+      {/* ================================================== */}
+
       <motion.section
         initial={{ opacity: 0, scale: 0.97 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -740,145 +785,178 @@ const HomePage = () => {
             </div>
           </div>
 
-          <motion.div whileHover={{ scale: 1.05, y: -3 }}>
-            <button
-              type="button"
-              onClick={() => navigate("/apply")}
-              className="group relative inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-4 font-bold text-[#087A3D] transition-colors hover:bg-[#EAF4EC]"
-            >
-              Apply Now
-              <ArrowRight
-                size={19}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </button>
-          </motion.div>
+          <motion.button
+            type="button"
+            onClick={() => navigate("/apply")}
+            {...buttonMotion}
+            className="group relative inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-4 font-bold text-[#087A3D] shadow-md hover:bg-[#EAF4EC] hover:shadow-xl"
+          >
+            Apply Now
+            <ArrowRight
+              size={19}
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            />
+          </motion.button>
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* FOOTER */}
+      {/* ================================================== */}
 
+      <footer
+        id="home-footer"
+        className="relative overflow-hidden border-t-2 border-[#075C30] bg-gradient-to-br from-[#F4E9C9] via-[#FBE9A0] to-[#FFD95A] text-[#123D27]"
+      >
+        {/* Decorative background */}
 
-{/* FOOTER SECTION */}
-<footer id="home-footer"
-className="relative overflow-hidden border-t-2 border-[#075C30] bg-gradient-to-r from-[#e9ddba] to-[#FFD95A] text-[#123D27]">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/30 blur-3xl" />
 
-  {/* Decorative background */}
-  <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
-  <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#075C30]/10 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#075C30]/10 blur-3xl" />
 
-  <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10">
+        <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10">
+          {/* MAIN FOOTER GRID */}
 
-    {/* Main footer grid */}
-    <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
+            {/* BRAND */}
 
-      {/* Brand section */}
-      <div className="lg:col-span-2">
-        <a href="/" className="inline-flex items-center gap-3">
-          <img
-            src={EkPaisa}
-            alt="EkPaisa logo"
-            className="h-14 w-auto object-contain"
-          />
-        </a>
+            <div className="lg:col-span-2">
+              <a
+                href="/"
+                className="inline-flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#075C30]"
+              >
+                <img
+                  src={EkPaisa}
+                  alt="EkPaisa logo"
+                  className="h-14 w-auto object-contain transition-transform duration-300 hover:scale-105"
+                />
+              </a>
 
-        <p className="mt-5 max-w-sm text-sm font-bold leading-7 text-[#234B34]">
-          Making financial decisions simpler. Explore loan options,
-          understand your choices, and take your next financial step
-          with greater confidence.
-        </p>
+              <p className="mt-5 max-w-sm text-sm font-bold leading-7 text-[#234B34]">
+                Making financial decisions simpler. Explore loan options,
+                understand your choices, and take your next financial step
+                with greater confidence.
+              </p>
 
-        <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/30 px-4 py-2 text-sm font-bold">
-          <ShieldCheck size={18} />
-          Your financial journey, made simpler
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/40 px-4 py-2 text-sm font-bold shadow-sm">
+                <ShieldCheck size={18} />
+                Your financial journey, made simpler
+              </div>
+            </div>
+
+            {/* EXPLORE LINKS */}
+
+            <div>
+              <h3 className="text-base font-extrabold text-[#073D24]">
+                Explore
+              </h3>
+
+              <div className="mt-5 flex flex-col items-start gap-3">
+                <a
+                  href="/"
+                  className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline"
+                >
+                  Home
+                </a>
+
+                <a
+                  href="/loan"
+                  className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline"
+                >
+                  Personal Loans
+                </a>
+
+                <a
+                  href="/apply"
+                  className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline"
+                >
+                  Apply for a Loan
+                </a>
+
+                <a
+                  href="/credit-cards"
+                  className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline"
+                >
+                  Credit Cards
+                </a>
+              </div>
+            </div>
+
+            {/* GET STARTED */}
+
+            <div>
+              <h3 className="text-base font-extrabold text-[#073D24]">
+                Get Started
+              </h3>
+
+              <p className="mt-5 text-sm font-bold leading-6 text-[#234B34]">
+                Take the first step towards finding a financial option that
+                suits your needs.
+              </p>
+
+              <motion.a
+                href="/loan"
+                {...buttonMotion}
+                className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#075C30] px-5 py-3 text-sm font-bold text-white shadow-md hover:bg-[#064824] hover:shadow-lg"
+              >
+                Explore Loans
+                <ArrowRight
+                  size={17}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </motion.a>
+            </div>
+
+            {/* IMPORTANT LINKS */}
+
+            <div>
+              <h3 className="text-base font-extrabold text-[#073D24]">
+                Important Links
+              </h3>
+
+              <div className="mt-5 flex flex-col items-start gap-3">
+                <a
+                  href="/privacy-policy"
+                  className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline"
+                >
+                  Privacy Policy
+                </a>
+
+                <a
+                  href="/terms"
+                  className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline"
+                >
+                  Terms &amp; Conditions
+                </a>
+
+                <a
+                  href="/contact"
+                  className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline"
+                >
+                  Contact Us
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* FOOTER DIVIDER */}
+
+          <div className="my-9 h-px bg-gradient-to-r from-transparent via-[#075C30]/30 to-transparent" />
+
+          {/* BOTTOM FOOTER */}
+
+          <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+            <p className="text-sm font-bold text-[#234B34]">
+              © {new Date().getFullYear()} EkPaisa. All rights reserved.
+            </p>
+
+            <p className="flex items-center gap-2 text-sm font-bold text-[#234B34]">
+              <LockKeyhole size={15} />
+              Make informed financial decisions
+            </p>
+          </div>
         </div>
-      </div>
-
-      {/* Explore links */}
-      <div>
-        <h3 className="text-base font-extrabold text-[#073D24]">
-          Explore
-        </h3>
-
-        <div className="mt-5 flex flex-col items-start gap-3">
-          <a href="/" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
-            Home
-          </a>
-
-          <a href="/loan" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
-            Personal Loans
-          </a>
-
-          <a href="/apply" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
-            Apply for a Loan
-          </a>
-
-          <a href="/credit-cards" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
-            Credit Cards
-          </a>
-        </div>
-      </div>
-
-      {/* Get Started */}
-      <div>
-        <h3 className="text-base font-extrabold text-[#073D24]">
-          Get Started
-        </h3>
-
-        <p className="mt-5 text-sm font-bold leading-6 text-[#234B34]">
-          Take the first step towards finding a financial option
-          that suits your needs.
-        </p>
-
-        <a
-          href="/loan"
-          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#075C30] px-5 py-3 text-sm font-bold text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:bg-[#064824] hover:shadow-lg"
-        >
-          Explore Loans
-          <ArrowRight size={17} />
-        </a>
-      </div>
-
-      {/* Important Links */}
-      <div>
-        <h3 className="text-base font-extrabold text-[#073D24]">
-          Important Links
-        </h3>
-
-        <div className="mt-5 flex flex-col items-start gap-3">
-          <a href="/privacy-policy" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
-            Privacy Policy
-          </a>
-
-          <a href="/terms" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
-            Terms & Conditions
-          </a>
-
-          <a href="/contact" className="text-sm font-bold text-[#234B34] transition-colors hover:text-[#075C30] hover:underline">
-            Contact Us
-          </a>
-        </div>
-      </div>
-    </div>
-
-    {/* Footer divider */}
-    <div className="my-9 h-px bg-[#075C30]/25" />
-
-    {/* Bottom footer */}
-    <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-      <p className="text-sm font-bold text-[#234B34]">
-        © {new Date().getFullYear()} EkPaisa. All rights reserved.
-      </p>
-
-      <p className="flex items-center gap-2 text-sm font-bold text-[#234B34]">
-        <LockKeyhole size={15} />
-        Make informed financial decisions
-      </p>
-    </div>
-
-  </div>
-</footer>
-  
+      </footer>
     </main>
   );
 };

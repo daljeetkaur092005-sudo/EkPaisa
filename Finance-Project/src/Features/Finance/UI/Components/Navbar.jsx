@@ -10,33 +10,38 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  // Detect when the homepage footer enters the screen
-useEffect(() => {
-  const checkFooter = () => {
-    const footer = document.querySelector("#home-footer");
+  // Hide navbar when homepage footer enters the screen
+  useEffect(() => {
+    const checkFooter = () => {
+      const footer = document.querySelector("#home-footer");
 
-    if (!footer) return;
+      if (!footer) {
+        setHideNavbar(false);
+        return;
+      }
 
-    const rect = footer.getBoundingClientRect();
+      const rect = footer.getBoundingClientRect();
 
-    const footerVisible =
-      rect.top < window.innerHeight && rect.bottom > 0;
+      const footerVisible =
+        rect.top < window.innerHeight && rect.bottom > 0;
 
-    setHideNavbar(footerVisible);
-  };
+      setHideNavbar(footerVisible);
+    };
 
-  checkFooter();
+    checkFooter();
 
-  window.addEventListener("scroll", checkFooter);
+    window.addEventListener("scroll", checkFooter);
 
-  return () => {
-    window.removeEventListener("scroll", checkFooter);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", checkFooter);
+    };
+  }, []);
 
   const linkClass = ({ isActive }) =>
     `text-sm font-medium transition-colors duration-300 ${
-      isActive ? "text-[#F5C542]" : "text-gray-300 hover:text-white"
+      isActive
+        ? "text-[#F5C542]"
+        : "text-gray-300 hover:text-white"
     }`;
 
   const mobileLinkClass = ({ isActive }) =>
@@ -50,9 +55,9 @@ useEffect(() => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full border-b border-[#087A3D]/40 bg-[#071B10]/95 shadow-[0_4px_24px_rgba(0,0,0,0.3)] backdrop-blur-xl transition-transform duration-300 ${
-  hideNavbar ? "-translate-y-full" : "translate-y-0"
-}`}
+      className={`sticky top-0 z-50 w-full border-b border-[#087A3D]/40 bg-[#103126]/95 shadow-[0_4px_24px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-transform duration-300 ${
+        hideNavbar ? "-translate-y-full" : "translate-y-0"
+      }`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
@@ -78,10 +83,6 @@ useEffect(() => {
             Loans
           </NavLink>
 
-          <NavLink to="/credit-cards" className={linkClass}>
-            Credit Cards
-          </NavLink>
-
           <NavLink to="/blogs" className={linkClass}>
             Blogs
           </NavLink>
@@ -89,6 +90,7 @@ useEffect(() => {
 
         {/* Get Started */}
         <button
+          type="button"
           onClick={() => navigate("/apply")}
           className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-[#D6A91F] to-[#FFD95A] px-5 py-3 text-sm font-bold text-[#102016] shadow-md transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_5px_20px_rgba(245,197,66,0.25)] md:flex"
         >
@@ -98,9 +100,12 @@ useEffect(() => {
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
+          type="button"
+          onClick={() => setIsOpen((prev) => !prev)}
           className="rounded-xl border border-[#087A3D]/40 bg-[#087A3D]/10 p-2.5 text-[#F5C542] transition hover:bg-[#087A3D]/20 md:hidden"
-          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-label={
+            isOpen ? "Close navigation menu" : "Open navigation menu"
+          }
           aria-expanded={isOpen}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -129,14 +134,6 @@ useEffect(() => {
             </NavLink>
 
             <NavLink
-              to="/credit-cards"
-              onClick={closeMenu}
-              className={mobileLinkClass}
-            >
-              Credit Cards
-            </NavLink>
-
-            <NavLink
               to="/blogs"
               onClick={closeMenu}
               className={mobileLinkClass}
@@ -145,6 +142,7 @@ useEffect(() => {
             </NavLink>
 
             <button
+              type="button"
               onClick={() => {
                 closeMenu();
                 navigate("/apply");
