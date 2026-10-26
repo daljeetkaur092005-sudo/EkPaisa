@@ -1,9 +1,6 @@
 
-// ============================================================
-// EKPAISA HOME PAGE
-// ============================================================
-
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
   ShieldCheck,
@@ -20,6 +17,8 @@ import {
   LockKeyhole,
   Sparkles,
   Rocket,
+  UserRound,
+  CircleCheck,
 } from "lucide-react";
 
 import { useMain } from "../../Hooks/useMain";
@@ -44,22 +43,80 @@ import computer from "/src/assets/computer.webp";
 // ============================================================
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 35 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.65,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
 const buttonMotion = {
-  whileHover: { y: -3 },
+  whileHover: {
+    y: -3,
+    transition: { duration: 0.25, ease: "easeOut" },
+  },
   whileTap: { scale: 0.97 },
-  transition: { duration: 0.25, ease: "easeOut" },
 };
+
+// Form animation made more compact
+const formCardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 35,
+    scale: 0.97,
+    rotateX: 3,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateX: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+      delay: 0.15,
+    },
+  },
+};
+
+const formStepVariants = {
+  initial: {
+    opacity: 0,
+    x: 18,
+    y: 8,
+  },
+  animate: {
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      duration: 0.35,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: -18,
+    y: -5,
+    transition: {
+      duration: 0.2,
+      ease: "easeInOut",
+    },
+  },
+};
+
+// ============================================================
+// INPUT STYLES
+// ============================================================
+
+const inputClass =
+  "w-full rounded-xl border border-[#D9E5D9] bg-white px-4 py-3 text-sm text-[#102016] outline-none transition-all duration-300 placeholder:text-[#9AA69C] focus:border-[#087A3D] focus:ring-4 focus:ring-[#087A3D]/10";
+
+const labelClass = "mb-1.5 block text-sm font-semibold text-[#26382B]";
 
 // ============================================================
 // HOME PAGE
@@ -67,6 +124,34 @@ const buttonMotion = {
 
 const HomePage = () => {
   const { navigate } = useMain();
+
+  const [formStep, setFormStep] = useState(1);
+
+  const [loanForm, setLoanForm] = useState({
+    loanType: "Personal Loan",
+    loanAmount: "",
+    fullName: "",
+    mobileNumber: "",
+    monthlyIncome: "",
+  });
+
+  const updateLoanForm = (event) => {
+    setLoanForm((current) => ({
+      ...current,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleLoanFormSubmit = (event) => {
+    event.preventDefault();
+
+    if (formStep < 3) {
+      setFormStep((current) => current + 1);
+      return;
+    }
+
+    navigate("/apply", { state: loanForm });
+  };
 
   const bankLogos = [
     { name: "State Bank of India", src: sbi },
@@ -79,12 +164,6 @@ const HomePage = () => {
     { name: "Canara Bank", src: canara },
     { name: "IDFC FIRST Bank", src: idfc },
     { name: "IndusInd Bank", src: induslnd },
-  ];
-
-  const exploreItems = [
-    { label: "Personal Loans", icon: Wallet, path: "/loans" },
-    { label: "Credit Cards", icon: CreditCard, path: "/credit-cards" },
-    { label: "Money Guides", icon: FileText, path: "/blogs" },
   ];
 
   const features = [
@@ -158,178 +237,541 @@ const HomePage = () => {
   return (
     <main
       style={{ fontFamily: "'Inter', Arial, sans-serif" }}
-      className="
-        overflow-hidden bg-white font-sans text-[#102016]
-        [&_button]:transition-all
-        [&_button]:duration-300
-        [&_button]:ease-out
-        [&_button:active]:scale-[0.98]
-        [&_button:focus-visible]:outline-none
-        [&_button:focus-visible]:ring-2
-        [&_button:focus-visible]:ring-[#D6A91F]
-        [&_button:focus-visible]:ring-offset-2
-        [&_a]:transition-all
-        [&_a]:duration-300
-        [&_a]:ease-out
-      "
+      className="overflow-hidden bg-white font-sans text-[#102016] [&_button]:transition-all [&_button]:duration-300 [&_button]:ease-out [&_button:focus-visible]:outline-none [&_button:focus-visible]:ring-2 [&_button:focus-visible]:ring-[#D6A91F] [&_button:focus-visible]:ring-offset-2 [&_a]:transition-all [&_a]:duration-300 [&_a]:ease-out"
     >
       {/* ================================================== */}
       {/* HERO SECTION */}
       {/* ================================================== */}
 
-      <section className="relative bg-gradient-to-br from-[#F4F8F2] via-white to-[#E7F0E5] px-5 pb-20 pt-12 sm:px-8 lg:px-16 lg:pt-20">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="pointer-events-none absolute -right-20 top-10 h-72 w-72 rounded-full bg-[#DCEFE2]/50 blur-3xl"
-        />
+      <section className="relative isolate flex min-h-[760px] items-center overflow-hidden bg-[#102016] px-5 py-10 sm:px-8 sm:py-12 lg:min-h-[790px] lg:px-16 lg:py-14">
+        {/* Background image remains unchanged */}
 
-        <div className="pointer-events-none absolute bottom-0 left-1/3 h-48 w-48 rounded-full bg-[#EAF4EC] blur-3xl" />
+        <div className="absolute inset-0 -z-20 bg-[#102016]">
+          <img
+            src={computer}
+            alt="Financial analytics dashboard"
+            fetchPriority="high"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-2">
-          {/* HERO CONTENT */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#102016]/65 via-[#102016]/40 to-[#102016]/20" />
+
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-[#102016]/25 to-transparent" />
+
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 lg:grid-cols-[1.05fr_0.85fr] lg:gap-14">
+          {/* LEFT CONTENT */}
 
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -35 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{
+              duration: 0.85,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="max-w-2xl py-3 text-white sm:py-5"
           >
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#F5C542] bg-white/80 px-4 py-2 text-sm font-medium text-[#087A3D]"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/35 bg-[#102016]/35 px-4 py-2 text-sm font-semibold text-white"
             >
-              <Sparkles size={16} />
+              <Sparkles size={16} className="text-[#FFE17A]" />
               Make Money Choices With Clarity
             </motion.div>
 
-            <h1 className="max-w-xl text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
               Your Money.
               <br />
               Clearer. Calmer.
               <br />
-              <span className="bg-gradient-to-r from-[#087A3D] to-[#D6A91F] bg-clip-text text-transparent">
+
+              <motion.span
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="inline-block text-[#FFE17A]"
+              >
                 Move With EkPaisa.
-              </span>
+              </motion.span>
             </h1>
 
-            <p className="mt-6 max-w-lg text-base leading-7 text-[#5F6F63] sm:text-lg">
-              Explore money-related options, learn the basics, and organise
-              your next step with a clearer view.
-            </p>
-
-            <div className="mt-8 flex flex-wrap gap-4">
-              <motion.button
-                type="button"
-                onClick={() => navigate("/apply")}
-                {...buttonMotion}
-                className="group inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3.5 font-semibold text-white shadow-lg shadow-[#087A3D]/20 hover:bg-[#075C30] hover:shadow-xl hover:shadow-[#087A3D]/25"
-              >
-                Apply Now
-                <ArrowRight
-                  size={18}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                />
-              </motion.button>
-
-              <motion.a
-                href="#how-it-works"
-                {...buttonMotion}
-                className="inline-flex items-center justify-center rounded-xl border border-[#D6A91F] bg-white/80 px-6 py-3.5 font-semibold text-[#087A3D] hover:border-[#087A3D] hover:bg-[#F4F8F2] hover:shadow-md"
-              >
-                Learn More
-              </motion.a>
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="mt-9 flex flex-wrap gap-x-6 gap-y-4 text-sm text-[#34483A]"
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="mt-5 max-w-lg text-base leading-7 text-white sm:text-lg"
             >
-              <div className="flex items-center gap-2">
-                <ShieldCheck size={20} className="text-[#087A3D]" />
-                Built Around Clarity
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Zap size={20} className="text-[#087A3D]" />
-                Simple to Explore
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Star size={20} className="text-[#087A3D]" />
-                Start With Curiosity
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* HERO IMAGE */}
-
-          <motion.div
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.2 }}
-            className="relative mx-auto w-full max-w-xl"
-          >
-            <div className="relative rounded-[2rem] bg-gradient-to-br from-[#DCEFE2] to-[#F5C542] p-3 shadow-2xl sm:p-5">
-              <motion.img
-                src={computer}
-                alt="Financial analytics dashboard"
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                whileHover={{ scale: 1.02 }}
-                className="h-[320px] w-full rounded-[1.5rem] object-cover sm:h-[420px]"
-              />
-
-              <div className="pointer-events-none absolute inset-3 rounded-[1.5rem] bg-gradient-to-t from-[#102016]/30 via-transparent to-transparent sm:inset-5" />
-            </div>
-
-            {/* FLOATING PRODUCTS CARD */}
+              Explore loan options, understand your choices, and take
+              your next step with clarity.
+            </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: [0, 8, 0] }}
-              transition={{
-                opacity: { delay: 0.9, duration: 0.6 },
-                y: {
-                  delay: 1.4,
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.12,
+                    delayChildren: 0.4,
+                  },
                 },
               }}
-              className="absolute -bottom-7 right-0 w-52 rounded-2xl border border-white bg-white/95 p-4 shadow-xl sm:-right-6 sm:w-60 sm:p-5"
+              className="mt-7 flex flex-wrap gap-x-5 gap-y-3 text-sm font-medium text-white"
             >
-              <p className="mb-3 text-sm font-semibold">
-                Explore Your Next Step
-              </p>
-
-              {exploreItems.map(({ label, icon: Icon, path }) => (
-                <button
+              {[
+                { icon: ShieldCheck, label: "Clear information" },
+                { icon: Zap, label: "Simple process" },
+                { icon: Star, label: "Your goals first" },
+              ].map(({ icon: Icon, label }) => (
+                <motion.div
                   key={label}
-                  type="button"
-                  onClick={() => navigate(path)}
-                  className="flex w-full items-center justify-between rounded-lg p-2 text-left text-sm hover:bg-[#F4F8F2]"
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  className="flex items-center gap-2"
                 >
-                  <span className="flex items-center gap-2">
-                    <Icon size={17} className="text-[#087A3D]" />
-                    {label}
-                  </span>
-
-                  <ArrowRight
-                    size={15}
-                    className="transition-transform duration-300 group-hover:translate-x-1"
-                  />
-                </button>
+                  <Icon size={19} className="text-[#FFE17A]" />
+                  {label}
+                </motion.div>
               ))}
             </motion.div>
+
+            <motion.button
+              type="button"
+              onClick={() =>
+                document
+                  .getElementById("loan-application-form")
+                  ?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  })
+              }
+              whileHover={{ y: -3, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#FFD95A] px-6 py-3.5 font-bold text-[#123D27] hover:bg-[#FFE88A]"
+            >
+              Get Started
+              <ArrowRight size={18} />
+            </motion.button>
+          </motion.div>
+
+          {/* ================================================== */}
+          {/* COMPACT LOAN FORM */}
+          {/* ================================================== */}
+
+          <motion.div
+            id="loan-application-form"
+            variants={formCardVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{
+              y: -2,
+              transition: {
+                duration: 0.3,
+                ease: "easeOut",
+              },
+            }}
+            style={{ transformPerspective: 1200 }}
+            className="relative mx-auto w-full max-w-md justify-self-center lg:translate-y-[-24px] lg:justify-self-end"
+          >
+            <form
+              onSubmit={handleLoanFormSubmit}
+              className="relative overflow-hidden rounded-2xl border border-white/70 bg-white"
+            >
+              {/* COMPACT FORM HEADER */}
+
+              <div className="relative overflow-hidden bg-gradient-to-br from-[#075C30] via-[#087A3D] to-[#0B6B3A] px-5 pb-4 pt-4 sm:px-6">
+                <div className="pointer-events-none absolute -right-7 -top-12 h-36 w-36 rounded-full border-[18px] border-white/10" />
+
+                <div className="pointer-events-none absolute -bottom-10 right-24 h-24 w-24 rounded-full bg-[#FFD95A]/10" />
+
+                <div className="relative flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <motion.div
+                      animate={{ rotate: [0, -5, 5, 0] }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-[#FFE17A]"
+                    >
+                      <Wallet size={22} />
+                    </motion.div>
+
+                    <div>
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#FFE17A]">
+                        EkPaisa
+                      </p>
+
+                      <h2 className="mt-0.5 text-lg font-extrabold text-white sm:text-xl">
+                        Find Your Loan
+                      </h2>
+                    </div>
+                  </div>
+
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white">
+                    {formStep === 3 ? (
+                      <CircleCheck size={20} />
+                    ) : (
+                      <span className="text-sm font-bold">
+                        0{formStep}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <p className="relative mt-2.5 text-xs leading-5 text-white/85 sm:text-sm">
+                  Tell us a little about your requirements to get started.
+                </p>
+
+                {/* PROGRESS BAR */}
+
+                <div className="relative mt-3.5">
+                  <div className="h-1 overflow-hidden rounded-full bg-white/20">
+                    <motion.div
+                      className="h-full rounded-full bg-[#FFD95A]"
+                      animate={{ width: `${(formStep / 3) * 100}%` }}
+                      transition={{
+                        duration: 0.45,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </div>
+
+                  <div className="mt-2.5 grid grid-cols-3 gap-2">
+                    {[
+                      { number: 1, label: "Loan details" },
+                      { number: 2, label: "Your details" },
+                      { number: 3, label: "Income" },
+                    ].map((item) => (
+                      <div
+                        key={item.number}
+                        className="flex items-center gap-1.5"
+                      >
+                        <motion.span
+                          animate={{
+                            backgroundColor:
+                              item.number <= formStep
+                                ? "#FFD95A"
+                                : "rgba(255,255,255,0.15)",
+                            color:
+                              item.number <= formStep
+                                ? "#123D27"
+                                : "#FFFFFF",
+                          }}
+                          className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold"
+                        >
+                          {item.number < formStep ? (
+                            <CheckCircle2 size={13} />
+                          ) : (
+                            item.number
+                          )}
+                        </motion.span>
+
+                        <span className="text-[10px] font-medium text-white/90 sm:text-xs">
+                          {item.label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* FORM FIELDS */}
+
+              <div className="px-5 py-4 sm:px-6 sm:py-5">
+                <AnimatePresence mode="wait" initial={false}>
+                  {/* STEP 1 */}
+
+                  {formStep === 1 && (
+                    <motion.div
+                      key="step-one"
+                      variants={formStepVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      className="space-y-3.5"
+                    >
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#087A3D]">
+                          Step 01
+                        </p>
+
+                        <h3 className="mt-0.5 text-base font-bold text-[#102016]">
+                          What are you looking for?
+                        </h3>
+                      </div>
+
+                      <div>
+                        <label htmlFor="loanType" className={labelClass}>
+                          Loan type
+                        </label>
+
+                        <div className="relative">
+                          <Wallet
+                            size={17}
+                            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[#087A3D]"
+                          />
+
+                          <select
+                            id="loanType"
+                            name="loanType"
+                            value={loanForm.loanType}
+                            onChange={updateLoanForm}
+                            className="w-full appearance-none rounded-xl border border-[#D9E5D9] bg-white py-3 pl-11 pr-10 text-sm font-medium text-[#102016] outline-none transition-all focus:border-[#087A3D] focus:ring-4 focus:ring-[#087A3D]/10"
+                          >
+                            <option>Personal Loan</option>
+                            <option>Home Loan</option>
+                            <option>Business Loan</option>
+                            <option>Education Loan</option>
+                          </select>
+
+                          <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#087A3D]">
+                            ▾
+                          </span>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="loanAmount" className={labelClass}>
+                          Required loan amount
+                        </label>
+
+                        <div className="flex overflow-hidden rounded-xl border border-[#D9E5D9] transition-all focus-within:border-[#087A3D] focus-within:ring-4 focus-within:ring-[#087A3D]/10">
+                          <span className="flex items-center border-r border-[#D9E5D9] bg-[#F3F8F3] px-4 text-sm font-bold text-[#087A3D]">
+                            ₹
+                          </span>
+
+                          <input
+                            id="loanAmount"
+                            name="loanAmount"
+                            type="number"
+                            min="1"
+                            required
+                            value={loanForm.loanAmount}
+                            onChange={updateLoanForm}
+                            placeholder="e.g. 500000"
+                            className="min-w-0 flex-1 bg-white px-3.5 py-3 text-sm text-[#102016] outline-none placeholder:text-[#9AA69C]"
+                          />
+                        </div>
+
+                        <p className="mt-1.5 text-xs text-[#788579]">
+                          Enter the amount you want to borrow.
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* STEP 2 */}
+
+                  {formStep === 2 && (
+                    <motion.div
+                      key="step-two"
+                      variants={formStepVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      className="space-y-3.5"
+                    >
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#087A3D]">
+                          Step 02
+                        </p>
+
+                        <h3 className="mt-0.5 text-base font-bold text-[#102016]">
+                          Let's get to know you
+                        </h3>
+                      </div>
+
+                      <div>
+                        <label htmlFor="fullName" className={labelClass}>
+                          Full name
+                        </label>
+
+                        <div className="relative">
+                          <UserRound
+                            size={17}
+                            className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-[#087A3D]"
+                          />
+
+                          <input
+                            id="fullName"
+                            name="fullName"
+                            type="text"
+                            autoComplete="name"
+                            required
+                            value={loanForm.fullName}
+                            onChange={updateLoanForm}
+                            placeholder="Enter your full name"
+                            className={`${inputClass} pl-11`}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="mobileNumber" className={labelClass}>
+                          Mobile number
+                        </label>
+
+                        <div className="flex overflow-hidden rounded-xl border border-[#D9E5D9] transition-all focus-within:border-[#087A3D] focus-within:ring-4 focus-within:ring-[#087A3D]/10">
+                          <span className="flex items-center border-r border-[#D9E5D9] bg-[#F3F8F3] px-3 text-sm font-semibold text-[#26382B]">
+                            +91
+                          </span>
+
+                          <input
+                            id="mobileNumber"
+                            name="mobileNumber"
+                            type="tel"
+                            inputMode="numeric"
+                            pattern="[0-9]{10}"
+                            maxLength={10}
+                            autoComplete="tel-national"
+                            required
+                            value={loanForm.mobileNumber}
+                            onChange={updateLoanForm}
+                            placeholder="10-digit mobile number"
+                            className="min-w-0 flex-1 bg-white px-3 py-3 text-sm text-[#102016] outline-none placeholder:text-[#9AA69C]"
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+
+                  {/* STEP 3 */}
+
+                  {formStep === 3 && (
+                    <motion.div
+                      key="step-three"
+                      variants={formStepVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      className="space-y-3.5"
+                    >
+                      <div>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.13em] text-[#087A3D]">
+                          Step 03
+                        </p>
+
+                        <h3 className="mt-0.5 text-base font-bold text-[#102016]">
+                          One last detail
+                        </h3>
+                      </div>
+
+                      <div>
+                        <label
+                          htmlFor="monthlyIncome"
+                          className={labelClass}
+                        >
+                          Monthly income
+                        </label>
+
+                        <div className="flex overflow-hidden rounded-xl border border-[#D9E5D9] transition-all focus-within:border-[#087A3D] focus-within:ring-4 focus-within:ring-[#087A3D]/10">
+                          <span className="flex items-center border-r border-[#D9E5D9] bg-[#F3F8F3] px-4 text-sm font-bold text-[#087A3D]">
+                            ₹
+                          </span>
+
+                          <input
+                            id="monthlyIncome"
+                            name="monthlyIncome"
+                            type="number"
+                            min="1"
+                            required
+                            value={loanForm.monthlyIncome}
+                            onChange={updateLoanForm}
+                            placeholder="Enter monthly income"
+                            className="min-w-0 flex-1 bg-white px-3.5 py-3 text-sm text-[#102016] outline-none placeholder:text-[#9AA69C]"
+                          />
+                        </div>
+                      </div>
+
+                      {/* REVIEW DETAILS */}
+
+                      <div className="rounded-xl border border-[#DCEFE2] bg-[#F5F9F4] p-3">
+                        <div className="flex items-center gap-2 text-sm font-bold text-[#087A3D]">
+                          <CheckCircle2 size={17} />
+                          Review your details
+                        </div>
+
+                        <div className="mt-2.5 space-y-2 text-sm text-[#526456]">
+                          <div className="flex justify-between gap-3">
+                            <span>Loan type</span>
+                            <span className="text-right font-semibold text-[#102016]">
+                              {loanForm.loanType}
+                            </span>
+                          </div>
+
+                          <div className="flex justify-between gap-3">
+                            <span>Loan amount</span>
+                            <span className="font-semibold text-[#102016]">
+                              ₹
+                              {Number(
+                                loanForm.loanAmount
+                              ).toLocaleString("en-IN")}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className="text-xs leading-5 text-[#788579]">
+                        Please check the information before continuing to
+                        the application page.
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* FORM NAVIGATION */}
+
+                <div className="mt-4 flex gap-3">
+                  {formStep > 1 && (
+                    <motion.button
+                      type="button"
+                      whileHover={{
+                        y: -2,
+                        transition: { duration: 0.25 },
+                      }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() =>
+                        setFormStep((current) => current - 1)
+                      }
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#CFE0D0] px-4 py-3 text-sm font-bold text-[#26382B] hover:bg-[#F3F8F3]"
+                    >
+                      <ArrowRight size={16} className="rotate-180" />
+                      Back
+                    </motion.button>
+                  )}
+
+                  <motion.button
+                    type="submit"
+                    whileHover={{
+                      y: -2,
+                      scale: 1.015,
+                      transition: { duration: 0.25 },
+                    }}
+                    whileTap={{ scale: 0.97 }}
+                    className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#087A3D] to-[#075C30] px-5 py-3 text-sm font-bold text-white hover:from-[#075C30] hover:to-[#064824]"
+                  >
+                    {formStep === 3 ? "Continue to Apply" : "Continue"}
+
+                    <ArrowRight
+                      size={17}
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </motion.button>
+                </div>
+
+                <div className="mt-3.5 flex items-center justify-center gap-2 text-[11px] text-[#788579]">
+                  <LockKeyhole size={13} className="text-[#087A3D]" />
+                  Your details should be reviewed before submitting.
+                </div>
+              </div>
+            </form>
           </motion.div>
         </div>
       </section>
@@ -399,7 +841,7 @@ const HomePage = () => {
               type="button"
               onClick={() => navigate("/apply")}
               {...buttonMotion}
-              className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3 font-semibold text-white shadow-md hover:bg-[#075C30] hover:shadow-lg"
+              className="group mt-6 inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3 font-semibold text-white hover:bg-[#075C30]"
             >
               Apply Now
               <ArrowRight
@@ -484,9 +926,9 @@ const HomePage = () => {
             {/* PERSONAL LOANS */}
 
             <motion.article
-              whileHover={{ y: -9 }}
+              whileHover={{ y: -7 }}
               transition={{ duration: 0.25 }}
-              className="group overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white shadow-sm hover:shadow-xl hover:shadow-[#087A3D]/10"
+              className="group overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white"
             >
               <div className="relative h-52 overflow-hidden bg-[#DCEFE2]">
                 <img
@@ -511,8 +953,8 @@ const HomePage = () => {
                 <h3 className="text-xl font-bold">Personal Loans</h3>
 
                 <p className="mt-3 leading-7 text-[#5F6F63]">
-                  Learn the basics of personal borrowing and the details worth
-                  reviewing.
+                  Learn the basics of personal borrowing and the details
+                  worth reviewing.
                 </p>
 
                 <motion.button
@@ -533,9 +975,9 @@ const HomePage = () => {
             {/* CREDIT CARDS */}
 
             <motion.article
-              whileHover={{ y: -9 }}
+              whileHover={{ y: -7 }}
               transition={{ duration: 0.25 }}
-              className="group overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white shadow-sm hover:shadow-xl hover:shadow-[#087A3D]/10"
+              className="group overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white"
             >
               <div className="relative h-52 overflow-hidden bg-[#DCEFE2]">
                 <img
@@ -560,13 +1002,13 @@ const HomePage = () => {
                 <h3 className="text-xl font-bold">Credit Cards</h3>
 
                 <p className="mt-3 leading-7 text-[#5F6F63]">
-                  Get familiar with common card features, charges, and reward
-                  conditions.
+                  Get familiar with common card features, charges, and
+                  reward conditions.
                 </p>
 
                 <motion.button
                   type="button"
-                  onClick={() => navigate("/")}
+                  onClick={() => navigate("/credit-cards")}
                   {...buttonMotion}
                   className="group/link mt-5 inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
                 >
@@ -582,18 +1024,29 @@ const HomePage = () => {
             {/* MONEY GUIDES */}
 
             <motion.article
-              whileHover={{ y: -9 }}
+              whileHover={{ y: -7 }}
               transition={{ duration: 0.25 }}
-              className="group overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white shadow-sm hover:shadow-xl hover:shadow-[#087A3D]/10 md:col-span-2 lg:col-span-1"
+              className="group overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white md:col-span-2 lg:col-span-1"
             >
               <div className="relative flex h-52 items-center justify-center overflow-hidden bg-gradient-to-br from-[#071B10] via-[#087A3D] to-[#D6A91F]">
-                <div className="absolute -right-6 -top-8 h-36 w-36 rounded-full border-[18px] border-white/15" />
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 30,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="absolute -right-6 -top-8 h-36 w-36 rounded-full border-[18px] border-white/15"
+                />
 
                 <div className="absolute -bottom-12 -left-5 h-36 w-36 rounded-full border-[18px] border-[#F5C542]/20" />
 
-                <div className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/30 bg-white/10 text-[#F5C542] shadow-lg backdrop-blur">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  className="relative flex h-20 w-20 items-center justify-center rounded-2xl border border-white/30 bg-white/10 text-[#F5C542]"
+                >
                   <FileText size={38} />
-                </div>
+                </motion.div>
 
                 <span className="absolute bottom-4 left-4 rounded-full border border-white/20 bg-[#071B10]/70 px-3 py-1.5 text-xs font-semibold text-white">
                   EkPaisa Guides
@@ -647,7 +1100,7 @@ const HomePage = () => {
 
         <div className="relative mx-auto max-w-7xl">
           <div className="mx-auto mb-12 max-w-2xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#DCEFE2] bg-white px-4 py-2 text-sm font-semibold text-[#087A3D] shadow-sm">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#DCEFE2] bg-white px-4 py-2 text-sm font-semibold text-[#087A3D]">
               <ShieldCheck size={16} />
               Banking Partners
             </span>
@@ -666,12 +1119,16 @@ const HomePage = () => {
             {bankLogos.map((bank, index) => (
               <motion.div
                 key={bank.name}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: index * 0.07 }}
-                whileHover={{ y: -8, scale: 1.025 }}
-                className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 shadow-sm transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-xl hover:shadow-[#087A3D]/10 sm:min-h-52 sm:px-5"
+                transition={{
+                  duration: 0.45,
+                  delay: index * 0.05,
+                  ease: "easeOut",
+                }}
+                whileHover={{ y: -6 }}
+                className="group flex min-h-48 flex-col items-center justify-center rounded-3xl border border-[#DCEFE2] bg-white px-4 py-6 transition-colors duration-300 hover:border-[#087A3D]/40 sm:min-h-52 sm:px-5"
               >
                 <div className="flex h-24 w-full items-center justify-center rounded-2xl bg-[#F8FAF7] p-3 transition-colors group-hover:bg-[#F0F7F0] sm:h-28">
                   <img
@@ -692,8 +1149,8 @@ const HomePage = () => {
           </div>
 
           <p className="mt-8 text-center text-xs leading-5 text-[#7A8A7D]">
-            Bank logos are trademarks of their respective owners. Logo images
-            are loaded from an external repository.
+            Bank logos are trademarks of their respective owners. Logo
+            images are loaded from an external repository.
           </p>
         </div>
       </motion.section>
@@ -732,13 +1189,15 @@ const HomePage = () => {
               transition={{ duration: 0.25 }}
               className="relative flex items-center gap-4"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D] shadow-sm transition-all duration-300 hover:shadow-md">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-[#087A3D]">
                 <Icon size={25} />
               </div>
 
               <div>
                 <p className="text-xl font-bold sm:text-2xl">{title}</p>
-                <p className="mt-1 text-sm text-[#5F6F63]">{description}</p>
+                <p className="mt-1 text-sm text-[#5F6F63]">
+                  {description}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -750,16 +1209,20 @@ const HomePage = () => {
       {/* ================================================== */}
 
       <motion.section
-        initial={{ opacity: 0, scale: 0.97 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6 }}
         className="px-5 py-12 sm:px-8 lg:px-16"
       >
-        <div className="relative mx-auto flex max-w-7xl flex-col gap-7 overflow-hidden rounded-3xl bg-gradient-to-r from-[#102016] via-[#075C30] to-[#087A3D] p-8 text-white shadow-xl shadow-[#087A3D]/10 sm:p-12 lg:flex-row lg:items-center lg:justify-between">
+        <div className="relative mx-auto flex max-w-7xl flex-col gap-7 overflow-hidden rounded-3xl bg-gradient-to-r from-[#102016] via-[#075C30] to-[#087A3D] p-8 text-white sm:p-12 lg:flex-row lg:items-center lg:justify-between">
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 5, repeat: Infinity }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
             className="pointer-events-none absolute -right-12 -top-20 h-64 w-64 rounded-full border-[35px] border-white/5"
           />
 
@@ -775,12 +1238,14 @@ const HomePage = () => {
 
               <h2 className="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
                 Ready to review
-                <span className="block text-[#F5C542]">your options?</span>
+                <span className="block text-[#F5C542]">
+                  your options?
+                </span>
               </h2>
 
               <p className="mt-3 max-w-lg leading-7 text-[#D5E4D8]">
-                Start with a topic, learn the basics, and make your next move
-                thoughtfully.
+                Start with a topic, learn the basics, and make your next
+                move thoughtfully.
               </p>
             </div>
           </div>
@@ -789,7 +1254,7 @@ const HomePage = () => {
             type="button"
             onClick={() => navigate("/apply")}
             {...buttonMotion}
-            className="group relative inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-4 font-bold text-[#087A3D] shadow-md hover:bg-[#EAF4EC] hover:shadow-xl"
+            className="group relative inline-flex w-fit shrink-0 items-center gap-2 rounded-xl bg-white px-6 py-4 font-bold text-[#087A3D] hover:bg-[#EAF4EC]"
           >
             Apply Now
             <ArrowRight
@@ -808,15 +1273,11 @@ const HomePage = () => {
         id="home-footer"
         className="relative overflow-hidden border-t-2 border-[#075C30] bg-gradient-to-br from-[#F4E9C9] via-[#FBE9A0] to-[#FFD95A] text-[#123D27]"
       >
-        {/* Decorative background */}
-
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/30 blur-3xl" />
 
         <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#075C30]/10 blur-3xl" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-10">
-          {/* MAIN FOOTER GRID */}
-
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
             {/* BRAND */}
 
@@ -838,7 +1299,7 @@ const HomePage = () => {
                 with greater confidence.
               </p>
 
-              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/40 px-4 py-2 text-sm font-bold shadow-sm">
+              <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/40 px-4 py-2 text-sm font-bold">
                 <ShieldCheck size={18} />
                 Your financial journey, made simpler
               </div>
@@ -890,21 +1351,9 @@ const HomePage = () => {
               </h3>
 
               <p className="mt-5 text-sm font-bold leading-6 text-[#234B34]">
-                Take the first step towards finding a financial option that
-                suits your needs.
+                Take the first step towards finding a financial option
+                that suits your needs.
               </p>
-
-              <motion.a
-                href="/loan"
-                {...buttonMotion}
-                className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#075C30] px-5 py-3 text-sm font-bold text-white shadow-md hover:bg-[#064824] hover:shadow-lg"
-              >
-                Explore Loans
-                <ArrowRight
-                  size={17}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                />
-              </motion.a>
             </div>
 
             {/* IMPORTANT LINKS */}

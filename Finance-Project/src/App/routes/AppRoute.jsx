@@ -1,6 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import MainLayout from "../../Layouts/MainLayout";
+import PersonalLoanPage from "../../Features/Finance/UI/Pages/PersonalLoanPage";
+import HomeLoanPage from "../../Features/Finance/UI/Pages/HomeLoanPage";
+import LoanAgainstProperty from "../../Features/Finance/UI/Pages/LoanAgainstProperty";
 
 // Lazy-loaded pages
 const HomePage = lazy(
@@ -65,12 +68,33 @@ const AppRoute = () => {
         },
 
 
+   {
+          path: "personal-loan",
+          element: (
+            <Suspense fallback={<PageLoader />}>
+              <PersonalLoanPage />
+            </Suspense>
+          ),
+        },
+
+  {
+          path: "home-loan",
+          element: (
+            <Suspense fallback={<PageLoader />}>
+              <HomeLoanPage />
+            </Suspense>
+          ),
+        },
 
 
-
-
-
-
+  {
+          path: "/loan-against-property",
+          element: (
+            <Suspense fallback={<PageLoader />}>
+              <LoanAgainstProperty />
+            </Suspense>
+          ),
+        },
 
 
 

@@ -39,7 +39,7 @@ const faqItems = [
   {
     question: "What is a personal loan?",
     answer:
-      "A personal loan is money borrowed from a bank or other lender that is generally repaid in fixed monthly instalments. Depending on the lender's rules, it may be used for expenses such as a planned purchase, a family event, travel or an unexpected bill. Always check the permitted uses in your loan agreement.",
+      "A  loan is money borrowed from a bank or other lender that is generally repaid in fixed monthly instalments. Depending on the lender's rules, it may be used for expenses such as a planned purchase, a family event, travel or an unexpected bill. Always check the permitted uses in your loan agreement.",
   },
   {
     question: "How is a personal loan EMI calculated?",
@@ -77,7 +77,7 @@ const personalLoanFeatures = [
     icon: Wallet,
     title: "Unsecured borrowing",
     description:
-      "Many personal loans do not require property or another asset as collateral. Approval still depends on the lender's checks and terms.",
+      "Many  loans do not require property or another asset as collateral. Approval still depends on the lender's checks and terms.",
   },
   {
     icon: Clock3,
@@ -305,7 +305,7 @@ const LoanPage = () => {
             </div>
 
             <h1 className="max-w-2xl text-4xl font-bold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
-              Personal loans,
+              Loan,
               <span className="mt-1 block bg-gradient-to-r from-[#087A3D] to-[#B58B12] bg-clip-text text-transparent">
                 explained simply.
               </span>
@@ -331,7 +331,7 @@ const LoanPage = () => {
                 href="#personal-loan-basics"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#CFE3D3] bg-white px-5 py-3 font-semibold text-[#087A3D] transition duration-300 hover:border-[#087A3D] hover:bg-[#F7FBF7] focus:outline-none focus:ring-4 focus:ring-[#087A3D]/10 sm:px-6"
               >
-                Understand personal loans
+                Understand loans
                 <ArrowDownRight size={18} />
               </a>
             </div>
@@ -437,14 +437,14 @@ const LoanPage = () => {
       >
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div>
-            <SectionLabel>Personal loan basics</SectionLabel>
+            <SectionLabel>Loan basics</SectionLabel>
 
             <h2 className="mt-3 text-3xl font-bold tracking-tight sm:text-4xl">
-              What is a personal loan?
+              What is a Loan?
             </h2>
 
             <p className="mt-5 leading-7 text-[#5F6F63] sm:leading-8">
-              A personal loan is a sum of money borrowed from a lender and
+              A  Loan is a sum of money borrowed from a lender and
               repaid over an agreed period, usually through monthly
               instalments. Some personal loans are unsecured, which means
               collateral is not generally required, but the lender still
