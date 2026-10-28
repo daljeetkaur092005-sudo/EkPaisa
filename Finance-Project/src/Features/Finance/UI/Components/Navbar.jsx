@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router";
 import {
@@ -10,6 +9,7 @@ import {
   House,
   Building2,
 } from "lucide-react";
+
 import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.webp";
 
 const Navbar = () => {
@@ -51,6 +51,7 @@ const Navbar = () => {
         : "border-white/5 text-gray-200 hover:border-[#087A3D]/40 hover:bg-white/5"
     }`;
 
+  // Close mobile menu and loan dropdown
   const closeMenu = () => {
     setIsOpen(false);
     setLoansOpen(false);
@@ -78,7 +79,7 @@ const Navbar = () => {
     },
   ];
 
-  // Common desktop navigation link styling
+  // Desktop navigation link styling
   const desktopLinkClass = ({ isActive }) =>
     `inline-flex items-center justify-center rounded-full px-4 py-2 text-[13px] font-semibold transition-all duration-300 ${
       isActive
@@ -92,13 +93,13 @@ const Navbar = () => {
         hideNavbar ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-3 sm:px-5 lg:px-6">
 
-        {/* Logo - Left Side */}
+        {/* Logo - Shifted slightly towards the left */}
         <NavLink
           to="/"
           onClick={closeMenu}
-          className="flex shrink-0 items-center"
+          className="ml-[-4px] flex shrink-0 items-center sm:ml-[-10px] lg:ml-[-100px]"
         >
           <img
             src={EkPaisa}
@@ -107,7 +108,7 @@ const Navbar = () => {
           />
         </NavLink>
 
-        {/* Desktop Navigation - Exact Center */}
+        {/* Desktop Navigation - Center */}
         <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-[#FFD95A] bg-gradient-to-r from-[#D6A91F] to-[#FFD95A] p-1 md:flex">
 
           {/* Home */}
@@ -119,16 +120,13 @@ const Navbar = () => {
             Home
           </NavLink>
 
-          {/* Loans Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setLoansOpen(true)}
-            onMouseLeave={() => setLoansOpen(false)}
-          >
+          {/* Loans Dropdown - Click Only */}
+          <div className="relative">
             <button
               type="button"
               onClick={() => setLoansOpen((prev) => !prev)}
               aria-expanded={loansOpen}
+              aria-haspopup="true"
               className={`inline-flex items-center justify-center gap-1 rounded-full px-4 py-2 text-[13px] font-semibold transition-all duration-300 ${
                 loansOpen
                   ? "bg-[#103126] text-[#FFD95A]"
@@ -136,6 +134,7 @@ const Navbar = () => {
               }`}
             >
               Loans
+
               <ChevronDown
                 size={14}
                 className={`transition-transform duration-300 ${
@@ -200,13 +199,14 @@ const Navbar = () => {
           {/* Blogs */}
           <NavLink
             to="/blogs"
+            onClick={() => setLoansOpen(false)}
             className={desktopLinkClass}
           >
             Blogs
           </NavLink>
         </div>
 
-        {/* Mobile Menu Button - Right Side */}
+        {/* Mobile Menu Button */}
         <button
           type="button"
           onClick={() => {
@@ -238,11 +238,12 @@ const Navbar = () => {
               Home
             </NavLink>
 
-            {/* Mobile Loans Dropdown */}
+            {/* Mobile Loans Dropdown - Click Only */}
             <button
               type="button"
               onClick={() => setLoansOpen((prev) => !prev)}
               aria-expanded={loansOpen}
+              aria-haspopup="true"
               className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold transition ${
                 loansOpen
                   ? "border-[#FFD95A]/50 bg-[#087A3D]/15 text-[#FFD95A]"

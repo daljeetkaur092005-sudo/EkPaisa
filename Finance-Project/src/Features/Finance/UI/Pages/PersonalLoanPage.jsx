@@ -173,11 +173,14 @@ const Reveal = ({ children, className = "", variant = fadeUp }) => (
 
 const PersonalLoanPage = () => {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#F7FAF7] text-[#12352B]">
+    <main className="min-h-screen overflow-hidden text-[#12352B]">
       {/* Hero section */}
       <section className="relative isolate overflow-hidden">
-        <img
-          src={personalLoanHero}
+        <video
+          src="https://www.pexels.com/download/video/7710750/"
+          autoplay 
+          muted
+          loop
           alt="A person planning finances at home"
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
         />
@@ -270,8 +273,11 @@ const PersonalLoanPage = () => {
               transition={{ duration: 0.3 }}
               className="rounded-3xl border border-white/80 bg-white/95 p-4 shadow-sm sm:p-5"
             >
-              <motion.img
-                src={personalimagetwo}
+              <motion.video
+                src="https://www.pexels.com/download/video/34828872/"
+                autoplay
+                muted
+                loop
                 alt="Personal loan planning illustration"
                 whileHover={{ scale: 1.025 }}
                 transition={{ duration: 0.4 }}
