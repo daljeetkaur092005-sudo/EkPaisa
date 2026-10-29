@@ -200,7 +200,7 @@ const LoanAgainstProperty = () => {
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <a
-                href="/apply"
+                href="/"
                 className="group inline-flex items-center gap-3 rounded-xl bg-[#087A3D] px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-green-900/10 transition hover:-translate-y-1 hover:bg-[#075C30]"
               >
                 Explore Loan Options
@@ -443,7 +443,7 @@ const LoanAgainstProperty = () => {
             </div>
 
             <a
-              href="/apply"
+              href="/loan"
               className="mt-8 inline-flex w-fit items-center gap-3 rounded-xl bg-[#087A3D] px-6 py-4 text-sm font-semibold text-white transition hover:bg-[#075C30]"
             >
               Explore your options <ArrowRight size={18} />
@@ -737,7 +737,7 @@ const LoanAgainstProperty = () => {
             </div>
 
             <a
-              href="/apply"
+              href="/"
               className="group inline-flex shrink-0 items-center justify-center gap-3 rounded-xl bg-[#087A3D] px-7 py-4 text-sm font-semibold text-white transition hover:bg-[#075C30]"
             >
               Explore Now

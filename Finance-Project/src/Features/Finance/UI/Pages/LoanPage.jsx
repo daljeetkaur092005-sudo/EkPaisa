@@ -1092,14 +1092,7 @@ const LoanPage = () => {
               </p>
             </div>
 
-            <button
-              type="button"
-              onClick={() => navigate("/apply")}
-              className="inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#F5C542] px-6 py-3.5 font-bold text-[#172317] shadow-lg shadow-black/10 transition duration-300 hover:-translate-y-0.5 hover:bg-[#FFDB68] focus:outline-none focus:ring-4 focus:ring-white/25 sm:w-auto"
-            >
-              Go to application
-              <ArrowRight size={18} />
-            </button>
+          
           </div>
         </div>
 

@@ -614,15 +614,7 @@ const PersonalLoanPage = () => {
             </p>
           </div>
 
-          <motion.a
-            href="/apply"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-[#FFD34D] px-6 py-3.5 font-extrabold text-[#12352B] transition-colors hover:bg-white"
-          >
-            Start an enquiry
-            <ArrowRight size={18} />
-          </motion.a>
+      
         </motion.div>
       </section>
 

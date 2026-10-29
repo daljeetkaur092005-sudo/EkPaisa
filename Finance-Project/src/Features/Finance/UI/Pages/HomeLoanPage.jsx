@@ -493,7 +493,7 @@ const HomeLoanPage = () => {
 
             <motion.a
               variants={reveal}
-              href="/apply"
+              href="/"
               whileHover={{ x: 5 }}
               className="mt-9 inline-flex items-center gap-3 rounded-full bg-[#F6E6B7] px-6 py-3.5 text-sm font-extrabold text-[#17372B] transition-colors hover:bg-white"
             >
@@ -671,7 +671,7 @@ const HomeLoanPage = () => {
             </div>
 
             <motion.a
-              href="/apply"
+              href="/"
               whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.97 }}
               className="inline-flex shrink-0 items-center gap-3 rounded-full bg-[#17372B] px-7 py-4 text-sm font-extrabold text-white shadow-xl transition-colors hover:bg-[#28513D]"
