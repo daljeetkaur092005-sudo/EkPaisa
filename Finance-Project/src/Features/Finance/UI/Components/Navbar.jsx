@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import {
   Menu,
   X,
@@ -16,6 +17,22 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loansOpen, setLoansOpen] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
+
+  const location = useLocation();
+
+  // Check whether the current route belongs to Loans
+  const isLoanActive = [
+    "/personal-loan",
+    "/home-loan",
+    "/loan-against-property",
+  ].includes(location.pathname);
+
+  // Keep Loans dropdown active on all loan pages
+  useEffect(() => {
+    if (isLoanActive) {
+      setLoansOpen(false);
+    }
+  }, [location.pathname, isLoanActive]);
 
   // Hide navbar when homepage footer enters the screen
   useEffect(() => {
@@ -56,7 +73,7 @@ const Navbar = () => {
   const mobileLinkClass = ({ isActive }) =>
     `flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-300 ${
       isActive
-        ? "border-[#FFD95A]/50 bg-[#087A3D]/25 text-[#FFD95A]"
+        ? "border-[#D6A91F]/50 bg-[#D6A91F]/15 text-[#FFD95A]"
         : "border-white/10 text-white hover:border-[#FFD95A]/30 hover:bg-white/5"
     }`;
 
@@ -86,13 +103,20 @@ const Navbar = () => {
   const desktopLinkClass = ({ isActive }) =>
     `inline-flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-[13px] ${
       isActive
-        ? "bg-[#103126] text-[#FFD95A]"
-        : "text-[#102016] hover:bg-white/40"
+        ? "bg-[#103126] text-[#FFD95A] shadow-sm"
+        : "text-[#173D2B] hover:bg-white/60 hover:text-[#087A3D]"
     }`;
+
+  // Loans button styling
+  const loansButtonClass = `inline-flex items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-[13px] ${
+    isLoanActive || loansOpen
+      ? "bg-[#103126] text-[#FFD95A] shadow-sm"
+      : "text-[#173D2B] hover:bg-white/60 hover:text-[#087A3D]"
+  }`;
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full border-t border-x border-[#D6A91F]/70 bg-gradient-to-r from-[#ccf1d1] via-[#ccf1d1] to-[#ccf1d1]  shadow-[0_4px_22px_rgba(3,74,43,0.18)] backdrop-blur-xl transition-transform duration-300 ${
+      className={`sticky top-0 z-50 w-full border-t border-r-0 border-l-0 border-5 border-[#face3d] bg-gradient-to-r from-[#f5f2e2] via-[#f5f3e8] to-[#f5f2e2] shadow-[0_4px_20px_rgba(40,65,40,0.10)] backdrop-blur-xl transition-transform duration-300 ${
         hideNavbar ? "-translate-y-full" : "translate-y-0"
       }`}
     >
@@ -112,10 +136,15 @@ const Navbar = () => {
         </NavLink>
 
         {/* Desktop Navigation */}
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-[#D6A91F] bg-gradient-to-r from-[#D6A91F] to-[#FFD95A] p-1 md:flex">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-[#D6A91F]/50 bg-gradient-to-r from-[#face3d] via-[#e2c260] to-[#f3d267] p-1 shadow-[0_3px_10px_rgba(130,100,20,0.10)] md:flex">
 
           {/* Home */}
-          <NavLink to="/" end className={desktopLinkClass}>
+          <NavLink
+            to="/"
+            end
+            onClick={() => setLoansOpen(false)}
+            className={desktopLinkClass}
+          >
             Home
           </NavLink>
 
@@ -126,11 +155,7 @@ const Navbar = () => {
               onClick={() => setLoansOpen((prev) => !prev)}
               aria-expanded={loansOpen}
               aria-haspopup="true"
-              className={`inline-flex items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-[13px] ${
-                loansOpen
-                  ? "bg-[#103126] text-[#FFD95A]"
-                  : "text-[#102016] hover:bg-white/40"
-              }`}
+              className={loansButtonClass}
             >
               Loans
 
@@ -145,7 +170,7 @@ const Navbar = () => {
             {/* Desktop Loan Dropdown */}
             {loansOpen && (
               <div className="absolute left-0 top-full z-50 w-[min(320px,calc(100vw-24px))] pt-3">
-                <div className="overflow-hidden rounded-2xl border border-[#FFD95A]/40 bg-gradient-to-br from-[#064526] via-[#034A2B] to-[#022F1C] p-2 shadow-[0_15px_45px_rgba(0,0,0,0.30)]">
+                <div className="overflow-hidden rounded-2xl border border-[#D6A91F]/40 bg-gradient-to-br from-[#173D2B] via-[#103D2A] to-[#0B3020] p-2 shadow-[0_15px_45px_rgba(0,0,0,0.25)]">
 
                   <div className="px-3 py-2">
                     <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#FFD95A]">
@@ -164,7 +189,7 @@ const Navbar = () => {
                         className={({ isActive }) =>
                           `group flex items-center gap-3 rounded-xl p-3 transition-all duration-200 ${
                             isActive
-                              ? "bg-white/10"
+                              ? "bg-white/15"
                               : "hover:bg-white/10"
                           }`
                         }
@@ -205,14 +230,14 @@ const Navbar = () => {
           </NavLink>
         </div>
 
-        {/* Mobile Menu Button: Dark Green + Yellow Border */}
+        {/* Mobile Menu Button */}
         <button
           type="button"
           onClick={() => {
             setIsOpen((prev) => !prev);
             setLoansOpen(false);
           }}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border-2 border-[#FFD95A] bg-gradient-to-br from-[#034A2B] to-[#022F1C] text-[#FFD95A] shadow-[0_3px_12px_rgba(3,74,43,0.22)] transition-all duration-300 hover:border-[#FFE68A] hover:from-[#087A3D] hover:to-[#034A2B] active:scale-95 md:hidden sm:h-11 sm:w-11"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D6A91F]/60 bg-[#173D2B] text-[#FFD95A] shadow-sm transition-all duration-300 hover:bg-[#24543A] active:scale-95 md:hidden sm:h-11 sm:w-11"
           aria-label={
             isOpen ? "Close navigation menu" : "Open navigation menu"
           }
@@ -228,7 +253,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="border-t-2 border-[#FFD95A] bg-gradient-to-b from-[#034A2B] via-[#023C24] to-[#022F1C] px-3 py-4 shadow-[0_12px_28px_rgba(0,0,0,0.22)] sm:px-5 sm:py-5 md:hidden">
+        <div className="border-t border-[#D6A91F]/40 bg-gradient-to-b from-[#173D2B] via-[#123724] to-[#0B3020] px-3 py-4 shadow-[0_12px_28px_rgba(0,0,0,0.18)] sm:px-5 sm:py-5 md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-2">
 
             {/* Mobile Home */}
@@ -249,8 +274,8 @@ const Navbar = () => {
               aria-expanded={loansOpen}
               aria-haspopup="true"
               className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-300 ${
-                loansOpen
-                  ? "border-[#FFD95A]/60 bg-[#087A3D]/30 text-[#FFD95A]"
+                isLoanActive || loansOpen
+                  ? "border-[#FFD95A]/60 bg-[#D6A91F]/15 text-[#FFD95A]"
                   : "border-white/10 text-white hover:border-[#FFD95A]/30 hover:bg-white/5"
               }`}
             >
@@ -281,7 +306,7 @@ const Navbar = () => {
                       className={({ isActive }) =>
                         `flex items-center gap-3 rounded-xl border px-3 py-3 text-sm transition-all duration-200 ${
                           isActive
-                            ? "border-[#FFD95A]/30 bg-[#087A3D]/30 text-[#FFD95A]"
+                            ? "border-[#FFD95A]/40 bg-[#D6A91F]/15 text-[#FFD95A]"
                             : "border-transparent text-gray-200 hover:border-white/10 hover:bg-white/5 hover:text-[#FFD95A]"
                         }`
                       }

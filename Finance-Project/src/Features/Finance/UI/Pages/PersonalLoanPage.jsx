@@ -15,9 +15,7 @@ import {
   Wallet,
 } from "lucide-react";
 
-import personalLoanHero from "/src/assets/personal-loan.webp";
 import personalimageone from "/src/assets/personalimageone.png";
-import personalimagetwo from "/src/assets/personalimagetwo.png";
 
 // Animation variants
 const fadeUp = {
@@ -173,30 +171,34 @@ const Reveal = ({ children, className = "", variant = fadeUp }) => (
 
 const PersonalLoanPage = () => {
   return (
-    <main className="min-h-screen overflow-hidden text-[#12352B]">
-      {/* Hero section */}
+    <main className="min-h-screen w-full overflow-x-hidden text-[#12352B]">
+
+      {/* Hero Section */}
       <section className="relative isolate overflow-hidden">
+
         <video
           src="https://www.pexels.com/download/video/7710750/"
-          autoplay 
+          autoPlay
           muted
           loop
-          alt="A person planning finances at home"
+          playsInline
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
         />
 
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#F5FAF5]/95 via-[#F5FAF5]/85 to-[#F5FAF5]/40" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#F5FAF5]/95 via-[#F5FAF5]/85 to-[#F5FAF5]/60" />
 
-        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1.1fr_0.7fr]">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 py-12 sm:px-6 sm:py-16 md:gap-10 md:py-20 lg:grid-cols-[1.1fr_0.7fr] lg:px-8">
+
+          {/* Hero Content */}
           <motion.div
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
-            className="max-w-2xl"
+            className="w-full min-w-0 max-w-2xl"
           >
             <motion.span
               variants={fadeUp}
-              className="inline-flex items-center gap-2 rounded-full border border-[#CDE5D4] bg-white/85 px-4 py-2 text-sm font-bold text-[#087A3D]"
+              className="inline-flex items-center gap-2 rounded-full border border-[#CDE5D4] bg-white/85 px-3 py-2 text-xs font-bold text-[#087A3D] sm:px-4 sm:text-sm"
             >
               <Wallet size={17} />
               Personal Loan Guide
@@ -204,7 +206,7 @@ const PersonalLoanPage = () => {
 
             <motion.h1
               variants={fadeUp}
-              className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl"
+              className="mt-5 text-3xl font-black leading-tight tracking-tight sm:mt-6 sm:text-4xl md:text-5xl lg:text-6xl"
             >
               Understand Personal Loans,
               <span className="mt-2 block text-[#087A3D]">
@@ -214,22 +216,23 @@ const PersonalLoanPage = () => {
 
             <motion.p
               variants={fadeUp}
-              className="mt-5 max-w-xl text-base leading-7 text-[#4E6559] sm:text-lg"
+              className="mt-4 max-w-xl text-sm leading-6 text-[#4E6559] sm:mt-5 sm:text-base sm:leading-7 md:text-lg"
             >
               Learn how personal loans work, what lenders may check, which
               documents could be required and how to compare the full cost of
               borrowing.
             </motion.p>
 
+            {/* Hero Buttons */}
             <motion.div
               variants={fadeUp}
-              className="mt-7 flex flex-wrap gap-3"
+              className="mt-6 flex flex-col gap-3 min-[480px]:flex-row sm:mt-7"
             >
               <motion.a
                 href="#loan-info"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-xl bg-[#087A3D] px-6 py-3.5 font-bold text-white transition-colors hover:bg-[#075C30]"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#087A3D] px-5 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#075C30] min-[480px]:w-auto sm:text-base"
               >
                 Explore Loan Details
                 <ArrowRight size={18} />
@@ -239,57 +242,58 @@ const PersonalLoanPage = () => {
                 href="#eligibility"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 rounded-xl border border-[#BFD8C7] bg-white/80 px-6 py-3.5 font-bold text-[#087A3D] transition-colors hover:bg-white"
+                className="inline-flex w-full items-center justify-center rounded-xl border border-[#BFD8C7] bg-white/80 px-5 py-3.5 text-sm font-bold text-[#087A3D] transition-colors hover:bg-white min-[480px]:w-auto sm:text-base"
               >
                 Check Eligibility
               </motion.a>
             </motion.div>
 
+            {/* Hero Highlights */}
             <motion.div
               variants={fadeUp}
-              className="mt-7 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-[#476457]"
+              className="mt-6 flex flex-col gap-3 text-xs font-semibold text-[#476457] min-[480px]:flex-row min-[480px]:flex-wrap sm:mt-7 sm:gap-x-6 sm:text-sm"
             >
               <span className="inline-flex items-center gap-2">
-                <ShieldCheck size={17} className="text-[#087A3D]" />
+                <ShieldCheck size={17} className="shrink-0 text-[#087A3D]" />
                 Clear information
               </span>
 
               <span className="inline-flex items-center gap-2">
-                <BadgeCheck size={17} className="text-[#087A3D]" />
+                <BadgeCheck size={17} className="shrink-0 text-[#087A3D]" />
                 Compare lender terms
               </span>
 
               <span className="inline-flex items-center gap-2">
-                <FileText size={17} className="text-[#087A3D]" />
+                <FileText size={17} className="shrink-0 text-[#087A3D]" />
                 Document checklist
               </span>
             </motion.div>
           </motion.div>
 
-          {/* Hero image card */}
+          {/* Hero Video Card */}
           <Reveal variant={fadeRight}>
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.3 }}
-              className="rounded-3xl border border-white/80 bg-white/95 p-4 shadow-sm sm:p-5"
+              className="w-full min-w-0 rounded-3xl border border-white/80 bg-white/95 p-3 shadow-sm sm:p-5"
             >
               <motion.video
                 src="https://www.pexels.com/download/video/34828872/"
-                autoplay
+                autoPlay
                 muted
                 loop
-                alt="Personal loan planning illustration"
+                playsInline
                 whileHover={{ scale: 1.025 }}
                 transition={{ duration: 0.4 }}
-                className="h-52 w-full rounded-2xl object-cover sm:h-64"
+                className="h-48 w-full rounded-2xl object-cover sm:h-64 md:h-72 lg:h-64"
               />
 
-              <div className="p-2 pt-5">
+              <div className="p-2 pt-4 sm:pt-5">
                 <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#087A3D]">
                   Know before you borrow
                 </p>
 
-                <h2 className="mt-2 text-2xl font-black">
+                <h2 className="mt-2 text-xl font-black sm:text-2xl">
                   Look beyond the monthly EMI
                 </h2>
 
@@ -308,25 +312,26 @@ const PersonalLoanPage = () => {
               </div>
             </motion.div>
           </Reveal>
+
         </div>
       </section>
 
-      {/* Key information cards */}
+      {/* Key Information Cards */}
       <section
         id="loan-info"
-        className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20"
+        className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
       >
         <Reveal>
           <div className="max-w-2xl">
-            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#087A3D]">
+            <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#087A3D] sm:text-sm">
               Personal loan basics
             </p>
 
-            <h2 className="mt-3 text-3xl font-black sm:text-4xl">
+            <h2 className="mt-3 text-2xl font-black sm:text-3xl md:text-4xl">
               The important details, explained simply.
             </h2>
 
-            <p className="mt-4 leading-7 text-[#65776C]">
+            <p className="mt-4 text-sm leading-7 text-[#65776C] sm:text-base">
               A personal loan is generally an unsecured loan, which means it
               usually does not require an asset as collateral. The lender sets
               the final terms after reviewing your application.
@@ -339,7 +344,7 @@ const PersonalLoanPage = () => {
           initial="hidden"
           whileInView="visible"
           viewport={viewportSettings}
-          className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+          className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
           {loanHighlights.map(({ icon: Icon, title, value, description }) => (
             <motion.article
@@ -347,7 +352,7 @@ const PersonalLoanPage = () => {
               variants={fadeUp}
               whileHover={{ y: -7, scale: 1.015 }}
               transition={{ duration: 0.25 }}
-              className="rounded-2xl border border-[#E1EBE4] bg-white p-5 transition-colors hover:border-[#B9DCC5] hover:shadow-lg hover:shadow-[#12352B]/5"
+              className="min-w-0 rounded-2xl border border-[#E1EBE4] bg-white p-4 transition-colors hover:border-[#B9DCC5] hover:shadow-lg hover:shadow-[#12352B]/5 sm:p-5"
             >
               <motion.span
                 whileHover={{ rotate: 6, scale: 1.08 }}
@@ -360,7 +365,9 @@ const PersonalLoanPage = () => {
                 {title}
               </p>
 
-              <h3 className="mt-1 text-lg font-extrabold">{value}</h3>
+              <h3 className="mt-1 break-words text-base font-extrabold sm:text-lg">
+                {value}
+              </h3>
 
               <p className="mt-2 text-sm leading-6 text-[#6C7D73]">
                 {description}
@@ -370,14 +377,16 @@ const PersonalLoanPage = () => {
         </motion.div>
       </section>
 
-      {/* Eligibility and documents */}
+      {/* Eligibility and Documents */}
       <section
         id="eligibility"
-        className="border-y border-[#E1EBE4] bg-white py-16 sm:py-20"
+        className="border-y border-[#E1EBE4] bg-white py-12 sm:py-16 lg:py-20"
       >
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 sm:px-8 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 sm:px-6 md:gap-8 lg:grid-cols-2 lg:px-8">
+
+          {/* Eligibility */}
           <Reveal variant={fadeLeft}>
-            <div className="h-full rounded-3xl bg-[#F0F8F2] p-6 sm:p-8">
+            <div className="h-full min-w-0 rounded-3xl bg-[#F0F8F2] p-5 sm:p-8">
               <motion.span
                 whileHover={{ rotate: -8, scale: 1.08 }}
                 className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#087A3D]"
@@ -389,7 +398,7 @@ const PersonalLoanPage = () => {
                 Personal loan eligibility
               </h2>
 
-              <p className="mt-3 leading-7 text-[#617369]">
+              <p className="mt-3 text-sm leading-7 text-[#617369] sm:text-base">
                 Lender requirements can vary, but these are common areas they
                 may review:
               </p>
@@ -411,7 +420,7 @@ const PersonalLoanPage = () => {
                       size={19}
                       className="mt-0.5 shrink-0 text-[#087A3D]"
                     />
-                    {item}
+                    <span>{item}</span>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -423,8 +432,9 @@ const PersonalLoanPage = () => {
             </div>
           </Reveal>
 
+          {/* Documents */}
           <Reveal variant={fadeRight}>
-            <div className="h-full rounded-3xl border border-[#E1EBE4] bg-white p-6 sm:p-8">
+            <div className="h-full min-w-0 rounded-3xl border border-[#E1EBE4] bg-white p-5 sm:p-8">
               <motion.span
                 whileHover={{ rotate: 6, scale: 1.08 }}
                 className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFF4C9] text-[#765A06]"
@@ -436,7 +446,7 @@ const PersonalLoanPage = () => {
                 Documents you may need
               </h2>
 
-              <p className="mt-3 leading-7 text-[#617369]">
+              <p className="mt-3 text-sm leading-7 text-[#617369] sm:text-base">
                 Keep the relevant documents ready; exact requirements depend
                 on the lender and your profile.
               </p>
@@ -447,13 +457,13 @@ const PersonalLoanPage = () => {
                     key={item.title}
                     whileHover={{ x: 5 }}
                     transition={{ duration: 0.2 }}
-                    className="flex gap-4 rounded-2xl bg-[#F8FAF8] p-4"
+                    className="flex min-w-0 gap-3 rounded-2xl bg-[#F8FAF8] p-3 sm:gap-4 sm:p-4"
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-sm font-black text-[#087A3D]">
                       {String(index + 1).padStart(2, "0")}
                     </span>
 
-                    <div>
+                    <div className="min-w-0">
                       <h3 className="font-extrabold">{item.title}</h3>
                       <p className="mt-1 text-sm leading-6 text-[#6B7C72]">
                         {item.text}
@@ -464,42 +474,47 @@ const PersonalLoanPage = () => {
               </div>
             </div>
           </Reveal>
+
         </div>
       </section>
 
-      {/* Cost comparison */}
+      {/* Cost Comparison */}
       <section
         id="compare"
-        className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:py-20"
+        className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
       >
-        <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1fr]">
+        <div className="grid grid-cols-1 items-center gap-7 md:gap-10 lg:grid-cols-[0.8fr_1fr]">
+
+          {/* Image */}
           <Reveal variant={fadeLeft}>
             <motion.div
               whileHover={{ y: -5 }}
               transition={{ duration: 0.3 }}
-              className="overflow-hidden rounded-3xl bg-[#E8F4EB] p-4 sm:p-6"
+              className="overflow-hidden rounded-3xl bg-[#E8F4EB] p-3 sm:p-6"
             >
               <motion.img
                 src={personalimageone}
                 alt="Planning a personal loan budget"
+                loading="lazy"
                 whileHover={{ scale: 1.04 }}
                 transition={{ duration: 0.5 }}
-                className="h-72 w-full rounded-2xl object-cover sm:h-96"
+                className="h-56 w-full rounded-2xl object-cover sm:h-72 md:h-96"
               />
             </motion.div>
           </Reveal>
 
+          {/* Comparison Content */}
           <Reveal variant={fadeRight}>
-            <div>
-              <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#087A3D]">
+            <div className="min-w-0">
+              <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#087A3D] sm:text-sm">
                 Compare carefully
               </p>
 
-              <h2 className="mt-3 text-3xl font-black sm:text-4xl">
+              <h2 className="mt-3 text-2xl font-black sm:text-3xl md:text-4xl">
                 What to check before choosing a loan
               </h2>
 
-              <p className="mt-4 leading-7 text-[#65776C]">
+              <p className="mt-4 text-sm leading-7 text-[#65776C] sm:text-base">
                 A lower EMI alone does not always mean a cheaper loan. Look at
                 the overall repayment cost and conditions.
               </p>
@@ -515,14 +530,14 @@ const PersonalLoanPage = () => {
                   <motion.div
                     key={title}
                     variants={fadeUp}
-                    className="flex gap-3"
+                    className="flex items-start gap-3"
                   >
                     <CheckCircle2
                       className="mt-0.5 shrink-0 text-[#087A3D]"
                       size={20}
                     />
 
-                    <div>
+                    <div className="min-w-0">
                       <h3 className="font-extrabold">{title}</h3>
                       <p className="mt-1 text-sm leading-6 text-[#6B7C72]">
                         {text}
@@ -533,12 +548,14 @@ const PersonalLoanPage = () => {
               </motion.div>
             </div>
           </Reveal>
+
         </div>
       </section>
 
       {/* FAQs */}
-      <section className="bg-[#F0F7F1] py-16 sm:py-20">
-        <div className="mx-auto max-w-5xl px-5 sm:px-8">
+      <section className="bg-[#F0F7F1] py-12 sm:py-16 lg:py-20">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+
           <Reveal>
             <div className="mx-auto max-w-2xl text-center">
               <motion.div
@@ -555,11 +572,11 @@ const PersonalLoanPage = () => {
                 />
               </motion.div>
 
-              <p className="mt-3 text-sm font-extrabold uppercase tracking-[0.16em] text-[#087A3D]">
+              <p className="mt-3 text-xs font-extrabold uppercase tracking-[0.16em] text-[#087A3D] sm:text-sm">
                 FAQs
               </p>
 
-              <h2 className="mt-2 text-3xl font-black sm:text-4xl">
+              <h2 className="mt-2 text-2xl font-black sm:text-3xl md:text-4xl">
                 Personal loan questions
               </h2>
             </div>
@@ -570,16 +587,18 @@ const PersonalLoanPage = () => {
             initial="hidden"
             whileInView="visible"
             viewport={viewportSettings}
-            className="mt-9 grid gap-4 md:grid-cols-2"
+            className="mt-8 grid grid-cols-1 gap-4 sm:mt-9 md:grid-cols-2"
           >
             {faqs.map((faq) => (
               <motion.article
                 key={faq.question}
                 variants={fadeUp}
                 whileHover={{ y: -4 }}
-                className="rounded-2xl border border-[#E0EAE2] bg-white p-5 transition-shadow hover:shadow-lg hover:shadow-[#12352B]/5 sm:p-6"
+                className="min-w-0 rounded-2xl border border-[#E0EAE2] bg-white p-4 transition-shadow hover:shadow-lg hover:shadow-[#12352B]/5 sm:p-6"
               >
-                <h3 className="text-lg font-extrabold">{faq.question}</h3>
+                <h3 className="text-base font-extrabold sm:text-lg">
+                  {faq.question}
+                </h3>
 
                 <p className="mt-3 text-sm leading-6 text-[#65776C]">
                   {faq.answer}
@@ -587,20 +606,21 @@ const PersonalLoanPage = () => {
               </motion.article>
             ))}
           </motion.div>
+
         </div>
       </section>
 
       {/* CTA */}
-      <section className="px-5 py-12 sm:px-8">
+      <section className="px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportSettings}
           transition={{ duration: 0.7 }}
-          className="mx-auto flex max-w-7xl flex-col gap-6 rounded-3xl bg-[#075C3B] p-7 text-white sm:p-10 md:flex-row md:items-center md:justify-between"
+          className="mx-auto flex max-w-7xl flex-col gap-5 rounded-3xl bg-[#075C3B] p-5 text-white sm:p-8 md:flex-row md:items-center md:justify-between lg:p-10"
         >
-          <div>
-            <p className="text-sm font-extrabold uppercase tracking-[0.16em] text-[#FFD34D]">
+          <div className="min-w-0">
+            <p className="text-xs font-extrabold uppercase tracking-[0.16em] text-[#FFD34D] sm:text-sm">
               Make an informed choice
             </p>
 
@@ -613,16 +633,15 @@ const PersonalLoanPage = () => {
               before submitting an application.
             </p>
           </div>
-
-      
         </motion.div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#064A31] px-5 py-6 text-center text-sm text-white/75">
+      <footer className="bg-[#064A31] px-4 py-6 text-center text-xs leading-6 text-white/75 sm:px-6 sm:text-sm">
         © {new Date().getFullYear()} EkPaisa. Information is general and is
         not a loan offer or approval guarantee.
       </footer>
+
     </main>
   );
 };
