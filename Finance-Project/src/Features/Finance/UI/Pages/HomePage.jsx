@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -6,8 +5,6 @@ import {
   ShieldCheck,
   Zap,
   Star,
-  Search,
-  Heart,
   FileText,
   SlidersHorizontal,
   CheckCircle2,
@@ -21,6 +18,8 @@ import {
   House,
   Building2,
   Calculator,
+  Handshake,
+  BriefcaseBusiness,
 } from "lucide-react";
 
 import { useMain } from "../../Hooks/useMain";
@@ -35,6 +34,7 @@ import hdfc from "/src/assets/hdfc.webp";
 import icic from "/src/assets/icic.webp";
 import canara from "/src/assets/canara.webp";
 import bob from "/src/assets/bob.webp";
+import homePage from "/src/assets/homePage.webp";
 import sbi from "/src/assets/sbi.webp";
 
 // ============================================================
@@ -196,28 +196,28 @@ const HomePage = () => {
   // Features
   const features = [
     {
-      icon: Search,
-      title: "Explore Your Options",
+      icon: House,
+      title: "Your Property, Your Potential",
       description:
-        "Review product details and decide which questions matter to you.",
+        "Explore loan options against residential or commercial property.",
     },
     {
-      icon: ShieldCheck,
-      title: "Learn About Credit",
+      icon: BriefcaseBusiness,
+      title: "For Business or Personal Needs",
       description:
-        "Get familiar with credit terms before making a financial decision.",
+        "Explore financing for business expansion,working capital or major personal expenses.",
     },
     {
       icon: FileText,
-      title: "Plain-Language Guides",
+      title: "Know What to Expect",
       description:
-        "Read straightforward explanations designed for everyday decisions.",
+        "Understand eligibility, interest rates, fees and repayment terms.",
     },
     {
-      icon: Heart,
-      title: "Your Plans, Your Pace",
+      icon:Handshake,
+      title: "Find Your Next Step",
       description:
-        "Use helpful starting points to think through your own priorities.",
+        "Explore available lending options and understand the application process.",
     },
   ];
 
@@ -271,23 +271,21 @@ const HomePage = () => {
     >
       {/* HERO SECTION */}
 
-      <section className="relative isolate flex items-center overflow-hidden bg-[#102016] px-4 py-10 sm:px-6 sm:py-14 md:px-10 lg:px-12 lg:py-16 xl:min-h-[740px] xl:px-16">
-        <div className="absolute inset-0 -z-20 bg-[#102016]">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
+      <section className="relative isolate flex items-center overflow-hidden bg-[#102002] px-4 py-10 sm:px-6 sm:py-14 md:px-10 lg:px-12 lg:py-16 xl:min-h-[740px] xl:px-16">
+        <div className="absolute inset-0 -z-20 bg-[#102010]">
+          <img
+            
+            loading="eager"
+            fetchPriority="high"
             aria-label="Abstract financial video background"
-            src="https://www.pexels.com/download/video/38055932/"
+            src={homePage}
             className="h-full w-full object-cover object-center"
           />
         </div>
 
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#102016]/80 via-[#102016]/60 to-[#102016]/35" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#102016]/65 via-[#102016]/40 to-[#102016]/20" />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-[#102016]/30 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-[#102016]/20 to-transparent" />
 
         <div className="relative mx-auto grid w-full max-w-7xl min-w-0 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[1.05fr_0.85fr] xl:gap-14">
           {/* HERO CONTENT */}
@@ -815,16 +813,24 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* FEATURES SECTION */}
+      
+
+      {/* POPULAR PRODUCTS */}
 
       <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={fadeUp}
+        className="bg-gradient-to-b from-[#F5F8F2] to-white px-4 py-6 sm:px-6 sm:py-16 md:px-10 lg:px-13"
+      >     <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
         variants={fadeUp}
         className="px-4 py-12 sm:px-6 sm:py-16 md:px-10 lg:px-16 lg:py-20"
       >
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-3xl bg-[#F5F8F2] p-4 sm:grid-cols-2 sm:gap-5 sm:p-6 md:p-8 xl:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-3xl bg-[#eff5ea] p-4 sm:grid-cols-2 sm:gap-5 sm:p-6 md:p-8 xl:grid-cols-4">
           {features.map(({ icon: Icon, title, description }) => (
             <motion.div
               key={title}
@@ -843,95 +849,48 @@ const HomePage = () => {
           ))}
         </div>
       </motion.section>
-
-      {/* HOW IT WORKS */}
-
-      <motion.section
-        id="how-it-works"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={fadeUp}
-        className="px-4 pb-14 pt-6 sm:px-6 sm:pb-20 sm:pt-8 md:px-10 lg:px-16"
-      >
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.85fr_2fr] lg:items-center lg:gap-10">
-          <div className="min-w-0">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#087A3D] sm:text-sm">
-              Your Starting Point
-            </p>
-            <h2 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">
-              Three steps to
-              <span className="block text-[#087A3D]">get oriented</span>
-            </h2>
-            <p className="mt-4 max-w-sm text-sm leading-7 text-[#5F6F63] sm:text-base">
-              Begin with a goal, explore relevant information, then decide
-              what to look into next.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {steps.map(({ number, icon: Icon, title, description }) => (
-              <motion.div
-                key={number}
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.25 }}
-                className="flex min-w-0 flex-col rounded-2xl border border-[#DCEFE2] bg-white p-5 shadow-sm transition-shadow hover:shadow-xl hover:shadow-[#087A3D]/10 sm:p-6"
-              >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#087A3D] font-bold text-white">
-                  {number}
-                </span>
-                <div className="my-5 flex justify-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF4EC] text-[#087A3D]">
-                    <Icon size={30} />
-                  </div>
-                </div>
-                <h3 className="text-center text-lg font-bold">{title}</h3>
-                <p className="mt-3 text-center text-sm leading-6 text-[#5F6F63]">
-                  {description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </motion.section>
-
-      {/* POPULAR PRODUCTS */}
-
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        variants={fadeUp}
-        className="bg-gradient-to-b from-[#F5F8F2] to-white px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16"
-      >
+      
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex min-w-0 flex-col justify-between gap-5 sm:mb-10 sm:flex-row sm:items-end">
             <div className="min-w-0">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#087A3D] sm:text-sm">
-                Topics to Explore
+                LOAN SOLUTIONS
               </p>
               <h2 className="mt-3 max-w-xl text-3xl font-bold leading-tight sm:text-4xl">
-                Start with the topic on your mind
+                Find the Right Loan for Your Needs
               </h2>
               <p className="mt-4 max-w-xl text-sm leading-7 text-[#5F6F63] sm:text-base">
-                Explore borrowing options, understand the important details,
-                and use AI-assisted guidance to help you research what may fit
-                your goals.
+                Explore financing options, for business growth,personal needs and property ownership. Learn about your optionns and make informed borrrowing decisions.
               </p>
-            </div>
 
-            <motion.button
+
+       <motion.button
               type="button"
               onClick={() => navigate("/blogs")}
               {...buttonMotion}
-              className="group inline-flex w-fit shrink-0 items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
+              className="group inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
             >
-              Browse Topics
-              <ArrowRight
-                size={18}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
+              <span className="inline-flex items-center gap-2">
+                Explore Loan Options
+                <ArrowRight
+                  size={18}
+                  className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </span>
+         
             </motion.button>
+
+
+
+
+
+
+
+
+
+            </div>
+
+       
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
@@ -1085,11 +1044,11 @@ const HomePage = () => {
         variants={fadeUp}
         className="px-4 py-12 sm:px-6 sm:py-16 md:px-10 lg:px-16"
       >
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-[#DCEFE2] bg-white shadow-lg shadow-[#087A3D]/5">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-[#CFE5D3] bg-[#F7FBF7] shadow-lg shadow-[#087A3D]/[0.06]">
           <div className="grid min-w-0 lg:grid-cols-[1.1fr_0.9fr]">
             {/* CALCULATOR INPUTS */}
 
-            <div className="min-w-0 p-5 sm:p-7 lg:p-8">
+            <div className="min-w-0 p-4 min-[390px]:p-5 sm:p-7 lg:p-8">
               <div className="flex items-center gap-3">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                   <Calculator size={23} />
@@ -1099,19 +1058,16 @@ const HomePage = () => {
                   <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#087A3D]">
                     Quick Calculator
                   </p>
-                  <h2 className="mt-1 text-2xl font-extrabold text-[#102016] sm:text-3xl">
+                  <h2 className="mt-1 text-xl font-extrabold text-[#102016] min-[390px]:text-2xl sm:text-3xl">
                     Calculate your EMI
                   </h2>
                 </div>
               </div>
 
-              <p className="mt-3 max-w-xl text-sm leading-6 text-[#5F6F63]">
-                Adjust the loan details to estimate your monthly payment.
-              </p>
 
               {/* LOAN AMOUNT */}
 
-              <div className="mt-6">
+              <div className="mt-4 min-[390px]:mt-5 sm:mt-6">
                 <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                   <label
                     htmlFor="emiAmount"
@@ -1146,7 +1102,7 @@ const HomePage = () => {
 
               {/* INTEREST RATE */}
 
-              <div className="mt-5">
+              <div className="mt-4 min-[390px]:mt-5">
                 <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
                   <label
                     htmlFor="interestRate"
@@ -1217,18 +1173,18 @@ const HomePage = () => {
 
             {/* EMI RESULT */}
 
-            <div className="flex min-w-0 flex-col justify-center bg-gradient-to-br from-[#075C30] via-[#087A3D] to-[#0B6B3A] p-5 text-white sm:p-7 lg:p-8">
+            <div className="flex min-w-0 flex-col justify-center bg-gradient-to-br from-[#075C30] via-[#087A3D] to-[#0B6B3A] p-4 text-white min-[390px]:p-5 sm:p-7 lg:p-8">
               <p className="text-sm font-semibold text-white/80">
                 Estimated monthly EMI
               </p>
 
-              <h3 className="mt-2 break-words text-4xl font-extrabold tracking-tight text-[#FFE17A] sm:text-5xl">
+              <h3 className="mt-2 break-words text-3xl font-extrabold tracking-tight text-[#FFE17A] min-[390px]:text-4xl sm:text-5xl">
                 ₹{formatCurrency(monthlyEMI)}
               </h3>
 
               <div className="mt-6 h-px bg-white/20" />
 
-              <div className="mt-5 space-y-4">
+              <div className="mt-4 space-y-3 min-[390px]:mt-5 min-[390px]:space-y-4">
                 <div className="flex items-center justify-between gap-3 text-sm">
                   <span className="text-white/80">Principal amount</span>
                   <span className="text-right font-bold">
@@ -1253,17 +1209,14 @@ const HomePage = () => {
 
               <button
                 type="button"
-                onClick={() => navigate("/loan")}
-                className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FFE17A] px-4 py-3 text-sm font-bold text-[#123D27] hover:bg-[#FFD95A]"
+                onClick={() => navigate("/personal-loan")}
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FFE17A] px-3 py-2.5 text-xs font-bold text-[#123D27] hover:bg-[#FFD95A] min-[390px]:mt-6 min-[390px]:px-4 min-[390px]:py-3 min-[390px]:text-sm"
               >
                 Explore Loan Options
                 <ArrowRight size={17} />
               </button>
 
-              <p className="mt-4 text-xs leading-5 text-white/65">
-                This is an estimate for planning purposes. Actual EMI may
-                vary based on lender terms, fees and the final interest rate.
-              </p>
+          
             </div>
           </div>
         </div>
@@ -1276,7 +1229,7 @@ const HomePage = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
         variants={fadeUp}
-        className="relative overflow-hidden bg-gradient-to-b from-white via-[#F5F8F2] to-white px-4 py-14 sm:px-6 sm:py-20 md:px-10 lg:px-16"
+        className="relative overflow-hidden bg-gradient-to-b from-white via-[#F5F8F2] to-white px-4  sm:px-6 sm:py-6 md:px-10 "
       >
         <div className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-[#DCEFE2]/60 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#F5C542]/15 blur-3xl" />
@@ -1297,39 +1250,42 @@ const HomePage = () => {
               that may suit your needs.
             </p>
           </div>
+<div className="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4 md:gap-5 xl:grid-cols-5">
+  {bankLogos.map((bank, index) => (
+    <motion.div
+      key={bank.name}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 0.45,
+        delay: index * 0.05,
+        ease: "easeOut",
+      }}
+      whileHover={{ y: -5 }}
+      className="group flex min-h-[120px] min-w-0 flex-col items-center justify-start rounded-2xl border border-[#D5E5D7] bg-white p-1 transition-all duration-300 hover:-translate-y-1 hover:border-[#087A3D]/40 hover:shadow-md hover:shadow-[#087A3D]/[0.07] sm:min-h-[166px] sm:p-2.5"
+    >
+      {/* Grey logo area */}
+<div className="flex h-[88px] w-[72%] items-center justify-center self-center rounded-xl bg-[#F4F7F4] px-2 transition-colors duration-300 group-hover:bg-[#EDF4EE] sm:h-[100px] sm:w-[76%] sm:px-3">
+  <div className="flex h-14 w-full items-center justify-center sm:h-16">
+    <img
+      src={bank.src}
+      alt={`${bank.name} logo`}
+      loading="lazy"
+      className="h-10 w-full max-w-[115px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:max-w-[130px]"
+    />
+  </div>
+</div>
 
-          <div className="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4 md:gap-5 xl:grid-cols-5">
-            {bankLogos.map((bank, index) => (
-              <motion.div
-                key={bank.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.45,
-                  delay: index * 0.05,
-                  ease: "easeOut",
-                }}
-                whileHover={{ y: -5 }}
-                className="group flex min-h-32 min-w-0 flex-col items-center justify-center rounded-2xl border border-[#DCEFE2] bg-white px-2.5 py-4 transition-colors duration-300 hover:border-[#087A3D]/40 sm:min-h-40 sm:px-4"
-              >
-                <div className="flex h-14 w-full items-center justify-center rounded-xl bg-[#F8FAF7] p-2 transition-colors group-hover:bg-[#F0F7F0] sm:h-[72px]">
-                  <img
-                    src={bank.src}
-                    alt={`${bank.name} logo`}
-                    loading="lazy"
-                    className="h-10 w-full max-w-[125px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:max-w-[145px]"
-                  />
-                </div>
+      {/* Bank name outside grey area */}
+      <p className="mt-1.5 break-words px-1 text-center text-[11px] font-bold leading-4 text-[#34483A] sm:mt-2 sm:text-sm sm:leading-5">
+        {bank.name}
+      </p>
 
-                <p className="mt-3 break-words text-center text-[11px] font-bold leading-5 text-[#34483A] sm:text-sm">
-                  {bank.name}
-                </p>
-
-                <span className="mt-2 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-12 group-hover:bg-[#087A3D]" />
-              </motion.div>
-            ))}
-          </div>
+      <span className="mt-1.5 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-12 group-hover:bg-[#087A3D]" />
+    </motion.div>
+  ))}
+</div>
 
           <p className="mt-8 text-center text-xs leading-5 text-[#7A8A7D]">
             Bank logos are trademarks of their respective owners. Logo
@@ -1353,11 +1309,10 @@ const HomePage = () => {
 
           <div className="relative min-w-0 sm:col-span-2 xl:col-span-1">
             <h2 className="text-2xl font-bold leading-snug sm:text-3xl xl:text-2xl">
-              Your money journey,
-              <span className="block text-[#087A3D]">at your pace.</span>
+              Finance, Made Clear.
             </h2>
             <p className="mt-3 text-sm leading-6 text-[#5F6F63]">
-              A thoughtful starting point for your own research.
+              Explore your loan options with confidence.
             </p>
           </div>
 
@@ -1412,15 +1367,14 @@ const HomePage = () => {
 
             <div className="min-w-0">
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#F5C542] sm:text-sm">
-                Take the First Step
+                YOUR PROPERTY. YOUR POSSIBILITIES.
               </p>
               <h2 className="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
-                Ready to review
-                <span className="block text-[#F5C542]">your options?</span>
+                Turn Property into Possibility.
+               
               </h2>
               <p className="mt-3 max-w-lg text-sm leading-7 text-[#D5E4D8] sm:text-base">
-                Start with a topic, learn the basics, and make your next
-                move thoughtfully.
+               Explore funding options against eligible property to support your business ambitions or perosnal goals.
               </p>
             </div>
           </div>
@@ -1434,7 +1388,7 @@ const HomePage = () => {
             }}
             className="relative inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#FFE17A] px-5 py-3 font-bold text-[#123D27] hover:bg-[#FFD95A] sm:w-fit"
           >
-            Get Started <ArrowRight size={18} />
+            Explore Your Options <ArrowRight size={18} />
           </button>
         </div>
       </motion.section>
@@ -1465,9 +1419,7 @@ const HomePage = () => {
               </a>
 
               <p className="mt-5 max-w-sm text-sm font-bold leading-7 text-[#234B34]">
-                Making financial decisions simpler. Explore loan options,
-                understand your choices, and take your next financial step
-                with greater confidence.
+             Simplifying your financial decisions.Explore loan options and take your next step with confidence
               </p>
 
               <div className="mt-6 inline-flex max-w-full items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/40 px-3 py-2 text-xs font-bold sm:px-4 sm:text-sm">
@@ -1489,11 +1441,11 @@ const HomePage = () => {
                 <a href="/loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Personal Loans
                 </a>
-                <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Apply for a Loan
-                </a>
                 <a href="/credit-cards" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Credit Cards
+                </a>
+                   <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                  Apply for a Loan
                 </a>
               </div>
             </div>
@@ -1502,19 +1454,29 @@ const HomePage = () => {
 
             <div>
               <h3 className="text-base font-extrabold text-[#073D24]">
-                Get Started
+                Resources
               </h3>
-              <p className="mt-5 max-w-sm text-sm font-bold leading-6 text-[#234B34]">
-                Take the first step towards finding a financial option
-                that suits your needs.
-              </p>
+             <div className="mt-5 flex flex-col items-start gap-3">
+                <a href="/" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                  Loan Calculator 
+                </a>
+                <a href="/loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                  Help Center
+                </a>
+                <a href="/credit-cards" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                  Financial Guides
+                </a>
+                   <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                  FAQs
+                </a>
+              </div>
             </div>
 
             {/* IMPORTANT LINKS */}
 
             <div>
               <h3 className="text-base font-extrabold text-[#073D24]">
-                Important Links
+                Legal & Contact 
               </h3>
               <div className="mt-5 flex flex-col items-start gap-3">
                 <a href="/privacy-policy" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
