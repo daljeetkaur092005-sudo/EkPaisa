@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -6,7 +7,6 @@ import {
   Zap,
   Star,
   FileText,
-  SlidersHorizontal,
   CheckCircle2,
   Wallet,
   Users,
@@ -20,11 +20,10 @@ import {
   Calculator,
   Handshake,
   BriefcaseBusiness,
+  Home,
 } from "lucide-react";
 
 import { useMain } from "../../Hooks/useMain";
-
-import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.webp";
 import pnb from "/src/assets/pnb.webp";
 import newkotak from "/src/assets/newkotak.webp";
 import newaxis from "/src/assets/newaxis.webp";
@@ -34,9 +33,12 @@ import hdfc from "/src/assets/hdfc.webp";
 import icic from "/src/assets/icic.webp";
 import canara from "/src/assets/canara.webp";
 import bob from "/src/assets/bob.webp";
-import homePage from "/src/assets/homePage.webp";
+import newone from "/src/assets/newone.png";
 import sbi from "/src/assets/sbi.webp";
-
+import newlogo from "/src/assets/newlogo.png";
+import coins from "/src/assets/coins.webp";
+import property from "/src/assets/property.webp";
+import homekey from "/src/assets/homekey.webp";
 // ============================================================
 // ANIMATION VARIANTS
 // ============================================================
@@ -129,17 +131,20 @@ const HomePage = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, []);
 
-  // Loan application form
+  // LOAN APPLICATION FORM
+
   const [formStep, setFormStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
 
-  const [loanForm, setLoanForm] = useState({
-    loanType: "Personal Loan",
+  const initialLoanForm = {
+    loanType: "Loan Against Property(LAP)",
     loanAmount: "",
     fullName: "",
     mobileNumber: "",
     monthlyIncome: "",
-  });
+  };
+
+  const [loanForm, setLoanForm] = useState(initialLoanForm);
 
   const updateLoanForm = (event) => {
     setLoanForm((current) => ({
@@ -156,11 +161,11 @@ const HomePage = () => {
       return;
     }
 
-    // Connect your backend API here.
     setSubmitted(true);
   };
 
-  // EMI calculator state
+  // EMI CALCULATOR
+
   const [emiAmount, setEmiAmount] = useState(500000);
   const [interestRate, setInterestRate] = useState(10.5);
   const [loanTenure, setLoanTenure] = useState(5);
@@ -179,7 +184,8 @@ const HomePage = () => {
   const totalPayment = monthlyEMI * totalMonths;
   const totalInterest = totalPayment - emiAmount;
 
-  // Bank logos
+  // BANK LOGOS
+
   const bankLogos = [
     { name: "State Bank of India", src: sbi },
     { name: "HDFC Bank", src: hdfc },
@@ -193,7 +199,8 @@ const HomePage = () => {
     { name: "IndusInd Bank", src: induslnd },
   ];
 
-  // Features
+  // FEATURES
+
   const features = [
     {
       icon: House,
@@ -205,7 +212,7 @@ const HomePage = () => {
       icon: BriefcaseBusiness,
       title: "For Business or Personal Needs",
       description:
-        "Explore financing for business expansion,working capital or major personal expenses.",
+        "Explore financing for business expansion, working capital or major personal expenses.",
     },
     {
       icon: FileText,
@@ -214,38 +221,15 @@ const HomePage = () => {
         "Understand eligibility, interest rates, fees and repayment terms.",
     },
     {
-      icon:Handshake,
+      icon: Handshake,
       title: "Find Your Next Step",
       description:
         "Explore available lending options and understand the application process.",
     },
   ];
 
-  // How it works
-  const steps = [
-    {
-      number: "1",
-      icon: FileText,
-      title: "Name Your Goal",
-      description: "Pick the topic you want to understand first.",
-    },
-    {
-      number: "2",
-      icon: SlidersHorizontal,
-      title: "Review the Details",
-      description:
-        "Look at the details and note anything you need to verify.",
-    },
-    {
-      number: "3",
-      icon: CheckCircle2,
-      title: "Choose Your Next Step",
-      description:
-        "Move forward when the information fits your needs.",
-    },
-  ];
+  // TRUST ITEMS
 
-  // Trust items
   const trustItems = [
     {
       icon: Users,
@@ -269,26 +253,36 @@ const HomePage = () => {
       style={{ fontFamily: "'Inter', Arial, sans-serif" }}
       className="w-full min-w-0 overflow-x-clip bg-white font-sans text-[#102016] [&_button]:transition-all [&_button]:duration-300 [&_button]:ease-out [&_button:focus-visible]:outline-none [&_button:focus-visible]:ring-2 [&_button:focus-visible]:ring-[#D6A91F] [&_button:focus-visible]:ring-offset-2 [&_a]:transition-all [&_a]:duration-300 [&_a]:ease-out"
     >
-      {/* HERO SECTION */}
 
-      <section className="relative isolate flex items-center overflow-hidden bg-[#102002] px-4 py-10 sm:px-6 sm:py-14 md:px-10 lg:px-12 lg:py-16 xl:min-h-[740px] xl:px-16">
-        <div className="absolute inset-0 -z-20 bg-[#102010]">
+      {/* ================================================== */}
+      {/* HERO SECTION */}
+      {/* ================================================== */}
+
+      <section className="relative isolate w-full min-w-0 overflow-hidden bg-[#102016] px-3 py-9 sm:px-5 sm:py-12 md:px-7 md:py-14 lg:px-9 lg:py-16 xl:min-h-[740px] xl:px-12">
+
+        {/* BACKGROUND IMAGE */}
+
+        <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden bg-[#102016]">
           <img
-            
+            src={newone}
+            alt="EkPaisa financial background"
             loading="eager"
             fetchPriority="high"
-            aria-label="Abstract financial video background"
-            src={homePage}
-            className="h-full w-full object-cover object-center"
+            className="absolute inset-0 h-full w-full object-cover object-[75%_center] [@media(max-width:767px)]:object-[45%_45%] md:object-[75%_25%]"
           />
         </div>
 
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#102016]/65 via-[#102016]/40 to-[#102016]/20" />
+        {/* IMAGE OVERLAY */}
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-[#102016]/20 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#102016]/45 via-[#102016]/45 to-[#102016]/90 sm:bg-gradient-to-r sm:from-[#102016]/75 sm:via-[#102016]/45 sm:to-[#102016]/15" />
 
-        <div className="relative mx-auto grid w-full max-w-7xl min-w-0 items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-10 xl:grid-cols-[1.05fr_0.85fr] xl:gap-14">
-          {/* HERO CONTENT */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-[#102016]/70 to-transparent" />
+
+        {/* HERO CONTENT */}
+
+        <div className="relative mx-auto grid w-full max-w-[1440px] min-w-0 items-center gap-7 sm:gap-9 lg:grid-cols-2 lg:gap-8 xl:grid-cols-[1.05fr_0.85fr] xl:gap-10">
+
+          {/* LEFT CONTENT */}
 
           <motion.div
             initial={{ opacity: 0, x: -35 }}
@@ -297,32 +291,28 @@ const HomePage = () => {
               duration: 0.85,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto w-full max-w-2xl min-w-0 py-2 text-white sm:py-4 lg:mx-0"
+            className="mx-auto flex w-full max-w-xl min-w-0 flex-col items-start text-left text-white lg:mx-0"
           >
+
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/35 bg-[#102016]/40 px-3 py-2 text-xs font-semibold text-white sm:px-4 sm:text-sm"
+              className="mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/30 bg-[#102016]/45 px-3 py-2 text-xs font-semibold tracking-wide text-white backdrop-blur-sm sm:mb-6 sm:px-4 sm:text-sm"
             >
-              <Sparkles
-                size={16}
-                className="shrink-0 text-[#FFE17A]"
-              />
-              <span>AI-Powered Financial Guidance</span>
+              <Home size={16} className="shrink-0 text-[#FFE17A]" />
+              <span>LOAN AGAINST PROPERTY</span>
             </motion.div>
 
-            <h1 className="max-w-full break-words text-3xl font-extrabold leading-[1.12] tracking-tight min-[390px]:text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
-              AI is everywhere,
-              <br />
-              why not in your
+            <h1 className="max-w-full break-words text-4xl font-extrabold leading-[1.08] tracking-tight min-[390px]:text-[2.65rem] sm:text-5xl md:text-6xl xl:text-[4.25rem]">
+              Unlock Your
               <motion.span
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="block text-[#FFE17A]"
+                className="mt-1 block text-[#F1C638]"
               >
-                finance?
+                Property's Value.
               </motion.span>
             </h1>
 
@@ -330,12 +320,23 @@ const HomePage = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="mt-5 max-w-lg text-sm leading-7 text-white/90 sm:text-base md:text-lg"
+              className="mt-5 max-w-xl text-base leading-7 text-white/95 sm:mt-6 sm:text-lg sm:leading-8 md:text-xl"
             >
-              Bring AI into your financial journey. Explore loan options,
-              understand important terms, and compare your choices with more
-              clarity — all in one place with EkPaisa.
+              Get a Loan Against Property (LAP) with interest rates starting at{" "}
+              <span className="font-semibold text-[#F1C638]">9% p.a.</span>
             </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="mt-3 max-w-xl text-sm leading-6 text-white/85 sm:mt-4 sm:text-base sm:leading-7"
+            >
+              Use your residential or commercial property to explore funding
+              options, repayment terms and financing possibilities with EkPaisa.
+            </motion.p>
+
+            {/* HERO HIGHLIGHTS */}
 
             <motion.div
               initial="hidden"
@@ -349,29 +350,63 @@ const HomePage = () => {
                   },
                 },
               }}
-              className="mt-7 flex flex-wrap gap-x-5 gap-y-3 text-xs font-medium text-white sm:text-sm"
+              className="mt-6 grid w-full max-w-xl grid-cols-3 items-start gap-2 border-y border-white/20 py-4 min-[390px]:gap-3 sm:mt-7 sm:gap-5 sm:py-5"
             >
               {[
-                { icon: ShieldCheck, label: "Clear information" },
-                { icon: Zap, label: "Simple process" },
-                { icon: Star, label: "Your goals first" },
-              ].map(({ icon: Icon, label }) => (
+                {
+                  icon: ShieldCheck,
+                  label: "Starting at",
+                  value: "9% p.a.",
+                },
+                {
+                  icon: Zap,
+                  label: "Residential &",
+                  value: "Commercial Property",
+                },
+                {
+                  icon: Star,
+                  label: "Flexible",
+                  value: "Repayment Tenure",
+                },
+              ].map(({ icon: Icon, label, value }) => (
                 <motion.div
                   key={label}
                   variants={{
                     hidden: { opacity: 0, y: 12 },
                     visible: { opacity: 1, y: 0 },
                   }}
-                  className="flex items-center gap-2"
+                  className="flex min-w-0 flex-col items-center gap-2 text-center text-[11px] font-medium leading-snug text-white min-[390px]:text-xs sm:flex-row sm:items-center sm:gap-2 sm:text-left sm:text-base"
                 >
                   <Icon
-                    size={19}
-                    className="shrink-0 text-[#FFE17A]"
+                    size={20}
+                    className="shrink-0 text-[#FFE17A] sm:h-6 sm:w-6"
                   />
-                  {label}
+
+                  <span className="min-w-0">
+                    <span className="block whitespace-nowrap">{label}</span>
+                    <span
+                      className={
+                        value === "9% p.a."
+                          ? "mt-1 block whitespace-nowrap text-sm font-bold text-[#FFE17A] min-[390px]:text-base sm:text-lg"
+                          : "mt-1 block font-normal text-white"
+                      }
+                    >
+                      {value}
+                    </span>
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="mt-4 max-w-xl text-xs leading-5 text-white/75 sm:mt-5 sm:text-sm sm:leading-6"
+            >
+              Indicative starting rate. Actual rate depends on lender policy,
+              borrower profile and property assessment.
+            </motion.p>
           </motion.div>
 
           {/* LOAN APPLICATION FORM */}
@@ -429,17 +464,12 @@ const HomePage = () => {
                     onClick={() => {
                       setSubmitted(false);
                       setFormStep(1);
-                      setLoanForm({
-                        loanType: "Personal Loan",
-                        loanAmount: "",
-                        fullName: "",
-                        mobileNumber: "",
-                        monthlyIncome: "",
-                      });
+                      setLoanForm(initialLoanForm);
                     }}
                     className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#087A3D] to-[#075C30] px-4 py-3 text-sm font-bold text-white hover:from-[#075C30] hover:to-[#064824] sm:px-5"
                   >
-                    Start a new application <ArrowRight size={17} />
+                    Start a new application
+                    <ArrowRight size={17} />
                   </button>
                 </div>
               ) : (
@@ -448,7 +478,6 @@ const HomePage = () => {
 
                   <div className="relative overflow-hidden bg-gradient-to-br from-[#075C30] via-[#087A3D] to-[#0B6B3A] px-4 pb-4 pt-4 sm:px-6">
                     <div className="pointer-events-none absolute -right-7 -top-12 h-36 w-36 rounded-full border-[18px] border-white/10" />
-
                     <div className="pointer-events-none absolute -bottom-10 right-24 h-24 w-24 rounded-full bg-[#FFD95A]/10" />
 
                     <div className="relative flex items-center justify-between gap-3">
@@ -479,9 +508,7 @@ const HomePage = () => {
                         {formStep === 3 ? (
                           <CircleCheck size={20} />
                         ) : (
-                          <span className="text-sm font-bold">
-                            0{formStep}
-                          </span>
+                          <span className="text-sm font-bold">0{formStep}</span>
                         )}
                       </div>
                     </div>
@@ -489,6 +516,8 @@ const HomePage = () => {
                     <p className="relative mt-2.5 text-xs leading-5 text-white/85 sm:text-sm">
                       Tell us a little about your requirements to get started.
                     </p>
+
+                    {/* PROGRESS BAR */}
 
                     <div className="relative mt-3.5">
                       <div className="h-1 overflow-hidden rounded-full bg-white/20">
@@ -545,6 +574,8 @@ const HomePage = () => {
 
                   <div className="px-4 py-4 sm:px-6 sm:py-5">
                     <AnimatePresence mode="wait" initial={false}>
+                      {/* STEP 1 */}
+
                       {formStep === 1 && (
                         <motion.div
                           key="step-one"
@@ -581,10 +612,9 @@ const HomePage = () => {
                                 onChange={updateLoanForm}
                                 className="w-full min-w-0 appearance-none rounded-xl border border-[#D9E5D9] bg-white py-3 pl-11 pr-10 text-sm font-medium text-[#102016] outline-none transition-all focus:border-[#087A3D] focus:ring-4 focus:ring-[#087A3D]/10"
                               >
+                                <option>Loan Against Property(LAP)</option>
                                 <option>Personal Loan</option>
                                 <option>Home Loan</option>
-                                <option>Business Loan</option>
-                                <option>Education Loan</option>
                               </select>
 
                               <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#087A3D]">
@@ -622,6 +652,8 @@ const HomePage = () => {
                           </div>
                         </motion.div>
                       )}
+
+                      {/* STEP 2 */}
 
                       {formStep === 2 && (
                         <motion.div
@@ -694,6 +726,8 @@ const HomePage = () => {
                           </div>
                         </motion.div>
                       )}
+
+                      {/* STEP 3 */}
 
                       {formStep === 3 && (
                         <motion.div
@@ -768,13 +802,17 @@ const HomePage = () => {
                       )}
                     </AnimatePresence>
 
+                    {/* FORM BUTTONS */}
+
                     <div className="mt-4 flex gap-2.5 sm:gap-3">
                       {formStep > 1 && (
                         <motion.button
                           type="button"
                           whileHover={{ y: -2 }}
                           whileTap={{ scale: 0.97 }}
-                          onClick={() => setFormStep((current) => current - 1)}
+                          onClick={() =>
+                            setFormStep((current) => current - 1)
+                          }
                           className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-xl border border-[#CFE0D0] px-3 py-3 text-sm font-bold text-[#26382B] hover:bg-[#F3F8F3] sm:gap-2 sm:px-4"
                         >
                           <ArrowRight size={16} className="rotate-180" />
@@ -813,87 +851,93 @@ const HomePage = () => {
         </div>
       </section>
 
-      
-
+      {/* ================================================== */}
       {/* POPULAR PRODUCTS */}
+      {/* ================================================== */}
 
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
         variants={fadeUp}
-        className="bg-gradient-to-b from-[#F5F8F2] to-white px-4 py-6 sm:px-6 sm:py-16 md:px-10 lg:px-13"
-      >     <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={fadeUp}
-        className="px-4 py-12 sm:px-6 sm:py-16 md:px-10 lg:px-16 lg:py-20"
+        className="w-full overflow-hidden bg-gradient-to-b from-[#F5F8F2] to-white px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-3 rounded-3xl bg-[#eff5ea] p-4 sm:grid-cols-2 sm:gap-5 sm:p-6 md:p-8 xl:grid-cols-4">
-          {features.map(({ icon: Icon, title, description }) => (
-            <motion.div
-              key={title}
-              whileHover={{ y: -5 }}
-              transition={{ duration: 0.25 }}
-              className="min-w-0 rounded-2xl p-4 transition-all hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10 sm:p-5"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
-                <Icon size={24} />
-              </div>
-              <h3 className="text-base font-bold sm:text-lg">{title}</h3>
-              <p className="mt-2 text-sm leading-6 text-[#5F6F63]">
-                {description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-      
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex min-w-0 flex-col justify-between gap-5 sm:mb-10 sm:flex-row sm:items-end">
-            <div className="min-w-0">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#087A3D] sm:text-sm">
-                LOAN SOLUTIONS
-              </p>
-              <h2 className="mt-3 max-w-xl text-3xl font-bold leading-tight sm:text-4xl">
-                Find the Right Loan for Your Needs
-              </h2>
-              <p className="mt-4 max-w-xl text-sm leading-7 text-[#5F6F63] sm:text-base">
-                Explore financing options, for business growth,personal needs and property ownership. Learn about your optionns and make informed borrrowing decisions.
-              </p>
+        <div className="mx-auto flex w-full max-w-[1440px] min-w-0 flex-col gap-7 sm:gap-9">
 
+          {/* FEATURES */}
 
-       <motion.button
-              type="button"
-              onClick={() => navigate("/blogs")}
-              {...buttonMotion}
-              className="group inline-flex items-center gap-2 font-semibold text-[#087A3D] hover:text-[#075C30]"
-            >
-              <span className="inline-flex items-center gap-2">
-                Explore Loan Options
-                <ArrowRight
-                  size={18}
-                  className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                />
-              </span>
-         
-            </motion.button>
-
-
-
-
-
-
-
-
-
-            </div>
-
-       
+          <div className="grid w-full grid-cols-1 gap-3 rounded-3xl bg-[#EFF5EA] p-3 sm:grid-cols-2 sm:gap-4 sm:p-5 md:p-6 xl:grid-cols-4">
+            {features.map(({ icon: Icon, title, description }) => (
+              <motion.div
+                key={title}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.25 }}
+                className="min-w-0 rounded-2xl p-4 transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-[#087A3D]/10 sm:p-5"
+              >
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#DCEFE2] text-[#087A3D]">
+                  <Icon size={24} />
+                </div>
+                <h3 className="text-base font-bold sm:text-lg">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#5F6F63]">
+                  {description}
+                </p>
+              </motion.div>
+            ))}
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-3">
+          {/* EKPAISA BRAND BANNER */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.6 }}
+            className="relative mx-auto w-full overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#073D24] via-[#075C30] to-[#087A3D] px-4 py-6 shadow-xl shadow-[#075C30]/15 sm:px-7 sm:py-8 md:px-9 md:py-9"
+          >
+            <div className="pointer-events-none absolute -right-12 -top-16 h-48 w-48 rounded-full border-[22px] border-white/[0.06] sm:h-64 sm:w-64 sm:border-[30px]" />
+            <div className="pointer-events-none absolute -bottom-20 left-1/3 h-44 w-44 rounded-full bg-[#FFD95A]/[0.07] blur-2xl" />
+
+            <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+              <div className="min-w-0 max-w-2xl">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FFE17A] sm:text-xs">
+                  <Sparkles size={14} />
+                  Smarter financial decisions
+                </div>
+
+                <h2 className="text-3xl font-extrabold tracking-tight text-white min-[390px]:text-4xl sm:text-5xl md:text-6xl">
+                  EkPaisa<span className="text-[#FFD95A]">.</span>
+                </h2>
+
+                <p className="mt-2 text-base font-semibold tracking-wide text-[#FFD95A] min-[390px]:text-lg sm:text-xl">
+                  Intelligence Behind Every Rupee.
+                </p>
+
+                <p className="mt-3 max-w-xl text-sm leading-6 text-white/80 sm:text-base sm:leading-7">
+                  A smarter approach to borrowing, financial discovery and
+                  money decisions.
+                </p>
+              </div>
+
+              <div className="relative flex shrink-0 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 sm:flex-col sm:items-start sm:px-5 sm:py-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFD95A] text-[#075C30]">
+                  <Sparkles size={21} />
+                </div>
+                <div>
+                  <p className="text-xs font-bold text-white sm:text-sm">
+                    Finance, made clearer
+                  </p>
+                  <p className="mt-1 text-[11px] text-white/65 sm:text-xs">
+                    Borrowing · Discovery · Technology
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* LOAN CARDS */}
+
+          <div className="mx-auto grid w-full max-w-[1320px] min-w-0 grid-cols-1 items-stretch gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-3">
+
             {/* PERSONAL LOAN */}
 
             <motion.article
@@ -903,7 +947,7 @@ const HomePage = () => {
             >
               <div className="relative h-48 overflow-hidden bg-[#DCEFE2] sm:h-52">
                 <img
-                  src="https://images.unsplash.com/photo-1633158829585-23ba8f7c8caf?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+                  src={coins}
                   alt="Personal loan planning and finances"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -948,7 +992,7 @@ const HomePage = () => {
             >
               <div className="relative h-48 overflow-hidden bg-[#DCEFE2] sm:h-52">
                 <img
-                  src="https://images.pexels.com/photos/34134899/pexels-photo-34134899.jpeg"
+                  src={homekey}
                   alt="A home representing home loan options"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -993,7 +1037,7 @@ const HomePage = () => {
             >
               <div className="relative h-48 overflow-hidden bg-[#DCEFE2] sm:h-52">
                 <img
-                  src="https://images.unsplash.com/photo-1781229771042-2a859f8f8022?q=80&w=1268&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+                  src={property}
                   alt="Residential property representing property-backed finance"
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -1008,7 +1052,9 @@ const HomePage = () => {
                 <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                   <Building2 size={23} />
                 </div>
-                <h3 className="text-xl font-bold">Loan Against Property</h3>
+                <h3 className="text-xl font-bold">
+                  Loan Against Property
+                </h3>
                 <p className="mt-3 flex-1 text-sm leading-7 text-[#5F6F63] sm:text-base">
                   Explore how property-backed borrowing works, what lenders
                   may consider, and why interest rates, fees, tenure and the
@@ -1033,7 +1079,7 @@ const HomePage = () => {
       </motion.section>
 
       {/* ================================================== */}
-      {/* COMPACT EMI CALCULATOR */}
+      {/* EMI CALCULATOR */}
       {/* ================================================== */}
 
       <motion.section
@@ -1042,10 +1088,11 @@ const HomePage = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
         variants={fadeUp}
-        className="px-4 py-12 sm:px-6 sm:py-16 md:px-10 lg:px-16"
+        className="w-full px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-[#CFE5D3] bg-[#F7FBF7] shadow-lg shadow-[#087A3D]/[0.06]">
+        <div className="mx-auto w-full max-w-[1440px] overflow-hidden rounded-3xl border border-[#CFE5D3] bg-[#F7FBF7] shadow-lg shadow-[#087A3D]/[0.06]">
           <div className="grid min-w-0 lg:grid-cols-[1.1fr_0.9fr]">
+
             {/* CALCULATOR INPUTS */}
 
             <div className="min-w-0 p-4 min-[390px]:p-5 sm:p-7 lg:p-8">
@@ -1053,7 +1100,6 @@ const HomePage = () => {
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EAF4EC] text-[#087A3D]">
                   <Calculator size={23} />
                 </div>
-
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[0.15em] text-[#087A3D]">
                     Quick Calculator
@@ -1064,23 +1110,17 @@ const HomePage = () => {
                 </div>
               </div>
 
-
               {/* LOAN AMOUNT */}
 
               <div className="mt-4 min-[390px]:mt-5 sm:mt-6">
                 <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                  <label
-                    htmlFor="emiAmount"
-                    className="text-sm font-semibold text-[#26382B]"
-                  >
+                  <label htmlFor="emiAmount" className="text-sm font-semibold text-[#26382B]">
                     Loan amount
                   </label>
-
                   <span className="text-base font-extrabold text-[#087A3D] sm:text-lg">
                     ₹{formatCurrency(emiAmount)}
                   </span>
                 </div>
-
                 <input
                   id="emiAmount"
                   type="range"
@@ -1088,12 +1128,9 @@ const HomePage = () => {
                   max="5000000"
                   step="50000"
                   value={emiAmount}
-                  onChange={(event) =>
-                    setEmiAmount(Number(event.target.value))
-                  }
+                  onChange={(event) => setEmiAmount(Number(event.target.value))}
                   className="h-2 w-full cursor-pointer accent-[#087A3D]"
                 />
-
                 <div className="mt-1 flex justify-between text-xs text-[#788579]">
                   <span>₹50,000</span>
                   <span>₹50,00,000</span>
@@ -1104,18 +1141,13 @@ const HomePage = () => {
 
               <div className="mt-4 min-[390px]:mt-5">
                 <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                  <label
-                    htmlFor="interestRate"
-                    className="text-sm font-semibold text-[#26382B]"
-                  >
+                  <label htmlFor="interestRate" className="text-sm font-semibold text-[#26382B]">
                     Interest rate
                   </label>
-
                   <span className="text-base font-extrabold text-[#087A3D]">
                     {interestRate.toFixed(1)}% p.a.
                   </span>
                 </div>
-
                 <input
                   id="interestRate"
                   type="range"
@@ -1123,12 +1155,9 @@ const HomePage = () => {
                   max="25"
                   step="0.5"
                   value={interestRate}
-                  onChange={(event) =>
-                    setInterestRate(Number(event.target.value))
-                  }
+                  onChange={(event) => setInterestRate(Number(event.target.value))}
                   className="h-2 w-full cursor-pointer accent-[#087A3D]"
                 />
-
                 <div className="mt-1 flex justify-between text-xs text-[#788579]">
                   <span>1%</span>
                   <span>25%</span>
@@ -1139,18 +1168,13 @@ const HomePage = () => {
 
               <div className="mt-5">
                 <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                  <label
-                    htmlFor="loanTenure"
-                    className="text-sm font-semibold text-[#26382B]"
-                  >
+                  <label htmlFor="loanTenure" className="text-sm font-semibold text-[#26382B]">
                     Loan tenure
                   </label>
-
                   <span className="text-base font-extrabold text-[#087A3D]">
                     {loanTenure} {loanTenure === 1 ? "year" : "years"}
                   </span>
                 </div>
-
                 <input
                   id="loanTenure"
                   type="range"
@@ -1158,12 +1182,9 @@ const HomePage = () => {
                   max="30"
                   step="1"
                   value={loanTenure}
-                  onChange={(event) =>
-                    setLoanTenure(Number(event.target.value))
-                  }
+                  onChange={(event) => setLoanTenure(Number(event.target.value))}
                   className="h-2 w-full cursor-pointer accent-[#087A3D]"
                 />
-
                 <div className="mt-1 flex justify-between text-xs text-[#788579]">
                   <span>1 year</span>
                   <span>30 years</span>
@@ -1222,20 +1243,22 @@ const HomePage = () => {
         </div>
       </motion.section>
 
-      {/* BANK LOGOS SECTION */}
+      {/* ================================================== */}
+      {/* BANK LOGOS */}
+      {/* ================================================== */}
 
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
         variants={fadeUp}
-        className="relative overflow-hidden bg-gradient-to-b from-white via-[#F5F8F2] to-white px-4  sm:px-6 sm:py-6 md:px-10 "
+        className="relative w-full overflow-hidden bg-gradient-to-b from-white via-[#F5F8F2] to-white px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
         <div className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-[#DCEFE2]/60 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#F5C542]/15 blur-3xl" />
 
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mx-auto mb-9 max-w-2xl text-center sm:mb-12">
+        <div className="relative mx-auto w-full max-w-[1440px]">
+          <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10">
             <span className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-[#DCEFE2] bg-white px-3 py-2 text-xs font-semibold text-[#087A3D] sm:px-4 sm:text-sm">
               <ShieldCheck size={16} className="shrink-0" />
               Banking Partners
@@ -1250,60 +1273,61 @@ const HomePage = () => {
               that may suit your needs.
             </p>
           </div>
-<div className="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4 md:gap-5 xl:grid-cols-5">
-  {bankLogos.map((bank, index) => (
-    <motion.div
-      key={bank.name}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        duration: 0.45,
-        delay: index * 0.05,
-        ease: "easeOut",
-      }}
-      whileHover={{ y: -5 }}
-      className="group flex min-h-[120px] min-w-0 flex-col items-center justify-start rounded-2xl border border-[#D5E5D7] bg-white p-1 transition-all duration-300 hover:-translate-y-1 hover:border-[#087A3D]/40 hover:shadow-md hover:shadow-[#087A3D]/[0.07] sm:min-h-[166px] sm:p-2.5"
-    >
-      {/* Grey logo area */}
-<div className="flex h-[88px] w-[72%] items-center justify-center self-center rounded-xl bg-[#F4F7F4] px-2 transition-colors duration-300 group-hover:bg-[#EDF4EE] sm:h-[100px] sm:w-[76%] sm:px-3">
-  <div className="flex h-14 w-full items-center justify-center sm:h-16">
-    <img
-      src={bank.src}
-      alt={`${bank.name} logo`}
-      loading="lazy"
-      className="h-10 w-full max-w-[115px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:max-w-[130px]"
-    />
-  </div>
-</div>
 
-      {/* Bank name outside grey area */}
-      <p className="mt-1.5 break-words px-1 text-center text-[11px] font-bold leading-4 text-[#34483A] sm:mt-2 sm:text-sm sm:leading-5">
-        {bank.name}
-      </p>
+          <div className="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4 md:gap-5 xl:grid-cols-5">
+            {bankLogos.map((bank, index) => (
+              <motion.div
+                key={bank.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.45,
+                  delay: index * 0.05,
+                  ease: "easeOut",
+                }}
+                whileHover={{ y: -5 }}
+                className="group flex min-h-[120px] min-w-0 flex-col items-center justify-start rounded-2xl border border-[#D5E5D7] bg-white p-1 transition-all duration-300 hover:border-[#087A3D]/40 hover:shadow-md hover:shadow-[#087A3D]/[0.07] sm:min-h-[166px] sm:p-2.5"
+              >
+                <div className="flex h-[88px] w-[72%] items-center justify-center self-center rounded-xl bg-[#F4F7F4] px-2 transition-colors duration-300 group-hover:bg-[#EDF4EE] sm:h-[100px] sm:w-[76%] sm:px-3">
+                  <div className="flex h-14 w-full items-center justify-center sm:h-16">
+                    <img
+                      src={bank.src}
+                      alt={`${bank.name} logo`}
+                      loading="lazy"
+                      className="h-10 w-full max-w-[115px] object-contain transition-transform duration-300 group-hover:scale-105 sm:h-12 sm:max-w-[130px]"
+                    />
+                  </div>
+                </div>
 
-      <span className="mt-1.5 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-12 group-hover:bg-[#087A3D]" />
-    </motion.div>
-  ))}
-</div>
+                <p className="mt-1.5 break-words px-1 text-center text-[11px] font-bold leading-4 text-[#34483A] sm:mt-2 sm:text-sm sm:leading-5">
+                  {bank.name}
+                </p>
+
+                <span className="mt-1.5 h-1 w-8 rounded-full bg-[#DCEFE2] transition-all duration-300 group-hover:w-12 group-hover:bg-[#087A3D]" />
+              </motion.div>
+            ))}
+          </div>
 
           <p className="mt-8 text-center text-xs leading-5 text-[#7A8A7D]">
-            Bank logos are trademarks of their respective owners. Logo
-            images are loaded from an external repository.
+            Bank logos are trademarks of their respective owners. Logo images
+            are loaded from an external repository.
           </p>
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* TRUST SECTION */}
+      {/* ================================================== */}
 
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
         variants={fadeUp}
-        className="px-4 py-10 sm:px-6 sm:py-12 md:px-10 lg:px-16"
+        className="w-full px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-7 overflow-hidden rounded-3xl border border-[#DCEFE2] bg-gradient-to-r from-[#EAF4EC] via-[#E7F0E5] to-[#F5F8F2] p-5 sm:grid-cols-2 sm:gap-8 sm:p-8 xl:grid-cols-4 xl:items-center xl:p-10">
+        <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-6 overflow-hidden rounded-3xl border border-[#DCEFE2] bg-gradient-to-r from-[#EAF4EC] via-[#E7F0E5] to-[#F5F8F2] p-4 sm:grid-cols-2 sm:gap-7 sm:p-7 xl:grid-cols-4 xl:items-center xl:p-9">
           <div className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-[#F5C542]/40" />
           <div className="pointer-events-none absolute -bottom-12 right-10 h-32 w-32 rounded-full bg-[#F5C542]/40" />
 
@@ -1340,16 +1364,18 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* FINAL CTA */}
+      {/* ================================================== */}
 
       <motion.section
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6 }}
-        className="px-4 py-10 sm:px-6 sm:py-12 md:px-10 lg:px-16"
+        className="w-full px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="relative mx-auto flex max-w-7xl min-w-0 flex-col gap-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#102016] via-[#075C30] to-[#087A3D] p-5 text-white sm:gap-7 sm:p-8 md:p-10 lg:flex-row lg:items-center lg:justify-between lg:p-12">
+        <div className="relative mx-auto flex w-full max-w-[1440px] min-w-0 flex-col gap-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#102016] via-[#075C30] to-[#087A3D] p-4 text-white sm:gap-7 sm:p-7 md:p-9 lg:flex-row lg:items-center lg:justify-between lg:p-10">
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{
@@ -1369,12 +1395,14 @@ const HomePage = () => {
               <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#F5C542] sm:text-sm">
                 YOUR PROPERTY. YOUR POSSIBILITIES.
               </p>
+
               <h2 className="mt-2 text-3xl font-bold leading-tight sm:text-4xl">
                 Turn Property into Possibility.
-               
               </h2>
+
               <p className="mt-3 max-w-lg text-sm leading-7 text-[#D5E4D8] sm:text-base">
-               Explore funding options against eligible property to support your business ambitions or perosnal goals.
+                Explore funding options against eligible property to support
+                your business ambitions or personal goals.
               </p>
             </div>
           </div>
@@ -1384,16 +1412,22 @@ const HomePage = () => {
             onClick={() => {
               document
                 .getElementById("loan-application-form")
-                ?.scrollIntoView({ behavior: "smooth", block: "center" });
+                ?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
             }}
             className="relative inline-flex w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#FFE17A] px-5 py-3 font-bold text-[#123D27] hover:bg-[#FFD95A] sm:w-fit"
           >
-            Explore Your Options <ArrowRight size={18} />
+            Explore Your Options
+            <ArrowRight size={18} />
           </button>
         </div>
       </motion.section>
 
+      {/* ================================================== */}
       {/* FOOTER */}
+      {/* ================================================== */}
 
       <footer
         id="home-footer"
@@ -1402,8 +1436,9 @@ const HomePage = () => {
         <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/30 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#075C30]/10 blur-3xl" />
 
-        <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 md:px-10 lg:px-10">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 xl:grid-cols-5 xl:gap-8">
+        <div className="relative mx-auto w-full max-w-[1440px] px-3 py-6 sm:px-5 sm:py-8 md:px-7 lg:px-9 xl:px-12">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 xl:grid-cols-5 xl:gap-8">
+
             {/* BRAND */}
 
             <div className="min-w-0 sm:col-span-2 xl:col-span-2">
@@ -1412,17 +1447,18 @@ const HomePage = () => {
                 className="inline-flex max-w-full items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#075C30]"
               >
                 <img
-                  src={EkPaisa}
+                  src={newlogo}
                   alt="EkPaisa logo"
                   className="h-12 w-auto max-w-full object-contain transition-transform duration-300 hover:scale-105 sm:h-14"
                 />
               </a>
 
-              <p className="mt-5 max-w-sm text-sm font-bold leading-7 text-[#234B34]">
-             Simplifying your financial decisions.Explore loan options and take your next step with confidence
+              <p className="mt-3 max-w-sm text-sm font-bold leading-7 text-[#234B34]">
+                Simplifying your financial decisions. Explore loan options and
+                take your next step with confidence.
               </p>
 
-              <div className="mt-6 inline-flex max-w-full items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/40 px-3 py-2 text-xs font-bold sm:px-4 sm:text-sm">
+              <div className="mt-4 inline-flex max-w-full items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/40 px-3 py-2 text-xs font-bold sm:px-4 sm:text-sm">
                 <ShieldCheck size={18} className="shrink-0" />
                 <span>Your financial journey, made simpler</span>
               </div>
@@ -1434,67 +1470,61 @@ const HomePage = () => {
               <h3 className="text-base font-extrabold text-[#073D24]">
                 Explore
               </h3>
-              <div className="mt-5 flex flex-col items-start gap-3">
+
+              <div className="mt-3 flex flex-col items-start gap-2.5">
                 <a href="/" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Home
                 </a>
                 <a href="/loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Personal Loans
                 </a>
-                <a href="/credit-cards" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Credit Cards
-                </a>
-                   <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Apply for a Loan
                 </a>
               </div>
             </div>
 
-            {/* GET STARTED */}
+            {/* RESOURCES */}
 
             <div>
               <h3 className="text-base font-extrabold text-[#073D24]">
                 Resources
               </h3>
-             <div className="mt-5 flex flex-col items-start gap-3">
-                <a href="/" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Loan Calculator 
+
+              <div className="mt-3 flex flex-col items-start gap-2.5">
+                <a href="/#emi-calculator" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                  Loan Calculator
                 </a>
                 <a href="/loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Help Center
                 </a>
-                <a href="/credit-cards" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Financial Guides
-                </a>
-                   <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   FAQs
                 </a>
               </div>
             </div>
 
-            {/* IMPORTANT LINKS */}
+            {/* LEGAL */}
 
             <div>
               <h3 className="text-base font-extrabold text-[#073D24]">
-                Legal & Contact 
+                Legal & Contact
               </h3>
-              <div className="mt-5 flex flex-col items-start gap-3">
+
+              <div className="mt-3 flex flex-col items-start gap-2.5">
                 <a href="/privacy-policy" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Privacy Policy
                 </a>
                 <a href="/terms" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Terms &amp; Conditions
                 </a>
-                <a href="/contact" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Contact Us
-                </a>
               </div>
             </div>
           </div>
 
-          <div className="my-8 h-px bg-gradient-to-r from-transparent via-[#075C30]/30 to-transparent sm:my-9" />
+          <div className="my-5 h-px bg-gradient-to-r from-transparent via-[#075C30]/30 to-transparent sm:my-6" />
 
-          <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+          <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
             <p className="text-xs font-bold text-[#234B34] sm:text-sm">
               © {new Date().getFullYear()} EkPaisa. All rights reserved.
             </p>

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router";
 import {
   Menu,
@@ -11,7 +11,7 @@ import {
   Building2,
 } from "lucide-react";
 
-import EkPaisa from "/src/assets/EkPaisa-dZfDSOqM.webp";
+import newlogo from "/src/assets/newlogo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,19 +20,77 @@ const Navbar = () => {
 
   const location = useLocation();
 
-  // Check whether the current route belongs to Loans
+  const navRef = useRef(null);
+  const desktopLoansRef = useRef(null);
+  const mobileLoansRef = useRef(null);
+
   const isLoanActive = [
     "/personal-loan",
     "/home-loan",
     "/loan-against-property",
   ].includes(location.pathname);
 
-  // Keep Loans dropdown active on all loan pages
+  const loanOptions = [
+    {
+      title: "Personal Loan",
+      description: "For your personal needs",
+      path: "/personal-loan",
+      icon: UserRound,
+    },
+    {
+      title: "Home Loan",
+      description: "Make your dream home a reality",
+      path: "/home-loan",
+      icon: House,
+    },
+    {
+      title: "Loan Against Property",
+      description: "Unlock your property's value",
+      path: "/loan-against-property",
+      icon: Building2,
+    },
+  ];
+
+  // Close menus when route changes
   useEffect(() => {
-    if (isLoanActive) {
-      setLoansOpen(false);
-    }
-  }, [location.pathname, isLoanActive]);
+    setIsOpen(false);
+    setLoansOpen(false);
+  }, [location.pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      const clickedDesktopDropdown =
+        desktopLoansRef.current?.contains(event.target);
+
+      const clickedMobileDropdown =
+        mobileLoansRef.current?.contains(event.target);
+
+      if (!clickedDesktopDropdown && !clickedMobileDropdown) {
+        setLoansOpen(false);
+      }
+
+      // Close complete mobile menu when clicking outside navbar
+      if (!navRef.current?.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    const handleEscape = (event) => {
+      if (event.key === "Escape") {
+        setLoansOpen(false);
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handleOutsideClick);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("pointerdown", handleOutsideClick);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
 
   // Hide navbar when homepage footer enters the screen
   useEffect(() => {
@@ -61,45 +119,20 @@ const Navbar = () => {
       window.removeEventListener("scroll", checkFooter);
       window.removeEventListener("resize", checkFooter);
     };
-  }, []);
+  }, [location.pathname]);
 
-  // Close mobile menu and dropdown
   const closeMenu = () => {
     setIsOpen(false);
     setLoansOpen(false);
   };
 
-  // Mobile navigation link styling
   const mobileLinkClass = ({ isActive }) =>
     `flex items-center gap-3 rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-300 ${
       isActive
-        ? "border-[#D6A91F]/50 bg-[#D6A91F]/15 text-[#FFD95A]"
+        ? "border-[#D6A91F]/50 bg-[#D6A91F]/10 text-[#FFD95A]"
         : "border-white/10 text-white hover:border-[#FFD95A]/30 hover:bg-white/5"
     }`;
 
-  // Loan dropdown options
-  const loanOptions = [
-    {
-      title: "Personal Loan",
-      description: "For your personal needs",
-      path: "/personal-loan",
-      icon: UserRound,
-    },
-    {
-      title: "Home Loan",
-      description: "Make your dream home a reality",
-      path: "/home-loan",
-      icon: House,
-    },
-    {
-      title: "Loan Against Property",
-      description: "Unlock your property's value",
-      path: "/loan-against-property",
-      icon: Building2,
-    },
-  ];
-
-  // Desktop navigation link styling
   const desktopLinkClass = ({ isActive }) =>
     `inline-flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-[13px] ${
       isActive
@@ -107,7 +140,6 @@ const Navbar = () => {
         : "text-[#173D2B] hover:bg-white/60 hover:text-[#087A3D]"
     }`;
 
-  // Loans button styling
   const loansButtonClass = `inline-flex items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-[13px] ${
     isLoanActive || loansOpen
       ? "bg-[#103126] text-[#FFD95A] shadow-sm"
@@ -116,7 +148,8 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`sticky top-0 z-50 w-full border-t border-r-0 border-l-0 border-3 border-[#face3d] bg-gradient-to-r from-[#f5f2e2] via-[#f5f3e8] to-[#f5f2e2] shadow-[0_4px_20px_rgba(40,65,40,0.10)] backdrop-blur-xl transition-transform duration-300 ${
+      ref={navRef}
+      className={`sticky top-0 z-50 w-full border-t-[3px] border-[#face3d] bg-gradient-to-r from-[#f5f2e2] via-[#f5f3e8] to-[#f5f2e2] shadow-[0_4px_20px_rgba(40,65,40,0.10)] backdrop-blur-xl transition-transform duration-300 ${
         hideNavbar ? "-translate-y-full" : "translate-y-0"
       }`}
     >
@@ -129,9 +162,9 @@ const Navbar = () => {
           className="ml-[-4px] flex min-w-0 shrink-0 items-center sm:ml-[-10px] lg:ml-[-35px] xl:ml-[-60px]"
         >
           <img
-            src={EkPaisa}
+            src={newlogo}
             alt="EkPaisa Logo"
-            className="h-11 w-auto object-contain sm:h-14 lg:h-16"
+            className="h-14 w-auto object-contain sm:h-20 lg:h-20"
           />
         </NavLink>
 
@@ -148,8 +181,8 @@ const Navbar = () => {
             Home
           </NavLink>
 
-          {/* Loans Dropdown */}
-          <div className="relative">
+          {/* Desktop Loans Dropdown */}
+          <div ref={desktopLoansRef} className="relative">
             <button
               type="button"
               onClick={() => setLoansOpen((prev) => !prev)}
@@ -167,7 +200,6 @@ const Navbar = () => {
               />
             </button>
 
-            {/* Desktop Loan Dropdown */}
             {loansOpen && (
               <div className="absolute left-0 top-full z-50 w-[min(320px,calc(100vw-24px))] pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#D6A91F]/40 bg-gradient-to-br from-[#173D2B] via-[#103D2A] to-[#0B3020] p-2 shadow-[0_15px_45px_rgba(0,0,0,0.25)]">
@@ -185,7 +217,7 @@ const Navbar = () => {
                       <NavLink
                         key={loan.path}
                         to={loan.path}
-                        onClick={() => setLoansOpen(false)}
+                        onClick={closeMenu}
                         className={({ isActive }) =>
                           `group flex items-center gap-3 rounded-xl p-3 transition-all duration-200 ${
                             isActive
@@ -238,9 +270,7 @@ const Navbar = () => {
             setLoansOpen(false);
           }}
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D6A91F]/60 bg-[#173D2B] text-[#FFD95A] shadow-sm transition-all duration-300 hover:bg-[#24543A] active:scale-95 md:hidden sm:h-11 sm:w-11"
-          aria-label={
-            isOpen ? "Close navigation menu" : "Open navigation menu"
-          }
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
         >
           {isOpen ? (
@@ -268,67 +298,69 @@ const Navbar = () => {
             </NavLink>
 
             {/* Mobile Loans Dropdown */}
-            <button
-              type="button"
-              onClick={() => setLoansOpen((prev) => !prev)}
-              aria-expanded={loansOpen}
-              aria-haspopup="true"
-              className={`flex items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-300 ${
-                isLoanActive || loansOpen
-                  ? "border-[#FFD95A]/60 bg-[#D6A91F]/15 text-[#FFD95A]"
-                  : "border-white/10 text-white hover:border-[#FFD95A]/30 hover:bg-white/5"
-              }`}
-            >
-              <span className="flex items-center gap-3">
-                <Building2 size={18} className="text-[#FFD95A]" />
-                Loans
-              </span>
-
-              <ChevronDown
-                size={18}
-                className={`text-[#FFD95A] transition-transform duration-300 ${
-                  loansOpen ? "rotate-180" : ""
+            <div ref={mobileLoansRef}>
+              <button
+                type="button"
+                onClick={() => setLoansOpen((prev) => !prev)}
+                aria-expanded={loansOpen}
+                aria-haspopup="true"
+                className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-300 ${
+                  isLoanActive || loansOpen
+                    ? "border-[#FFD95A]/60 bg-[#D6A91F]/15 text-[#FFD95A]"
+                    : "border-white/10 text-white hover:border-[#FFD95A]/30 hover:bg-white/5"
                 }`}
-              />
-            </button>
+              >
+                <span className="flex items-center gap-3">
+                  <Building2 size={18} className="text-[#FFD95A]" />
+                  Loans
+                </span>
 
-            {/* Mobile Loan Options */}
-            {loansOpen && (
-              <div className="ml-3 flex flex-col gap-1 border-l-2 border-[#FFD95A]/60 py-1 pl-3">
-                {loanOptions.map((loan) => {
-                  const Icon = loan.icon;
+                <ChevronDown
+                  size={18}
+                  className={`text-[#FFD95A] transition-transform duration-300 ${
+                    loansOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-                  return (
-                    <NavLink
-                      key={loan.path}
-                      to={loan.path}
-                      onClick={closeMenu}
-                      className={({ isActive }) =>
-                        `flex items-center gap-3 rounded-xl border px-3 py-3 text-sm transition-all duration-200 ${
-                          isActive
-                            ? "border-[#FFD95A]/40 bg-[#D6A91F]/15 text-[#FFD95A]"
-                            : "border-transparent text-gray-200 hover:border-white/10 hover:bg-white/5 hover:text-[#FFD95A]"
-                        }`
-                      }
-                    >
-                      <Icon
-                        size={18}
-                        className="shrink-0 text-[#FFD95A]"
-                      />
+              {/* Mobile Loan Options */}
+              {loansOpen && (
+                <div className="ml-3 mt-2 flex flex-col gap-1 border-l-2 border-[#FFD95A]/60 py-1 pl-3">
+                  {loanOptions.map((loan) => {
+                    const Icon = loan.icon;
 
-                      <span className="min-w-0 flex-1">
-                        {loan.title}
-                      </span>
+                    return (
+                      <NavLink
+                        key={loan.path}
+                        to={loan.path}
+                        onClick={closeMenu}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 rounded-xl border px-3 py-3 text-sm transition-all duration-200 ${
+                            isActive
+                              ? "border-[#FFD95A]/40 bg-[#D6A91F]/15 text-[#FFD95A]"
+                              : "border-transparent text-gray-200 hover:border-white/10 hover:bg-white/5 hover:text-[#FFD95A]"
+                          }`
+                        }
+                      >
+                        <Icon
+                          size={18}
+                          className="shrink-0 text-[#FFD95A]"
+                        />
 
-                      <ArrowUpRight
-                        size={15}
-                        className="shrink-0 text-[#FFD95A]/70"
-                      />
-                    </NavLink>
-                  );
-                })}
-              </div>
-            )}
+                        <span className="min-w-0 flex-1">
+                          {loan.title}
+                        </span>
+
+                        <ArrowUpRight
+                          size={15}
+                          className="shrink-0 text-[#FFD95A]/70"
+                        />
+                      </NavLink>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
 
             {/* Mobile Blogs */}
             <NavLink
