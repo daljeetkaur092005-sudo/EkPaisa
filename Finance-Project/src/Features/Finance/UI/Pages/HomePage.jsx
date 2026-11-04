@@ -439,8 +439,7 @@ const HomePage = () => {
 
                   <p className="mt-3 max-w-sm text-sm leading-6 text-[#5F6F63]">
                     Thank you, {loanForm.fullName}. Your details have been
-                    submitted on this page. Connect a backend API to securely
-                    save and process the application.
+                    submitted on this page. 
                   </p>
 
                   <div className="mt-5 w-full rounded-xl border border-[#DCEFE2] bg-[#F5F9F4] p-3 text-left text-sm sm:p-4">
