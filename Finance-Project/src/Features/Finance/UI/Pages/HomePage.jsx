@@ -970,7 +970,7 @@ const HomePage = () => {
                 </p>
                 <motion.button
                   type="button"
-                  onClick={() => navigate("/loan")}
+                  onClick={() => navigate("/personal-loan")}
                   {...buttonMotion}
                   className="group/link mt-5 inline-flex items-center gap-2 self-start text-left text-sm font-semibold text-[#087A3D] hover:text-[#075C30] sm:text-base"
                 >
