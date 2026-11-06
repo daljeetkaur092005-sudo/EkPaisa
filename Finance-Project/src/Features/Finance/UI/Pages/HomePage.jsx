@@ -891,7 +891,7 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.6 }}
-            className="relative mx-auto w-full overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#073D24] via-[#075C30] to-[#087A3D] px-4 py-6 shadow-xl shadow-[#075C30]/15 sm:px-7 sm:py-8 md:px-9 md:py-9"
+            className="relative mx-auto w-full max-w-[1320px] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#073D24] via-[#075C30] to-[#087A3D] px-4 py-6 shadow-xl shadow-[#075C30]/15 sm:px-7 sm:py-8 md:px-9 md:py-9"
           >
             <div className="pointer-events-none absolute -right-12 -top-16 h-48 w-48 rounded-full border-[22px] border-white/[0.06] sm:h-64 sm:w-64 sm:border-[30px]" />
             <div className="pointer-events-none absolute -bottom-20 left-1/3 h-44 w-44 rounded-full bg-[#FFD95A]/[0.07] blur-2xl" />
@@ -1474,10 +1474,10 @@ const HomePage = () => {
                 <a href="/" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Home
                 </a>
-                <a href="/loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                <a href="/personal-loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Personal Loans
                 </a>
-                <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                <a href=" /loan-against-property" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Apply for a Loan
                 </a>
               </div>
@@ -1494,10 +1494,10 @@ const HomePage = () => {
                 <a href="/#emi-calculator" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Loan Calculator
                 </a>
-                <a href="/loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                <a href="/personal-loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   Help Center
                 </a>
-                <a href="/apply" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
+                <a href="/loan-against-property" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
                   FAQs
                 </a>
               </div>
@@ -1528,10 +1528,7 @@ const HomePage = () => {
               © {new Date().getFullYear()} EkPaisa. All rights reserved.
             </p>
 
-            <p className="flex items-center gap-2 text-xs font-bold text-[#234B34] sm:text-sm">
-              <LockKeyhole size={15} className="shrink-0" />
-              Make informed financial decisions
-            </p>
+      
           </div>
         </div>
       </footer>
