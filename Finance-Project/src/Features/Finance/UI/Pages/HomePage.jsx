@@ -886,52 +886,66 @@ const HomePage = () => {
 
           {/* EKPAISA BRAND BANNER */}
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.6 }}
-            className="relative mx-auto w-full max-w-[1320px] overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-[#073D24] via-[#075C30] to-[#087A3D] px-4 py-6 shadow-xl shadow-[#075C30]/15 sm:px-7 sm:py-8 md:px-9 md:py-9"
-          >
-            <div className="pointer-events-none absolute -right-12 -top-16 h-48 w-48 rounded-full border-[22px] border-white/[0.06] sm:h-64 sm:w-64 sm:border-[30px]" />
-            <div className="pointer-events-none absolute -bottom-20 left-1/3 h-44 w-44 rounded-full bg-[#FFD95A]/[0.07] blur-2xl" />
+       
+<motion.div
+  initial={{ opacity: 0, y: 18 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.25 }}
+  transition={{ duration: 0.6 }}
+  className="relative mx-auto w-full max-w-[1320px] overflow-hidden rounded-2xl border border-[#075C30]/20 bg-gradient-to-br from-[#073D24] via-[#075C30] to-[#087A3D] px-5 py-7 shadow-lg shadow-[#075C30]/10 sm:px-8 sm:py-9 md:px-10 md:py-10"
+>
+  {/* Background Decoration */}
+  <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full border-[28px] border-white/[0.05]" />
+  <div className="pointer-events-none absolute -bottom-24 left-1/3 h-48 w-48 rounded-full bg-[#FFD95A]/[0.06] blur-3xl" />
 
-            <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-              <div className="min-w-0 max-w-2xl">
-                <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#FFE17A] sm:text-xs">
-                  <Sparkles size={14} />
-                  Smarter financial decisions
-                </div>
+  <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
 
-                <h2 className="text-3xl font-extrabold tracking-tight text-white min-[390px]:text-4xl sm:text-5xl md:text-6xl">
-                  EkPaisa<span className="text-[#FFD95A]">.</span>
-                </h2>
+    {/* BRAND CONTENT */}
+    <div className="min-w-0 max-w-2xl">
 
-                <p className="mt-2 text-base font-semibold tracking-wide text-[#FFD95A] min-[390px]:text-lg sm:text-xl">
-                  Intelligence Behind Every Rupee.
-                </p>
+      <div className="mb-5 inline-flex items-center gap-2 rounded-md border border-[#FFD95A]/25 bg-[#FFD95A]/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#FFE17A] sm:text-xs">
+        <Sparkles size={14} />
+        Financial Guidance Platform
+      </div>
 
-                <p className="mt-3 max-w-xl text-sm leading-6 text-white/80 sm:text-base sm:leading-7">
-                  A smarter approach to borrowing, financial discovery and
-                  money decisions.
-                </p>
-              </div>
+      <h2 className="text-3xl font-bold tracking-tight text-white min-[390px]:text-4xl sm:text-5xl md:text-6xl">
+        EkPaisa<span className="text-[#FFD95A]">.</span>
+      </h2>
 
-              <div className="relative flex shrink-0 items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.08] px-4 py-3 sm:flex-col sm:items-start sm:px-5 sm:py-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FFD95A] text-[#075C30]">
-                  <Sparkles size={21} />
-                </div>
-                <div>
-                  <p className="text-xs font-bold text-white sm:text-sm">
-                    Finance, made clearer
-                  </p>
-                  <p className="mt-1 text-[11px] text-white/65 sm:text-xs">
-                    Borrowing · Discovery · Technology
-                  </p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+      <p className="mt-3 text-xl font-bold leading-snug tracking-wide text-[#FFD95A] min-[390px]:text-2xl sm:text-3xl md:text-[2.1rem]">
+        Intelligence Behind Every Rupee.
+      </p>
+
+      <div className="mt-4 h-[2px] w-16 rounded-full bg-[#FFD95A]" />
+
+      <p className="mt-4 max-w-xl text-sm leading-6 text-white/75 sm:text-base sm:leading-7">
+        Bringing clarity to borrowing and financial decisions through
+        accessible information and intelligent guidance.
+      </p>
+    </div>
+
+    {/* HIGHLIGHT CARD */}
+    <div className="relative flex shrink-0 items-center gap-4 rounded-xl border border-white/15 bg-white/[0.07] px-5 py-5 sm:w-[245px] sm:flex-col sm:items-start sm:gap-4 sm:px-6 sm:py-6">
+
+      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#FFD95A] text-[#075C30]">
+        <Sparkles size={21} />
+      </div>
+
+      <div>
+        <p className="text-sm font-semibold tracking-wide text-white sm:text-base">
+          Finance, Made Clearer
+        </p>
+
+        <p className="mt-2 text-xs leading-5 text-white/65">
+          Clarity · Guidance · Technology
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</motion.div>
+
 
           {/* LOAN CARDS */}
 
@@ -1428,110 +1442,156 @@ const HomePage = () => {
       {/* FOOTER */}
       {/* ================================================== */}
 
-      <footer
-        id="home-footer"
-        className="relative overflow-hidden border-t-2 border-[#075C30] bg-gradient-to-br from-[#F4E9C9] via-[#FBE9A0] to-[#FFD95A] text-[#123D27]"
-      >
-        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-[#075C30]/10 blur-3xl" />
 
-        <div className="relative mx-auto w-full max-w-[1440px] px-3 py-6 sm:px-5 sm:py-8 md:px-7 lg:px-9 xl:px-12">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 xl:grid-cols-5 xl:gap-8">
+{/* FOOTER */}
 
-            {/* BRAND */}
 
-            <div className="min-w-0 sm:col-span-2 xl:col-span-2">
-              <a
-                href="/"
-                className="inline-flex max-w-full items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#075C30]"
-              >
-                <img
-                  src={newlogo}
-                  alt="EkPaisa logo"
-                  className="h-12 w-auto max-w-full object-contain transition-transform duration-300 hover:scale-105 sm:h-14"
-                />
-              </a>
+<footer
+  id="home-footer"
+  className="w-full border-t border-[#075C30] bg-gradient-to-br from-[#F4E9C9] via-[#FBE9A0] to-[#FFD95A] text-[#123D27]"
+>
+  <div className="mx-auto w-full max-w-[1440px] px-4 py-9 sm:px-6 sm:py-11 md:px-8 lg:px-10 xl:px-12">
 
-              <p className="mt-3 max-w-sm text-sm font-bold leading-7 text-[#234B34]">
-                Simplifying your financial decisions. Explore loan options and
-                take your next step with confidence.
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[1.6fr_1fr_1fr_1.2fr] xl:gap-12">
+
+      {/* BRAND */}
+      <div className="min-w-0">
+        <a href="/" className="inline-flex items-center">
+          <img
+            src={newlogo}
+            alt="EkPaisa logo"
+            className="h-12 w-auto max-w-full object-contain sm:h-14"
+          />
+        </a>
+
+        <p className="mt-4 max-w-sm text-[14px] leading-6 text-[#657368] sm:text-[15px] sm:leading-7">
+          Simplifying financial decisions through accessible
+          loan information and financial guidance.
+          Explore your options and make informed decisions
+          with EkPaisa.
+        </p>
+
+        <div className="mt-5 h-1 w-12 rounded-full bg-[#D6A91F]" />
+      </div>
+
+      {/* EXPLORE */}
+      <div>
+        <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
+          Explore
+        </h3>
+
+        <div className="mt-5 flex flex-col items-start gap-3">
+          <a
+            href="/personal-loan"
+            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+          >
+            Personal Loans
+          </a>
+
+          <a
+            href="/home-loan"
+            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+          >
+            Home Loans
+          </a>
+
+          <a
+            href="/loan-against-property"
+            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+          >
+            Loan Against Property
+          </a>
+        </div>
+      </div>
+
+      {/* RESOURCES */}
+      <div>
+        <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
+          Resources
+        </h3>
+
+        <div className="mt-5 flex flex-col items-start gap-3">
+          <a
+            href="/#emi-calculator"
+            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+          >
+            EMI Calculator
+          </a>
+
+          <a
+            href="/personal-loan"
+            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+          >
+            Loan Information
+          </a>
+
+          <a
+            href="/home"
+            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+          >
+            Apply for a Loan
+          </a>
+        </div>
+      </div>
+
+      {/* CONTACT */}
+      <div>
+        <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
+          Contact Information
+        </h3>
+
+        <div className="mt-5 space-y-4">
+          <div className="flex items-start gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#EAF4EC] text-[#087A3D]">
+              <House size={17} />
+            </div>
+
+            <div>
+              <p className="text-[14px] font-semibold text-[#075C30]">
+                Location
+              </p>
+              <p className="mt-1 text-[14px] leading-5 text-[#657368]">
+                Kaushambi, Ghaziabad
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-start gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#EAF4EC] text-[#087A3D]">
+              <Users size={17} />
+            </div>
+
+            <div>
+              <p className="text-[14px] font-semibold text-[#075C30]">
+                Phone
               </p>
 
-              <div className="mt-4 inline-flex max-w-full items-center gap-2 rounded-full border border-[#075C30]/20 bg-white/40 px-3 py-2 text-xs font-bold sm:px-4 sm:text-sm">
-                <ShieldCheck size={18} className="shrink-0" />
-                <span>Your financial journey, made simpler</span>
-              </div>
+              <a
+                href="tel:9999726956"
+                className="mt-1 block text-[14px] text-[#657368] transition-colors hover:text-[#087A3D]"
+              >
+                +91 9999726956
+              </a>
             </div>
-
-            {/* EXPLORE */}
-
-            <div>
-              <h3 className="text-base font-extrabold text-[#073D24]">
-                Explore
-              </h3>
-
-              <div className="mt-3 flex flex-col items-start gap-2.5">
-                <a href="/" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Home
-                </a>
-                <a href="/personal-loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Personal Loans
-                </a>
-                <a href=" /loan-against-property" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Apply for a Loan
-                </a>
-              </div>
-            </div>
-
-            {/* RESOURCES */}
-
-            <div>
-              <h3 className="text-base font-extrabold text-[#073D24]">
-                Resources
-              </h3>
-
-              <div className="mt-3 flex flex-col items-start gap-2.5">
-                <a href="/#emi-calculator" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Loan Calculator
-                </a>
-                <a href="/personal-loan" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Help Center
-                </a>
-                <a href="/loan-against-property" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  FAQs
-                </a>
-              </div>
-            </div>
-
-            {/* LEGAL */}
-
-            <div>
-              <h3 className="text-base font-extrabold text-[#073D24]">
-                Legal & Contact
-              </h3>
-
-              <div className="mt-3 flex flex-col items-start gap-2.5">
-                <a href="/privacy-policy" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Privacy Policy
-                </a>
-                <a href="/terms" className="text-sm font-bold text-[#234B34] hover:translate-x-1 hover:text-[#075C30] hover:underline">
-                  Terms &amp; Conditions
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="my-5 h-px bg-gradient-to-r from-transparent via-[#075C30]/30 to-transparent sm:my-6" />
-
-          <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
-            <p className="text-xs font-bold text-[#234B34] sm:text-sm">
-              © {new Date().getFullYear()} EkPaisa. All rights reserved.
-            </p>
-
-      
           </div>
         </div>
-      </footer>
+      </div>
+
+    </div>
+
+    {/* BOTTOM FOOTER */}
+    <div className="my-8 h-px w-full bg-[#DCE5DC]" />
+
+    <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
+      <p className="text-[12px] text-[#657368] sm:text-[13px]">
+        © {new Date().getFullYear()} EkPaisa. All rights reserved.
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+
     </main>
   );
 };
