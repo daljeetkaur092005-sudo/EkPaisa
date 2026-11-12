@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
@@ -253,6 +254,40 @@ const HomePage = () => {
       style={{ fontFamily: "'Inter', Arial, sans-serif" }}
       className="w-full min-w-0 overflow-x-clip bg-white font-sans text-[#102016] [&_button]:transition-all [&_button]:duration-300 [&_button]:ease-out [&_button:focus-visible]:outline-none [&_button:focus-visible]:ring-2 [&_button:focus-visible]:ring-[#D6A91F] [&_button:focus-visible]:ring-offset-2 [&_a]:transition-all [&_a]:duration-300 [&_a]:ease-out"
     >
+      <Helmet>
+        <title>EkPaisa Intelligence Behind Every Rupee.
+ </title>
+        <meta
+          name="description"
+          content="Explore loan against property, personal loans and home loans with EkPaisa. Understand loan eligibility, interest rates, repayment options and calculate your EMI."
+        />
+        <meta
+          name="keywords"
+          content="EkPaisa, loan against property, personal loan, home loan, EMI calculator, loan eligibility, financial guidance India"
+        />
+        <meta name="author" content="EkPaisa" />
+        <meta name="robots" content="index, follow" />
+        <meta name="theme-color" content="#075C30" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EkPaisa" />
+        <meta
+          property="og:title"
+          content="EkPaisa | Loan Against Property, Personal & Home Loans"
+        />
+        <meta
+          property="og:description"
+          content="Explore loan against property, personal loans and home loans with EkPaisa. Understand loan eligibility, interest rates, repayment options and calculate your EMI."
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta
+          name="twitter:title"
+          content="EkPaisa | Loan Against Property, Personal & Home Loans"
+        />
+        <meta
+          name="twitter:description"
+          content="Explore loan against property, personal loans and home loans with EkPaisa. Understand loan eligibility, interest rates, repayment options and calculate your EMI."
+        />
+      </Helmet>
 
       {/* ================================================== */}
       {/* HERO SECTION */}
@@ -1204,6 +1239,7 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
+            
 
             {/* EMI RESULT */}
 
@@ -1322,10 +1358,7 @@ const HomePage = () => {
             ))}
           </div>
 
-          <p className="mt-8 text-center text-xs leading-5 text-[#7A8A7D]">
-            Bank logos are trademarks of their respective owners. Logo images
-            are loaded from an external repository.
-          </p>
+ 
         </div>
       </motion.section>
 

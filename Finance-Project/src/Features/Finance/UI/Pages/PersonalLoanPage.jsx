@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -172,6 +173,34 @@ const Reveal = ({ children, className = "", variant = fadeUp }) => (
 const PersonalLoanPage = () => {
   return (
     <main className="min-h-screen w-full overflow-x-hidden text-[#12352B]">
+      <Helmet>
+        <title>Personal Loan Guide: Eligibility, Documents & Costs | EkPaisa</title>
+        <meta
+          name="description"
+          content="Understand how personal loans work, what lenders may check, which documents could be required, and how to compare interest rates, fees and total repayment with EkPaisa."
+        />
+        <meta
+          name="keywords"
+          content="personal loan, personal loan eligibility, personal loan documents, personal loan interest rate, personal loan fees, loan repayment, personal loan guide India, EkPaisa"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="EkPaisa" />
+        <meta
+          property="og:title"
+          content="Personal Loan Guide: Eligibility, Documents & Costs | EkPaisa"
+        />
+        <meta
+          property="og:description"
+          content="Learn how personal loans work, understand eligibility and documents, and compare the full cost of borrowing."
+        />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Personal Loan Guide | EkPaisa" />
+        <meta
+          name="twitter:description"
+          content="Understand personal loan eligibility, documents, interest rates and repayment costs with EkPaisa."
+        />
+      </Helmet>
 
       {/* Hero Section */}
       <section className="relative isolate overflow-hidden">

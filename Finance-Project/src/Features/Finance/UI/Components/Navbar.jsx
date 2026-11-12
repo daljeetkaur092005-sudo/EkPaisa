@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation } from "react-router";
+
 import {
   Menu,
   X,
@@ -13,6 +14,27 @@ import {
 
 import newlogo from "/src/assets/newlogo.png";
 
+const loanOptions = [
+  {
+    title: "Personal Loan",
+    description: "For your personal needs",
+    path: "/personal-loan",
+    icon: UserRound,
+  },
+  {
+    title: "Home Loan",
+    description: "Make your dream home a reality",
+    path: "/home-loan",
+    icon: House,
+  },
+  {
+    title: "Loan Against Property",
+    description: "Unlock your property's value",
+    path: "/loan-against-property",
+    icon: Building2,
+  },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loansOpen, setLoansOpen] = useState(false);
@@ -24,32 +46,9 @@ const Navbar = () => {
   const desktopLoansRef = useRef(null);
   const mobileLoansRef = useRef(null);
 
-  const isLoanActive = [
-    "/personal-loan",
-    "/home-loan",
-    "/loan-against-property",
-  ].includes(location.pathname);
-
-  const loanOptions = [
-    {
-      title: "Personal Loan",
-      description: "For your personal needs",
-      path: "/personal-loan",
-      icon: UserRound,
-    },
-    {
-      title: "Home Loan",
-      description: "Make your dream home a reality",
-      path: "/home-loan",
-      icon: House,
-    },
-    {
-      title: "Loan Against Property",
-      description: "Unlock your property's value",
-      path: "/loan-against-property",
-      icon: Building2,
-    },
-  ];
+  const isLoanActive = loanOptions.some(
+    (loan) => loan.path === location.pathname
+  );
 
   // Close menus when route changes
   useEffect(() => {
@@ -57,7 +56,7 @@ const Navbar = () => {
     setLoansOpen(false);
   }, [location.pathname]);
 
-  // Close dropdown when clicking outside
+  // Close dropdown and mobile menu on outside click
   useEffect(() => {
     const handleOutsideClick = (event) => {
       const clickedDesktopDropdown =
@@ -70,7 +69,6 @@ const Navbar = () => {
         setLoansOpen(false);
       }
 
-      // Close complete mobile menu when clicking outside navbar
       if (!navRef.current?.contains(event.target)) {
         setIsOpen(false);
       }
@@ -149,8 +147,11 @@ const Navbar = () => {
   return (
     <nav
       ref={navRef}
+      aria-label="Main navigation"
       className={`sticky top-0 z-50 w-full border-t-[3px] border-[#face3d] bg-gradient-to-r from-[#f5f2e2] via-[#f5f3e8] to-[#f5f2e2] shadow-[0_4px_20px_rgba(40,65,40,0.10)] backdrop-blur-xl transition-transform duration-300 ${
-        hideNavbar ? "-translate-y-full" : "translate-y-0"
+        hideNavbar
+          ? "pointer-events-none -translate-y-full"
+          : "translate-y-0"
       }`}
     >
       <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:h-20 sm:px-5 lg:px-6">
@@ -159,11 +160,15 @@ const Navbar = () => {
         <NavLink
           to="/"
           onClick={closeMenu}
+          aria-label="EkPaisa home"
           className="ml-[-4px] flex min-w-0 shrink-0 items-center sm:ml-[-10px] lg:ml-[-35px] xl:ml-[-60px]"
         >
           <img
             src={newlogo}
-            alt="EkPaisa Logo"
+            alt="EkPaisa"
+            width="160"
+            height="80"
+            fetchPriority="high"
             className="h-14 w-auto object-contain sm:h-20 lg:h-20"
           />
         </NavLink>
@@ -188,12 +193,14 @@ const Navbar = () => {
               onClick={() => setLoansOpen((prev) => !prev)}
               aria-expanded={loansOpen}
               aria-haspopup="true"
+              aria-controls="desktop-loan-menu"
               className={loansButtonClass}
             >
               Loans
 
               <ChevronDown
                 size={14}
+                aria-hidden="true"
                 className={`transition-transform duration-300 ${
                   loansOpen ? "rotate-180" : ""
                 }`}
@@ -201,7 +208,10 @@ const Navbar = () => {
             </button>
 
             {loansOpen && (
-              <div className="absolute left-0 top-full z-50 w-[min(320px,calc(100vw-24px))] pt-3">
+              <div
+                id="desktop-loan-menu"
+                className="absolute left-0 top-full z-50 w-[min(320px,calc(100vw-24px))] pt-3"
+              >
                 <div className="overflow-hidden rounded-2xl border border-[#D6A91F]/40 bg-gradient-to-br from-[#173D2B] via-[#103D2A] to-[#0B3020] p-2 shadow-[0_15px_45px_rgba(0,0,0,0.25)]">
 
                   <div className="px-3 py-2">
@@ -227,7 +237,7 @@ const Navbar = () => {
                         }
                       >
                         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#FFD95A]/25 bg-[#087A3D]/30 text-[#FFD95A] transition group-hover:bg-[#087A3D]/50 sm:h-11 sm:w-11">
-                          <Icon size={21} />
+                          <Icon size={21} aria-hidden="true" />
                         </span>
 
                         <span className="min-w-0 flex-1">
@@ -242,6 +252,7 @@ const Navbar = () => {
 
                         <ArrowUpRight
                           size={16}
+                          aria-hidden="true"
                           className="shrink-0 text-gray-400 transition group-hover:text-[#FFD95A]"
                         />
                       </NavLink>
@@ -272,18 +283,22 @@ const Navbar = () => {
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D6A91F]/60 bg-[#173D2B] text-[#FFD95A] shadow-sm transition-all duration-300 hover:bg-[#24543A] active:scale-95 md:hidden sm:h-11 sm:w-11"
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
         >
           {isOpen ? (
-            <X size={23} strokeWidth={2.5} />
+            <X size={23} strokeWidth={2.5} aria-hidden="true" />
           ) : (
-            <Menu size={23} strokeWidth={2.5} />
+            <Menu size={23} strokeWidth={2.5} aria-hidden="true" />
           )}
         </button>
       </div>
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="border-t border-[#D6A91F]/40 bg-gradient-to-b from-[#173D2B] via-[#123724] to-[#0B3020] px-3 py-4 shadow-[0_12px_28px_rgba(0,0,0,0.18)] sm:px-5 sm:py-5 md:hidden">
+        <div
+          id="mobile-navigation"
+          className="border-t border-[#D6A91F]/40 bg-gradient-to-b from-[#173D2B] via-[#123724] to-[#0B3020] px-3 py-4 shadow-[0_12px_28px_rgba(0,0,0,0.18)] sm:px-5 sm:py-5 md:hidden"
+        >
           <div className="mx-auto flex max-w-7xl flex-col gap-2">
 
             {/* Mobile Home */}
@@ -304,6 +319,7 @@ const Navbar = () => {
                 onClick={() => setLoansOpen((prev) => !prev)}
                 aria-expanded={loansOpen}
                 aria-haspopup="true"
+                aria-controls="mobile-loan-menu"
                 className={`flex w-full items-center justify-between rounded-xl border px-4 py-3 text-sm font-semibold transition-all duration-300 ${
                   isLoanActive || loansOpen
                     ? "border-[#FFD95A]/60 bg-[#D6A91F]/15 text-[#FFD95A]"
@@ -317,6 +333,7 @@ const Navbar = () => {
 
                 <ChevronDown
                   size={18}
+                  aria-hidden="true"
                   className={`text-[#FFD95A] transition-transform duration-300 ${
                     loansOpen ? "rotate-180" : ""
                   }`}
@@ -325,7 +342,10 @@ const Navbar = () => {
 
               {/* Mobile Loan Options */}
               {loansOpen && (
-                <div className="ml-3 mt-2 flex flex-col gap-1 border-l-2 border-[#FFD95A]/60 py-1 pl-3">
+                <div
+                  id="mobile-loan-menu"
+                  className="ml-3 mt-2 flex flex-col gap-1 border-l-2 border-[#FFD95A]/60 py-1 pl-3"
+                >
                   {loanOptions.map((loan) => {
                     const Icon = loan.icon;
 
@@ -344,6 +364,7 @@ const Navbar = () => {
                       >
                         <Icon
                           size={18}
+                          aria-hidden="true"
                           className="shrink-0 text-[#FFD95A]"
                         />
 
@@ -353,6 +374,7 @@ const Navbar = () => {
 
                         <ArrowUpRight
                           size={15}
+                          aria-hidden="true"
                           className="shrink-0 text-[#FFD95A]/70"
                         />
                       </NavLink>
