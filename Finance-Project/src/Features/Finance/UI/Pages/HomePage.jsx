@@ -41,6 +41,7 @@ import short from "/src/assets/short.jpg";
 import coins from "/src/assets/coins.webp";
 import property from "/src/assets/property.webp";
 import homekey from "/src/assets/homekey.webp";
+
 // ============================================================
 // ANIMATION VARIANTS
 // ============================================================
@@ -256,8 +257,7 @@ const HomePage = () => {
       className="w-full min-w-0 overflow-x-clip bg-white font-sans text-[#102016] [&_button]:transition-all [&_button]:duration-300 [&_button]:ease-out [&_button:focus-visible]:outline-none [&_button:focus-visible]:ring-2 [&_button:focus-visible]:ring-[#D6A91F] [&_button:focus-visible]:ring-offset-2 [&_a]:transition-all [&_a]:duration-300 [&_a]:ease-out"
     >
       <Helmet>
-        <title>EkPaisa Intelligence Behind Every Rupee.
- </title>
+        <title>EkPaisa Intelligence Behind Every Rupee.</title>
         <meta
           name="description"
           content="Explore loan against property, personal loans and home loans with EkPaisa. Understand loan eligibility, interest rates, repayment options and calculate your EMI."
@@ -294,37 +294,29 @@ const HomePage = () => {
       {/* HERO SECTION */}
       {/* ================================================== */}
 
-<section className="relative isolate w-full min-w-0 overflow-hidden bg-[#102016] px-3 py-9 sm:px-5 sm:py-12 md:px-7 md:py-14 lg:px-9 lg:py-16 xl:min-h-[740px] xl:px-12">        {/* BACKGROUND IMAGE */}
+      <section className="relative isolate w-full min-w-0 overflow-hidden bg-[#102016] px-3 py-8 sm:px-5 sm:py-10 md:px-7 md:py-12 lg:px-8 lg:py-14 xl:px-10 2xl:px-12">
 
-    {/* BACKGROUND IMAGE */}
+        {/* BACKGROUND IMAGE */}
 
-{/* BACKGROUND IMAGE */}
-
-<div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden bg-[#102016]">
-  <img
-    src={short}
-    alt="EkPaisa financial background"
-    loading="eager"
-    fetchPriority="high"
-    className="h-full w-full object-cover object-center"
-  />
-</div>
-
+        <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden bg-[#102016]">
+          <img
+            src={short}
+            alt="EkPaisa financial background"
+            loading="eager"
+            fetchPriority="high"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
 
         {/* IMAGE OVERLAY */}
-{/* IMAGE OVERLAY */}
 
-{/* IMAGE OVERLAY */}
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#102016]/75 via-[#102016]/45 to-[#102016]/15 max-[1199px]:bg-gradient-to-b max-[1199px]:from-[#102016]/40 max-[1199px]:via-[#102016]/65 max-[1199px]:to-[#102016]/95" />
 
-<div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#102016]/75 via-[#102016]/45 to-[#102016]/15 max-lg:bg-gradient-to-b max-lg:from-[#102016]/40 max-lg:via-[#102016]/65 max-lg:to-[#102016]/95" />
-<div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-[#102016] to-transparent" />
-
-        {/* LOAN BIDDING DISCOVERY CARD */}
-
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-[#102016] to-transparent" />
 
         {/* HERO CONTENT */}
 
-        <div className="relative mx-auto grid w-full max-w-[1440px] min-w-0 items-center gap-7 sm:gap-9 lg:grid-cols-2 lg:gap-8 xl:grid-cols-[1.05fr_0.85fr] xl:gap-10">
+        <div className="relative mx-auto grid w-full max-w-[1320px] min-w-0 grid-cols-1 items-center gap-8 sm:gap-10 min-[1200px]:grid-cols-[minmax(0,1.1fr)_minmax(360px,0.9fr)] min-[1200px]:gap-8 2xl:gap-12">
 
           {/* LEFT CONTENT */}
 
@@ -335,9 +327,8 @@ const HomePage = () => {
               duration: 0.85,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="mx-auto flex w-full max-w-xl min-w-0 flex-col items-start text-left text-white lg:mx-0"
+            className="mx-auto flex w-full max-w-[580px] min-w-0 flex-col items-start text-left text-white min-[1200px]:mx-0"
           >
-
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -348,7 +339,7 @@ const HomePage = () => {
               <span>LOAN AGAINST PROPERTY</span>
             </motion.div>
 
-            <h1 className="max-w-full break-words text-4xl font-extrabold leading-[1.08] tracking-tight min-[390px]:text-[2.65rem] sm:text-5xl md:text-6xl xl:text-[4.25rem]">
+            <h1 className="max-w-full break-words text-4xl font-extrabold leading-[1.08] tracking-tight min-[390px]:text-[2.65rem] sm:text-5xl md:text-6xl min-[1200px]:text-[3.4rem] 2xl:text-[4rem]">
               Unlock Your
               <motion.span
                 initial={{ opacity: 0, y: 10 }}
@@ -364,41 +355,11 @@ const HomePage = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="mt-5 max-w-xl text-base leading-7 text-white/95 sm:mt-6 sm:text-lg sm:leading-8 md:text-xl"
+              className="mt-5 max-w-xl text-base leading-7 text-white/95 sm:mt-6 sm:text-lg sm:leading-8 min-[1200px]:text-lg"
             >
               Get a Loan Against Property (LAP) with interest rates starting at{" "}
               <span className="font-semibold text-[#F1C638]">9% p.a.</span>
             </motion.p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             <motion.p
               initial={{ opacity: 0, y: 15 }}
@@ -409,51 +370,46 @@ const HomePage = () => {
               Use your residential or commercial property to explore funding
               options, repayment terms and financing possibilities with EkPaisa.
             </motion.p>
-<motion.button
-  type="button"
-  onClick={() => navigate("/personal-loan")}
-  initial={{ opacity: 0, y: 18 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.65, delay: 0.15 }}
-  whileHover={{ y: -3, scale: 1.005 }}
-  whileTap={{ scale: 0.985 }}
-  aria-label="Discover EkPaisa Loan Bidding"
-  className="group relative z-10 mx-auto mt-7 mb-7 flex w-full max-w-3xl min-w-0 items-center justify-between gap-3 rounded-2xl border border-white/80 bg-white/[0.94] px-4 py-4 text-left shadow-[0_14px_40px_rgba(0,0,0,0.14)] backdrop-blur-xl transition-all duration-300 hover:border-[#B9DCC5] hover:shadow-[0_18px_45px_rgba(0,0,0,0.2)] sm:mt-2 sm:mb-2 sm:gap-5 sm:rounded-full sm:px-6 sm:py-4 md:mt-8 md:px-7"
->
-  {/* Soft decorative glow */}
- 
-<span className="pointer-events-none absolute -left-8 top-0 h-24 w-24 rounded-full bg-[#DCEFE2]/50 blur-2xl" />
 
-<span className="relative flex min-w-0 items-center gap-3 sm:gap-4">
+            {/* LOAN BIDDING DISCOVERY CARD */}
 
-  {/* AI Logo */}
-{/* AI Logo */}
-{/* AI Logo */}
-<span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg sm:h-9 sm:w-9">
-  <img
-    src={chat}
-    alt="AI Assistant"
-    className="h-full w-full object-contain"
-  />
-</span>
+            <motion.button
+              type="button"
+              onClick={() => navigate("/personal-loan")}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: 0.15 }}
+              whileHover={{ y: -3, scale: 1.005 }}
+              whileTap={{ scale: 0.985 }}
+              aria-label="Discover EkPaisa Loan Bidding"
+              className="group relative z-10 mx-auto mt-7 mb-7 flex w-full max-w-[580px] min-w-0 items-center justify-between gap-3 rounded-2xl border border-white/80 bg-white/[0.94] px-4 py-4 text-left shadow-[0_14px_40px_rgba(0,0,0,0.14)] backdrop-blur-xl transition-all duration-300 hover:border-[#B9DCC5] hover:shadow-[0_18px_45px_rgba(0,0,0,0.2)] sm:mt-5 sm:mb-5 sm:gap-5 sm:rounded-full sm:px-6 sm:py-4"
+            >
+              <span className="pointer-events-none absolute -left-8 top-0 h-24 w-24 rounded-full bg-[#DCEFE2]/50 blur-2xl" />
 
-  {/* Card Text */}
-  <span className="min-w-0">
-    <span className="block text-sm font-extrabold leading-snug tracking-tight text-[#101812] sm:text-lg md:text-xl">
-      Discover EkPaisa Loan Bidding
-    </span>
-    <span className="mt-0.5 block text-[11px] font-medium text-[#647568] sm:text-xs">
-      Explore smarter loan opportunities
-    </span>
-  </span>
+              <span className="relative flex min-w-0 items-center gap-3 sm:gap-4">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg sm:h-9 sm:w-9">
+                  <img
+                    src={chat}
+                    alt="AI Assistant"
+                    className="h-full w-full object-contain"
+                  />
+                </span>
 
-</span>
+                <span className="min-w-0">
+                  <span className="block text-sm font-extrabold leading-snug tracking-tight text-[#101812] sm:text-lg">
+                    Discover EkPaisa Loan Bidding
+                  </span>
+                  <span className="mt-0.5 block text-[11px] font-medium text-[#647568] sm:text-xs">
+                    Explore smarter loan opportunities
+                  </span>
+                </span>
+              </span>
 
-{/* Arrow Icon */}
-<span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F0F8F1] text-[#087A3D] transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#E3F1E6] sm:h-10 sm:w-10">
-  <ArrowUpRight size={21} strokeWidth={2.4} />
-</span>
-</motion.button>
+              <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F0F8F1] text-[#087A3D] transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#E3F1E6] sm:h-10 sm:w-10">
+                <ArrowUpRight size={21} strokeWidth={2.4} />
+              </span>
+            </motion.button>
+
             {/* HERO HIGHLIGHTS */}
 
             <motion.div
@@ -468,7 +424,7 @@ const HomePage = () => {
                   },
                 },
               }}
-              className="mt-6 grid w-full max-w-xl grid-cols-3 items-start gap-2 border-y border-white/20 py-4 min-[390px]:gap-3 sm:mt-7 sm:gap-5 sm:py-5"
+              className="mt-3 grid w-full max-w-[580px] grid-cols-3 items-start gap-2 border-y border-white/20 py-4 min-[390px]:gap-3 sm:mt-5 sm:gap-4 sm:py-5"
             >
               {[
                 {
@@ -493,7 +449,7 @@ const HomePage = () => {
                     hidden: { opacity: 0, y: 12 },
                     visible: { opacity: 1, y: 0 },
                   }}
-                  className="flex min-w-0 flex-col items-center gap-2 text-center text-[11px] font-medium leading-snug text-white min-[390px]:text-xs sm:flex-row sm:items-center sm:gap-2 sm:text-left sm:text-base"
+                  className="flex min-w-0 flex-col items-center gap-2 text-center text-[11px] font-medium leading-snug text-white min-[390px]:text-xs sm:flex-row sm:items-center sm:gap-2 sm:text-left sm:text-sm 2xl:text-base"
                 >
                   <Icon
                     size={20}
@@ -501,7 +457,7 @@ const HomePage = () => {
                   />
 
                   <span className="min-w-0">
-                    <span className="block whitespace-nowrap">{label}</span>
+                    <span className="block">{label}</span>
                     <span
                       className={
                         value === "9% p.a."
@@ -515,30 +471,6 @@ const HomePage = () => {
                 </motion.div>
               ))}
             </motion.div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </motion.div>
 
           {/* LOAN APPLICATION FORM */}
@@ -553,7 +485,7 @@ const HomePage = () => {
               transition: { duration: 0.3, ease: "easeOut" },
             }}
             style={{ transformPerspective: 1200 }}
-            className="relative mx-auto w-full min-w-0 max-w-md justify-self-center lg:justify-self-end xl:translate-y-[-16px]"
+            className="relative mx-auto w-full min-w-0 max-w-[420px] justify-self-center min-[1200px]:justify-self-end"
           >
             <form
               onSubmit={handleLoanFormSubmit}
@@ -571,7 +503,7 @@ const HomePage = () => {
 
                   <p className="mt-3 max-w-sm text-sm leading-6 text-[#5F6F63]">
                     Thank you, {loanForm.fullName}. Your details have been
-                    submitted on this page. 
+                    submitted on this page.
                   </p>
 
                   <div className="mt-5 w-full rounded-xl border border-[#DCEFE2] bg-[#F5F9F4] p-3 text-left text-sm sm:p-4">
@@ -978,54 +910,10 @@ const HomePage = () => {
                 </>
               )}
             </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </motion.div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
         </div>
       </section>
-      
+
       {/* ================================================== */}
       {/* POPULAR PRODUCTS */}
       {/* ================================================== */}
@@ -1037,7 +925,7 @@ const HomePage = () => {
         variants={fadeUp}
         className="w-full overflow-hidden bg-gradient-to-b from-[#F5F8F2] to-white px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="mx-auto flex w-full max-w-[1440px] min-w-0 flex-col gap-7 sm:gap-9">
+        <div className="mx-auto flex w-full max-w-[1320px] min-w-0 flex-col gap-7 sm:gap-9">
 
           {/* FEATURES */}
 
@@ -1062,66 +950,55 @@ const HomePage = () => {
 
           {/* EKPAISA BRAND BANNER */}
 
-       
-<motion.div
-  initial={{ opacity: 0, y: 18 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, amount: 0.25 }}
-  transition={{ duration: 0.6 }}
-  className="relative mx-auto w-full max-w-[1320px] overflow-hidden rounded-2xl border border-[#075C30]/20 bg-gradient-to-br from-[#073D24] via-[#075C30] to-[#087A3D] px-5 py-7 shadow-lg shadow-[#075C30]/10 sm:px-8 sm:py-9 md:px-10 md:py-10"
->
-  {/* Background Decoration */}
-  <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full border-[28px] border-white/[0.05]" />
-  <div className="pointer-events-none absolute -bottom-24 left-1/3 h-48 w-48 rounded-full bg-[#FFD95A]/[0.06] blur-3xl" />
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.6 }}
+            className="relative mx-auto w-full max-w-[1320px] overflow-hidden rounded-2xl border border-[#075C30]/20 bg-gradient-to-br from-[#073D24] via-[#075C30] to-[#087A3D] px-5 py-7 shadow-lg shadow-[#075C30]/10 sm:px-8 sm:py-9 md:px-10 md:py-10"
+          >
+            <div className="pointer-events-none absolute -right-16 -top-20 h-64 w-64 rounded-full border-[28px] border-white/[0.05]" />
+            <div className="pointer-events-none absolute -bottom-24 left-1/3 h-48 w-48 rounded-full bg-[#FFD95A]/[0.06] blur-3xl" />
 
-  <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+            <div className="relative flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
+              <div className="min-w-0 max-w-2xl">
+                <div className="mb-5 inline-flex items-center gap-2 rounded-md border border-[#FFD95A]/25 bg-[#FFD95A]/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#FFE17A] sm:text-xs">
+                  <Sparkles size={14} />
+                  Financial Guidance Platform
+                </div>
 
-    {/* BRAND CONTENT */}
-    <div className="min-w-0 max-w-2xl">
+                <h2 className="text-3xl font-bold tracking-tight text-white min-[390px]:text-4xl sm:text-5xl md:text-6xl">
+                  EkPaisa<span className="text-[#FFD95A]">.</span>
+                </h2>
 
-      <div className="mb-5 inline-flex items-center gap-2 rounded-md border border-[#FFD95A]/25 bg-[#FFD95A]/10 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#FFE17A] sm:text-xs">
-        <Sparkles size={14} />
-        Financial Guidance Platform
-      </div>
+                <p className="mt-3 text-xl font-bold leading-snug tracking-wide text-[#FFD95A] min-[390px]:text-2xl sm:text-3xl md:text-[2.1rem]">
+                  Intelligence Behind Every Rupee.
+                </p>
 
-      <h2 className="text-3xl font-bold tracking-tight text-white min-[390px]:text-4xl sm:text-5xl md:text-6xl">
-        EkPaisa<span className="text-[#FFD95A]">.</span>
-      </h2>
+                <div className="mt-4 h-[2px] w-16 rounded-full bg-[#FFD95A]" />
 
-      <p className="mt-3 text-xl font-bold leading-snug tracking-wide text-[#FFD95A] min-[390px]:text-2xl sm:text-3xl md:text-[2.1rem]">
-        Intelligence Behind Every Rupee.
-      </p>
+                <p className="mt-4 max-w-xl text-sm leading-6 text-white/75 sm:text-base sm:leading-7">
+                  Bringing clarity to borrowing and financial decisions through
+                  accessible information and intelligent guidance.
+                </p>
+              </div>
 
-      <div className="mt-4 h-[2px] w-16 rounded-full bg-[#FFD95A]" />
+              <div className="relative flex shrink-0 items-center gap-4 rounded-xl border border-white/15 bg-white/[0.07] px-5 py-5 sm:w-[245px] sm:flex-col sm:items-start sm:gap-4 sm:px-6 sm:py-6">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#FFD95A] text-[#075C30]">
+                  <Sparkles size={21} />
+                </div>
 
-      <p className="mt-4 max-w-xl text-sm leading-6 text-white/75 sm:text-base sm:leading-7">
-        Bringing clarity to borrowing and financial decisions through
-        accessible information and intelligent guidance.
-      </p>
-    </div>
-
-    {/* HIGHLIGHT CARD */}
-    <div className="relative flex shrink-0 items-center gap-4 rounded-xl border border-white/15 bg-white/[0.07] px-5 py-5 sm:w-[245px] sm:flex-col sm:items-start sm:gap-4 sm:px-6 sm:py-6">
-
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#FFD95A] text-[#075C30]">
-        <Sparkles size={21} />
-      </div>
-
-      <div>
-        <p className="text-sm font-semibold tracking-wide text-white sm:text-base">
-          Finance, Made Clearer
-        </p>
-
-        <p className="mt-2 text-xs leading-5 text-white/65">
-          Clarity · Guidance · Technology
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-</motion.div>
-
+                <div>
+                  <p className="text-sm font-semibold tracking-wide text-white sm:text-base">
+                    Finance, Made Clearer
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-white/65">
+                    Clarity · Guidance · Technology
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
           {/* LOAN CARDS */}
 
@@ -1279,7 +1156,7 @@ const HomePage = () => {
         variants={fadeUp}
         className="w-full px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="mx-auto w-full max-w-[1440px] overflow-hidden rounded-3xl border border-[#CFE5D3] bg-[#F7FBF7] shadow-lg shadow-[#087A3D]/[0.06]">
+        <div className="mx-auto w-full max-w-[1320px] overflow-hidden rounded-3xl border border-[#CFE5D3] bg-[#F7FBF7] shadow-lg shadow-[#087A3D]/[0.06]">
           <div className="grid min-w-0 lg:grid-cols-[1.1fr_0.9fr]">
 
             {/* CALCULATOR INPUTS */}
@@ -1380,7 +1257,6 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-            
 
             {/* EMI RESULT */}
 
@@ -1426,8 +1302,6 @@ const HomePage = () => {
                 Explore Loan Options
                 <ArrowRight size={17} />
               </button>
-
-          
             </div>
           </div>
         </div>
@@ -1447,7 +1321,7 @@ const HomePage = () => {
         <div className="pointer-events-none absolute -left-24 top-16 h-64 w-64 rounded-full bg-[#DCEFE2]/60 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-10 h-64 w-64 rounded-full bg-[#F5C542]/15 blur-3xl" />
 
-        <div className="relative mx-auto w-full max-w-[1440px]">
+        <div className="relative mx-auto w-full max-w-[1320px]">
           <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-10">
             <span className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-[#DCEFE2] bg-white px-3 py-2 text-xs font-semibold text-[#087A3D] sm:px-4 sm:text-sm">
               <ShieldCheck size={16} className="shrink-0" />
@@ -1498,8 +1372,6 @@ const HomePage = () => {
               </motion.div>
             ))}
           </div>
-
- 
         </div>
       </motion.section>
 
@@ -1514,7 +1386,7 @@ const HomePage = () => {
         variants={fadeUp}
         className="w-full px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-6 overflow-hidden rounded-3xl border border-[#DCEFE2] bg-gradient-to-r from-[#EAF4EC] via-[#E7F0E5] to-[#F5F8F2] p-4 sm:grid-cols-2 sm:gap-7 sm:p-7 xl:grid-cols-4 xl:items-center xl:p-9">
+        <div className="relative mx-auto grid w-full max-w-[1320px] grid-cols-1 gap-6 overflow-hidden rounded-3xl border border-[#DCEFE2] bg-gradient-to-r from-[#EAF4EC] via-[#E7F0E5] to-[#F5F8F2] p-4 sm:grid-cols-2 sm:gap-7 sm:p-7 xl:grid-cols-4 xl:items-center xl:p-9">
           <div className="pointer-events-none absolute -left-10 -top-10 h-32 w-32 rounded-full bg-[#F5C542]/40" />
           <div className="pointer-events-none absolute -bottom-12 right-10 h-32 w-32 rounded-full bg-[#F5C542]/40" />
 
@@ -1562,7 +1434,7 @@ const HomePage = () => {
         transition={{ duration: 0.6 }}
         className="w-full px-3 py-9 sm:px-5 sm:py-12 md:px-7 lg:px-9 xl:px-12 lg:py-14"
       >
-        <div className="relative mx-auto flex w-full max-w-[1440px] min-w-0 flex-col gap-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#102016] via-[#075C30] to-[#087A3D] p-4 text-white sm:gap-7 sm:p-7 md:p-9 lg:flex-row lg:items-center lg:justify-between lg:p-10">
+        <div className="relative mx-auto flex w-full max-w-[1320px] min-w-0 flex-col gap-6 overflow-hidden rounded-3xl bg-gradient-to-r from-[#102016] via-[#075C30] to-[#087A3D] p-4 text-white sm:gap-7 sm:p-7 md:p-9 lg:flex-row lg:items-center lg:justify-between lg:p-10">
           <motion.div
             animate={{ rotate: [0, 5, -5, 0] }}
             transition={{
@@ -1616,156 +1488,152 @@ const HomePage = () => {
       {/* FOOTER */}
       {/* ================================================== */}
 
+      <footer
+        id="home-footer"
+        className="w-full border-t border-[#075C30] bg-gradient-to-br from-[#F4E9C9] via-[#FBE9A0] to-[#FFD95A] text-[#123D27]"
+      >
+        <div className="mx-auto w-full max-w-[1320px] px-4 py-9 sm:px-6 sm:py-11 md:px-8 lg:px-10 xl:px-12">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[1.6fr_1fr_1fr_1.2fr] xl:gap-12">
 
-{/* FOOTER */}
+            {/* BRAND */}
 
-
-<footer
-  id="home-footer"
-  className="w-full border-t border-[#075C30] bg-gradient-to-br from-[#F4E9C9] via-[#FBE9A0] to-[#FFD95A] text-[#123D27]"
->
-  <div className="mx-auto w-full max-w-[1440px] px-4 py-9 sm:px-6 sm:py-11 md:px-8 lg:px-10 xl:px-12">
-
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 xl:grid-cols-[1.6fr_1fr_1fr_1.2fr] xl:gap-12">
-
-      {/* BRAND */}
-      <div className="min-w-0">
-        <a href="/" className="inline-flex items-center">
-          <img
-            src={newlogo}
-            alt="EkPaisa logo"
-            className="h-12 w-auto max-w-full object-contain sm:h-14"
-          />
-        </a>
-
-        <p className="mt-4 max-w-sm text-[14px] leading-6 text-[#657368] sm:text-[15px] sm:leading-7">
-          Simplifying financial decisions through accessible
-          loan information and financial guidance.
-          Explore your options and make informed decisions
-          with EkPaisa.
-        </p>
-
-        <div className="mt-5 h-1 w-12 rounded-full bg-[#D6A91F]" />
-      </div>
-
-      {/* EXPLORE */}
-      <div>
-        <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
-          Explore
-        </h3>
-
-        <div className="mt-5 flex flex-col items-start gap-3">
-          <a
-            href="/personal-loan"
-            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
-          >
-            Personal Loans
-          </a>
-
-          <a
-            href="/home-loan"
-            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
-          >
-            Home Loans
-          </a>
-
-          <a
-            href="/loan-against-property"
-            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
-          >
-            Loan Against Property
-          </a>
-        </div>
-      </div>
-
-      {/* RESOURCES */}
-      <div>
-        <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
-          Resources
-        </h3>
-
-        <div className="mt-5 flex flex-col items-start gap-3">
-          <a
-            href="/#emi-calculator"
-            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
-          >
-            EMI Calculator
-          </a>
-
-          <a
-            href="/personal-loan"
-            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
-          >
-            Loan Information
-          </a>
-
-          <a
-            href="/home"
-            className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
-          >
-            Apply for a Loan
-          </a>
-        </div>
-      </div>
-
-      {/* CONTACT */}
-      <div>
-        <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
-          Contact Information
-        </h3>
-
-        <div className="mt-5 space-y-4">
-          <div className="flex items-start gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#EAF4EC] text-[#087A3D]">
-              <House size={17} />
-            </div>
-
-            <div>
-              <p className="text-[14px] font-semibold text-[#075C30]">
-                Location
-              </p>
-              <p className="mt-1 text-[14px] leading-5 text-[#657368]">
-                Kaushambi, Ghaziabad
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3">
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#EAF4EC] text-[#087A3D]">
-              <Users size={17} />
-            </div>
-
-            <div>
-              <p className="text-[14px] font-semibold text-[#075C30]">
-                Phone
-              </p>
-
-              <a
-                href="tel:9999726956"
-                className="mt-1 block text-[14px] text-[#657368] transition-colors hover:text-[#087A3D]"
-              >
-                +91 9999726956
+            <div className="min-w-0">
+              <a href="/" className="inline-flex items-center">
+                <img
+                  src={newlogo}
+                  alt="EkPaisa logo"
+                  className="h-12 w-auto max-w-full object-contain sm:h-14"
+                />
               </a>
+
+              <p className="mt-4 max-w-sm text-[14px] leading-6 text-[#657368] sm:text-[15px] sm:leading-7">
+                Simplifying financial decisions through accessible
+                loan information and financial guidance.
+                Explore your options and make informed decisions
+                with EkPaisa.
+              </p>
+
+              <div className="mt-5 h-1 w-12 rounded-full bg-[#D6A91F]" />
+            </div>
+
+            {/* EXPLORE */}
+
+            <div>
+              <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
+                Explore
+              </h3>
+
+              <div className="mt-5 flex flex-col items-start gap-3">
+                <a
+                  href="/personal-loan"
+                  className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+                >
+                  Personal Loans
+                </a>
+
+                <a
+                  href="/home-loan"
+                  className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+                >
+                  Home Loans
+                </a>
+
+                <a
+                  href="/loan-against-property"
+                  className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+                >
+                  Loan Against Property
+                </a>
+              </div>
+            </div>
+
+            {/* RESOURCES */}
+
+            <div>
+              <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
+                Resources
+              </h3>
+
+              <div className="mt-5 flex flex-col items-start gap-3">
+                <a
+                  href="/#emi-calculator"
+                  className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+                >
+                  EMI Calculator
+                </a>
+
+                <a
+                  href="/personal-loan"
+                  className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+                >
+                  Loan Information
+                </a>
+
+                <a
+                  href="/home"
+                  className="text-[14px] font-medium text-[#075C30] transition-colors hover:text-[#087A3D] sm:text-[15px]"
+                >
+                  Apply for a Loan
+                </a>
+              </div>
+            </div>
+
+            {/* CONTACT */}
+
+            <div>
+              <h3 className="text-[14px] font-bold uppercase tracking-wider text-[#000000] sm:text-[15px]">
+                Contact Information
+              </h3>
+
+              <div className="mt-5 space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#EAF4EC] text-[#087A3D]">
+                    <House size={17} />
+                  </div>
+
+                  <div>
+                    <p className="text-[14px] font-semibold text-[#075C30]">
+                      Location
+                    </p>
+                    <p className="mt-1 text-[14px] leading-5 text-[#657368]">
+                      Kaushambi, Ghaziabad
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#EAF4EC] text-[#087A3D]">
+                    <Users size={17} />
+                  </div>
+
+                  <div>
+                    <p className="text-[14px] font-semibold text-[#075C30]">
+                      Phone
+                    </p>
+
+                    <a
+                      href="tel:9999726956"
+                      className="mt-1 block text-[14px] text-[#657368] transition-colors hover:text-[#087A3D]"
+                    >
+                      +91 9999726956
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* BOTTOM FOOTER */}
+
+          <div className="my-8 h-px w-full bg-[#DCE5DC]" />
+
+          <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
+            <p className="text-[12px] text-[#657368] sm:text-[13px]">
+              © {new Date().getFullYear()} EkPaisa. All rights reserved.
+            </p>
+          </div>
         </div>
-      </div>
-
-    </div>
-
-    {/* BOTTOM FOOTER */}
-    <div className="my-8 h-px w-full bg-[#DCE5DC]" />
-
-    <div className="flex flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
-      <p className="text-[12px] text-[#657368] sm:text-[13px]">
-        © {new Date().getFullYear()} EkPaisa. All rights reserved.
-      </p>
-    </div>
-
-  </div>
-</footer>
-
-
+      </footer>
     </main>
   );
 };

@@ -132,13 +132,13 @@ const Navbar = () => {
     }`;
 
   const desktopLinkClass = ({ isActive }) =>
-    `inline-flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-[13px] ${
+    `inline-flex items-center justify-center rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 xl:px-4 xl:text-[13px] ${
       isActive
         ? "bg-[#103126] text-[#FFD95A] shadow-sm"
         : "text-[#173D2B] hover:bg-white/60 hover:text-[#087A3D]"
     }`;
 
-  const loansButtonClass = `inline-flex items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 sm:px-4 sm:text-[13px] ${
+  const loansButtonClass = `inline-flex items-center justify-center gap-1 rounded-full px-3 py-2 text-xs font-semibold transition-all duration-300 xl:px-4 xl:text-[13px] ${
     isLoanActive || loansOpen
       ? "bg-[#103126] text-[#FFD95A] shadow-sm"
       : "text-[#173D2B] hover:bg-white/60 hover:text-[#087A3D]"
@@ -154,14 +154,15 @@ const Navbar = () => {
           : "translate-y-0"
       }`}
     >
-      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between px-3 sm:h-20 sm:px-5 lg:px-6">
+      {/* Navbar Container */}
+      <div className="relative mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8 xl:px-10 2xl:px-12">
 
         {/* Logo */}
         <NavLink
           to="/"
           onClick={closeMenu}
           aria-label="EkPaisa home"
-          className="ml-[-4px] flex min-w-0 shrink-0 items-center sm:ml-[-10px] lg:ml-[-35px] xl:ml-[-60px]"
+          className="flex min-w-0 shrink items-center"
         >
           <img
             src={newlogo}
@@ -169,12 +170,12 @@ const Navbar = () => {
             width="160"
             height="80"
             fetchPriority="high"
-            className="h-14 w-auto object-contain sm:h-20 lg:h-20"
+            className="h-12 w-auto max-w-[130px] object-contain sm:h-16 sm:max-w-[155px] lg:h-[72px] lg:max-w-[170px]"
           />
         </NavLink>
 
         {/* Desktop Navigation */}
-        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-[#D6A91F]/50 bg-gradient-to-r from-[#face3d] via-[#e2c260] to-[#f3d267] p-1 shadow-[0_3px_10px_rgba(130,100,20,0.10)] md:flex">
+        <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border border-[#D6A91F]/50 bg-gradient-to-r from-[#face3d] via-[#e2c260] to-[#f3d267] p-1 shadow-[0_3px_10px_rgba(130,100,20,0.10)] lg:flex">
 
           {/* Home */}
           <NavLink
@@ -280,7 +281,7 @@ const Navbar = () => {
             setIsOpen((prev) => !prev);
             setLoansOpen(false);
           }}
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D6A91F]/60 bg-[#173D2B] text-[#FFD95A] shadow-sm transition-all duration-300 hover:bg-[#24543A] active:scale-95 md:hidden sm:h-11 sm:w-11"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[#D6A91F]/60 bg-[#173D2B] text-[#FFD95A] shadow-sm transition-all duration-300 hover:bg-[#24543A] active:scale-95 sm:h-11 sm:w-11 lg:hidden"
           aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
           aria-expanded={isOpen}
           aria-controls="mobile-navigation"
@@ -297,9 +298,9 @@ const Navbar = () => {
       {isOpen && (
         <div
           id="mobile-navigation"
-          className="border-t border-[#D6A91F]/40 bg-gradient-to-b from-[#173D2B] via-[#123724] to-[#0B3020] px-3 py-4 shadow-[0_12px_28px_rgba(0,0,0,0.18)] sm:px-5 sm:py-5 md:hidden"
+          className="border-t border-[#D6A91F]/40 bg-gradient-to-b from-[#173D2B] via-[#123724] to-[#0B3020] px-3 py-4 shadow-[0_12px_28px_rgba(0,0,0,0.18)] sm:px-5 sm:py-5 lg:hidden"
         >
-          <div className="mx-auto flex max-w-7xl flex-col gap-2">
+          <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-2">
 
             {/* Mobile Home */}
             <NavLink
