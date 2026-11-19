@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight,
+  ArrowUpRight,
   ShieldCheck,
   Zap,
   Star,
@@ -34,9 +34,10 @@ import hdfc from "/src/assets/hdfc.webp";
 import icic from "/src/assets/icic.webp";
 import canara from "/src/assets/canara.webp";
 import bob from "/src/assets/bob.webp";
-import newone from "/src/assets/newone.png";
-import sbi from "/src/assets/sbi.webp";
 import newlogo from "/src/assets/newlogo.png";
+import chat from "/src/assets/chat.png";
+import sbi from "/src/assets/sbi.webp";
+import short from "/src/assets/short.jpg";
 import coins from "/src/assets/coins.webp";
 import property from "/src/assets/property.webp";
 import homekey from "/src/assets/homekey.webp";
@@ -293,25 +294,33 @@ const HomePage = () => {
       {/* HERO SECTION */}
       {/* ================================================== */}
 
-      <section className="relative isolate w-full min-w-0 overflow-hidden bg-[#102016] px-3 py-9 sm:px-5 sm:py-12 md:px-7 md:py-14 lg:px-9 lg:py-16 xl:min-h-[740px] xl:px-12">
+<section className="relative isolate w-full min-w-0 overflow-hidden bg-[#102016] px-3 py-9 sm:px-5 sm:py-12 md:px-7 md:py-14 lg:px-9 lg:py-16 xl:min-h-[740px] xl:px-12">        {/* BACKGROUND IMAGE */}
 
-        {/* BACKGROUND IMAGE */}
+    {/* BACKGROUND IMAGE */}
 
-        <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden bg-[#102016]">
-          <img
-            src={newone}
-            alt="EkPaisa financial background"
-            loading="eager"
-            fetchPriority="high"
-            className="absolute inset-0 h-full w-full object-cover object-[75%_center] [@media(max-width:767px)]:object-[45%_45%] md:object-[75%_25%]"
-          />
-        </div>
+{/* BACKGROUND IMAGE */}
+
+<div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden bg-[#102016]">
+  <img
+    src={short}
+    alt="EkPaisa financial background"
+    loading="eager"
+    fetchPriority="high"
+    className="h-full w-full object-cover object-center"
+  />
+</div>
+
 
         {/* IMAGE OVERLAY */}
+{/* IMAGE OVERLAY */}
 
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-[#102016]/45 via-[#102016]/45 to-[#102016]/90 sm:bg-gradient-to-r sm:from-[#102016]/75 sm:via-[#102016]/45 sm:to-[#102016]/15" />
+{/* IMAGE OVERLAY */}
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-[#102016]/70 to-transparent" />
+<div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#102016]/75 via-[#102016]/45 to-[#102016]/15 max-lg:bg-gradient-to-b max-lg:from-[#102016]/40 max-lg:via-[#102016]/65 max-lg:to-[#102016]/95" />
+<div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-t from-[#102016] to-transparent" />
+
+        {/* LOAN BIDDING DISCOVERY CARD */}
+
 
         {/* HERO CONTENT */}
 
@@ -361,6 +370,36 @@ const HomePage = () => {
               <span className="font-semibold text-[#F1C638]">9% p.a.</span>
             </motion.p>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
@@ -370,7 +409,51 @@ const HomePage = () => {
               Use your residential or commercial property to explore funding
               options, repayment terms and financing possibilities with EkPaisa.
             </motion.p>
+<motion.button
+  type="button"
+  onClick={() => navigate("/personal-loan")}
+  initial={{ opacity: 0, y: 18 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.65, delay: 0.15 }}
+  whileHover={{ y: -3, scale: 1.005 }}
+  whileTap={{ scale: 0.985 }}
+  aria-label="Discover EkPaisa Loan Bidding"
+  className="group relative z-10 mx-auto mt-7 mb-7 flex w-full max-w-3xl min-w-0 items-center justify-between gap-3 rounded-2xl border border-white/80 bg-white/[0.94] px-4 py-4 text-left shadow-[0_14px_40px_rgba(0,0,0,0.14)] backdrop-blur-xl transition-all duration-300 hover:border-[#B9DCC5] hover:shadow-[0_18px_45px_rgba(0,0,0,0.2)] sm:mt-2 sm:mb-2 sm:gap-5 sm:rounded-full sm:px-6 sm:py-4 md:mt-8 md:px-7"
+>
+  {/* Soft decorative glow */}
+ 
+<span className="pointer-events-none absolute -left-8 top-0 h-24 w-24 rounded-full bg-[#DCEFE2]/50 blur-2xl" />
 
+<span className="relative flex min-w-0 items-center gap-3 sm:gap-4">
+
+  {/* AI Logo */}
+{/* AI Logo */}
+{/* AI Logo */}
+<span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg sm:h-9 sm:w-9">
+  <img
+    src={chat}
+    alt="AI Assistant"
+    className="h-full w-full object-contain"
+  />
+</span>
+
+  {/* Card Text */}
+  <span className="min-w-0">
+    <span className="block text-sm font-extrabold leading-snug tracking-tight text-[#101812] sm:text-lg md:text-xl">
+      Discover EkPaisa Loan Bidding
+    </span>
+    <span className="mt-0.5 block text-[11px] font-medium text-[#647568] sm:text-xs">
+      Explore smarter loan opportunities
+    </span>
+  </span>
+
+</span>
+
+{/* Arrow Icon */}
+<span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F0F8F1] text-[#087A3D] transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#E3F1E6] sm:h-10 sm:w-10">
+  <ArrowUpRight size={21} strokeWidth={2.4} />
+</span>
+</motion.button>
             {/* HERO HIGHLIGHTS */}
 
             <motion.div
@@ -433,15 +516,29 @@ const HomePage = () => {
               ))}
             </motion.div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="mt-4 max-w-xl text-xs leading-5 text-white/75 sm:mt-5 sm:text-sm sm:leading-6"
-            >
-              Indicative starting rate. Actual rate depends on lender policy,
-              borrower profile and property assessment.
-            </motion.p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </motion.div>
 
           {/* LOAN APPLICATION FORM */}
@@ -881,10 +978,54 @@ const HomePage = () => {
                 </>
               )}
             </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           </motion.div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
         </div>
       </section>
-
+      
       {/* ================================================== */}
       {/* POPULAR PRODUCTS */}
       {/* ================================================== */}
