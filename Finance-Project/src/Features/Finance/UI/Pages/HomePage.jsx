@@ -1,6 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
+
+
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { db } from "../../../../firebase.js";
+
+
 import {
   ArrowRight,
   ArrowUpRight,
@@ -25,6 +35,8 @@ import {
 } from "lucide-react";
 
 import { useMain } from "../../Hooks/useMain";
+
+
 import pnb from "/src/assets/pnb.webp";
 import newkotak from "/src/assets/newkotak.webp";
 import newaxis from "/src/assets/newaxis.webp";
@@ -128,44 +140,38 @@ const formatCurrency = (amount) =>
 // ============================================================
 
 const HomePage = () => {
-  const { navigate } = useMain();
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, []);
-
-  // LOAN APPLICATION FORM
+  const {
+    navigate,
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    errors,
+    isSubmitting,
+  } = useMain();
 
   const [formStep, setFormStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
 
-  const initialLoanForm = {
-    loanType: "Loan Against Property(LAP)",
-    loanAmount: "",
-    fullName: "",
-    mobileNumber: "",
-    monthlyIncome: "",
-  };
 
-  const [loanForm, setLoanForm] = useState(initialLoanForm);
+const handleLoanFormSubmit = async (data) => {
+  if (formStep < 3) {
+    setFormStep((current) => current + 1);
+    return;
+  }
 
-  const updateLoanForm = (event) => {
-    setLoanForm((current) => ({
-      ...current,
-      [event.target.name]: event.target.value,
-    }));
-  };
-
-  const handleLoanFormSubmit = (event) => {
-    event.preventDefault();
-
-    if (formStep < 3) {
-      setFormStep((current) => current + 1);
-      return;
-    }
+  try {
+    await addDoc(collection(db, "loanApplications"), {
+      ...data,
+      createdAt: serverTimestamp(),
+    });
 
     setSubmitted(true);
-  };
+  } catch (error) {
+    console.error("Firebase submission error:", error);
+    alert("Unable to submit application. Please try again.");
+  }
+};
 
   // EMI CALCULATOR
 
@@ -488,7 +494,7 @@ const HomePage = () => {
             className="relative mx-auto w-full min-w-0 max-w-[420px] justify-self-center min-[1200px]:justify-self-end"
           >
             <form
-              onSubmit={handleLoanFormSubmit}
+  onSubmit={handleSubmit(handleLoanFormSubmit)}
               className="relative w-full min-w-0 overflow-hidden rounded-2xl border border-white/70 bg-white shadow-2xl shadow-black/20"
             >
               {submitted ? (
@@ -502,33 +508,33 @@ const HomePage = () => {
                   </h3>
 
                   <p className="mt-3 max-w-sm text-sm leading-6 text-[#5F6F63]">
-                    Thank you, {loanForm.fullName}. Your details have been
+                    Thank you, {watch("fullName")}. Your details have been
                     submitted on this page.
                   </p>
 
                   <div className="mt-5 w-full rounded-xl border border-[#DCEFE2] bg-[#F5F9F4] p-3 text-left text-sm sm:p-4">
                     <div className="flex flex-wrap justify-between gap-2 py-1">
                       <span className="text-[#5F6F63]">Loan type</span>
-                      <strong className="text-right text-[#102016]">
-                        {loanForm.loanType}
-                      </strong>
+                   <strong className="text-right text-[#102016]">
+                {watch("loanType")}
+                  </strong>
                     </div>
 
                     <div className="flex flex-wrap justify-between gap-2 py-1">
                       <span className="text-[#5F6F63]">Loan amount</span>
                       <strong className="text-right text-[#102016]">
-                        ₹{Number(loanForm.loanAmount).toLocaleString("en-IN")}
+                      ₹{Number(watch("loanAmount")).toLocaleString("en-IN")}
                       </strong>
                     </div>
                   </div>
 
                   <button
                     type="button"
-                    onClick={() => {
-                      setSubmitted(false);
-                      setFormStep(1);
-                      setLoanForm(initialLoanForm);
-                    }}
+               onClick={() => {
+    setSubmitted(false);
+    setFormStep(1);
+    reset();
+  }}
                     className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#087A3D] to-[#075C30] px-4 py-3 text-sm font-bold text-white hover:from-[#075C30] hover:to-[#064824] sm:px-5"
                   >
                     Start a new application
@@ -669,10 +675,9 @@ const HomePage = () => {
                               />
 
                               <select
-                                id="loanType"
-                                name="loanType"
-                                value={loanForm.loanType}
-                                onChange={updateLoanForm}
+                                 {...register("loanType", {
+    required: "Please select loan type",
+  })}
                                 className="w-full min-w-0 appearance-none rounded-xl border border-[#D9E5D9] bg-white py-3 pl-11 pr-10 text-sm font-medium text-[#102016] outline-none transition-all focus:border-[#087A3D] focus:ring-4 focus:ring-[#087A3D]/10"
                               >
                                 <option>Loan Against Property(LAP)</option>
@@ -697,13 +702,13 @@ const HomePage = () => {
                               </span>
 
                               <input
-                                id="loanAmount"
-                                name="loanAmount"
+                                                               {...register("loanAmount", {
+    required: "Please enter your loanAmount",
+  })}
                                 type="number"
                                 min="1"
                                 required
-                                value={loanForm.loanAmount}
-                                onChange={updateLoanForm}
+
                                 placeholder="e.g. 500000"
                                 className="min-w-0 flex-1 bg-white px-3 py-3 text-sm text-[#102016] outline-none placeholder:text-[#9AA69C] sm:px-3.5"
                               />
@@ -748,13 +753,12 @@ const HomePage = () => {
                               />
 
                               <input
-                                id="fullName"
-                                name="fullName"
+                                                                 {...register("fullName", {
+    required: "Please enter your fullname",
+  })}
                                 type="text"
                                 autoComplete="name"
                                 required
-                                value={loanForm.fullName}
-                                onChange={updateLoanForm}
                                 placeholder="Enter your full name"
                                 className={`${inputClass} pl-11`}
                               />
@@ -772,16 +776,16 @@ const HomePage = () => {
                               </span>
 
                               <input
-                                id="mobileNumber"
-                                name="mobileNumber"
+                                    { ...register("mobileNumber", {
+  required: "Please enter your mobile number",
+})}               
                                 type="tel"
                                 inputMode="numeric"
                                 pattern="[0-9]{10}"
                                 maxLength={10}
                                 autoComplete="tel-national"
                                 required
-                                value={loanForm.mobileNumber}
-                                onChange={updateLoanForm}
+                             
                                 placeholder="10-digit mobile number"
                                 className="min-w-0 flex-1 bg-white px-3 py-3 text-sm text-[#102016] outline-none placeholder:text-[#9AA69C]"
                               />
@@ -821,13 +825,14 @@ const HomePage = () => {
                               </span>
 
                               <input
-                                id="monthlyIncome"
-                                name="monthlyIncome"
+ {...register("monthlyIncome", {
+  required: "Please enter your monthly income",
+})}
+                           
                                 type="number"
                                 min="1"
                                 required
-                                value={loanForm.monthlyIncome}
-                                onChange={updateLoanForm}
+                                
                                 placeholder="Enter monthly income"
                                 className="min-w-0 flex-1 bg-white px-3 py-3 text-sm text-[#102016] outline-none placeholder:text-[#9AA69C] sm:px-3.5"
                               />
@@ -844,14 +849,14 @@ const HomePage = () => {
                               <div className="flex flex-wrap justify-between gap-2">
                                 <span>Loan type</span>
                                 <span className="text-right font-semibold text-[#102016]">
-                                  {loanForm.loanType}
+                                  {watch("loanType")}
                                 </span>
                               </div>
 
                               <div className="flex flex-wrap justify-between gap-2">
                                 <span>Loan amount</span>
                                 <span className="font-semibold text-[#102016]">
-                                  ₹{Number(loanForm.loanAmount).toLocaleString("en-IN")}
+                                  ₹{Number(watch("loanAmount")).toLocaleString("en-IN")}
                                 </span>
                               </div>
                             </div>
